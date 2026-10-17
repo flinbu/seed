@@ -34,7 +34,7 @@
 - **DescriptionList** (package): Pairs of labels and values: a token's details, a version's metadata, account settings to read
 - **Timeline** (package): Events in order: a version history, an activity feed, the steps of a sync
 - **AvatarGroup** (package): A stack of people: who's in a file, who reviewed a change, who's online
-- **CommentThread** (design system): A conversation between people pinned to something: a token, a component, a proposal
+- **CommentThread** (package): A conversation between people pinned to something: a token, a component, a proposal
 
 ## Design system
 
@@ -87,14 +87,14 @@
 - **TagInput** (package): A field that turns typed text into tags: components in a release, keywords, aliases, people to notify
 - **CopyField** (package): A read-only value with a copy button: install commands, API keys, token names, URLs
 - **PasswordInput** (package): A password field with a Show/Hide toggle and, when creating a password, a live list of requirements
-- **MentionInput** (design system): A text area that suggests people, tokens or components as you type a trigger: `@` to mention, `#` to link a token
+- **MentionInput** (package): A text area that suggests people, tokens or components as you type a trigger: `@` to mention, `#` to link a token
 - **DateRangePicker** (package): Picks a start and end date, with presets for the common ranges
-- **TimePicker** (design system): Picks a time of day from a list or by typing
+- **TimePicker** (package): Picks a time of day from a list or by typing
 
 ## Foundations
 
 - **Icon** (package): The single source of icons in Seed: the full Lucide set (version 1.49.0, 1,857 icons, ISC license), drawn through one component
-- **Typography** (design system): Seed's type for reading: `Typography` styles rendered rich text and Markdown (headings, paragraphs, lists, quotes, code, tables), and `Heading` and `Text` set single pieces of copy with the right type style
+- **Typography** (package): Seed's type for reading: `Typography` styles rendered rich text and Markdown (headings, paragraphs, lists, quotes, code, tables), and `Heading` and `Text` set single pieces of copy with the right type style
 - **DirectionProvider** (design system): Sets the reading direction for everything inside it: right-to-left for Arabic, Hebrew or Persian, left-to-right otherwise
 - **VisuallyHidden** (package): Hides content on screen but keeps it for screen readers: extra context on a number, a label for a field whose purpose is visible, a skip link
 
@@ -121,8 +121,8 @@
 - **Stepper** (package): Numbered steps for a flow people move through in order: onboarding, an import, a release
 - **FileTree** (package): A folder tree for generated files: export bundles, a GitHub sync, a component's source
 - **Menubar** (package): A horizontal row of menus, as in a desktop app (File, Edit, View), for editors with many commands
-- **NavigationMenu** (design system): The main navigation of a site: plain links and menus that drop a panel of links with short descriptions (Product, Resources, Pricing)
-- **TableOfContents** (design system): An "On this page" list that follows the reader as they scroll and jumps to a section on click
+- **NavigationMenu** (package): The main navigation of a site: plain links and menus that drop a panel of links with short descriptions (Product, Resources, Pricing)
+- **TableOfContents** (package): An "On this page" list that follows the reader as they scroll and jumps to a section on click
 - **Link** (package): Text that goes somewhere
 
 ## Overlays
@@ -137,6 +137,6 @@
 - **AlertDialog** (package): A modal that asks for one decision and waits for it: confirming a delete, discarding unsaved changes, leaving a flow halfway
 - **Drawer** (package): A panel that rises from the bottom of the screen with a grab handle, for short tasks on touch screens: picking an option, a quick form, the actions for one item
 - **ContextMenu** (package): A menu that opens where you right-click, holding the commands for the thing under the pointer: a canvas, a row, a file, a token
-- **Tour** (design system): A short guided walk through a screen: a spotlight on one element at a time with a card that explains it
+- **Tour** (package): A short guided walk through a screen: a spotlight on one element at a time with a card that explains it
 
 Also in the design system: `Seed.format` (numbers, percents, dates, relative times, ranges) and `Seed.color` (parse, contrast, OKLCH). The package adds `ThemeProvider`, `ThemeScript`, `useTheme` and `cn`.

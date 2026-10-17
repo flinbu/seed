@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people" | "content"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -340,7 +340,39 @@ export const COMPONENTS: ComponentDoc[] = [
     use: ["Integrations, members, files, settings; thumbnails and previews."], a11y: ["With href the title link covers the row and actions stay separate targets; inside ItemGroup rows are list items."],
     examples: [{ file: "people", fn: "ItemBasic", title: "Integrations and a member" }, { file: "people", fn: "AspectRatioBasic", title: "AspectRatio" }],
     parts: ["Item", "ItemGroup", "AspectRatio"],
-    props: [{ name: "title / description", type: "ReactNode", description: "Text." }, { name: "media", type: "IconProp | ReactNode", description: "An icon (in a tile) or an Avatar." }, { name: "actions", type: "ReactNode", description: "Buttons or Badges." }, { name: "href", type: "string", description: "The row becomes a link." }, { name: "variant", type: "'plain' | 'outline' | 'muted'", default: "'plain'", description: "Frame." }, { name: "AspectRatio: ratio", type: "number", default: "16/9", description: "Width over height." }] }
+    props: [{ name: "title / description", type: "ReactNode", description: "Text." }, { name: "media", type: "IconProp | ReactNode", description: "An icon (in a tile) or an Avatar." }, { name: "actions", type: "ReactNode", description: "Buttons or Badges." }, { name: "href", type: "string", description: "The row becomes a link." }, { name: "variant", type: "'plain' | 'outline' | 'muted'", default: "'plain'", description: "Frame." }, { name: "AspectRatio: ratio", type: "number", default: "16/9", description: "Width over height." }] },
+  { slug: "typography", name: "Typography, Heading and Text", group: "Display", description: "Rendered rich text and Markdown in Seed's reading styles, and single lines of copy.",
+    use: ["Docs pages, release notes, the assistant's answers (size small)."], a11y: ["Heading separates the element (level) from the look (size), so the outline stays right."],
+    examples: [{ file: "content", fn: "TypographyBasic", title: "A header and prose" }],
+    parts: ["Typography", "Heading", "Text"],
+    props: [{ name: "Typography: size", type: "'body' | 'small'", default: "'body'", description: "16/26 or 14/22, Noto Serif Light." }, { name: "Heading: level / size", type: "1–6", description: "Element and look." }, { name: "Heading: display", type: "boolean", description: "Domine, for hero screens." }, { name: "Text: variant", type: "'lead' | 'body' | 'small' | 'muted' | 'caption' | 'reading' | 'label' | 'value'", default: "'body'", description: "The type style." }] },
+  { slug: "navigation-menu", name: "NavigationMenu", group: "Navigation", description: "Site navigation: links and panels of links.",
+    use: ["Marketing and docs headers."], avoid: ["App navigation: use the Sidebar."],
+    a11y: ["Built on Radix NavigationMenu: a nav landmark, triggers report aria-expanded, arrow keys move, Escape closes; the current page has aria-current=page."],
+    examples: [{ file: "content", fn: "NavigationMenuBasic", title: "A panel and links" }],
+    props: [{ name: "items", type: "NavigationItem[]", description: "{ label, href, current? } or { label, links: { label, href, description?, icon? }[], columns?, footer? }." }, { name: "linkAs", type: "ElementType", default: "'a'", description: "Your router's Link." }] },
+  { slug: "mention-input", name: "MentionInput", group: "Forms", description: "A text area that suggests people, tokens or components after @ or #.",
+    use: ["Comments and prompts."], a11y: ["Suggestions are a listbox linked with aria-activedescendant; arrows move, Enter or Tab inserts, Escape closes."],
+    examples: [{ file: "content", fn: "MentionBasic", title: "People and tokens" }],
+    props: [{ name: "sources", type: "Record<string, MentionItem[]>", description: "Trigger to items: { '@': people, '#': tokens }." }, { name: "items", type: "MentionItem[]", description: "One source on @." }, { name: "onMention", type: "(item, trigger) => void", description: "After inserting." }, { name: "onSubmit", type: "(value) => void", description: "⌘ or Ctrl + Enter." }] },
+  { slug: "time-picker", name: "TimePicker", group: "Forms", description: "A time typed or picked, shown in the reader's format.",
+    use: ["Schedules, quiet hours, publish times."], a11y: ["The combobox pattern; typed text is parsed on Enter or blur, and anything unreadable is marked invalid."],
+    examples: [{ file: "content", fn: "TimePickerBasic", title: "12 and 24 hour" }],
+    parts: ["TimePicker", "parseTime", "formatTime"],
+    props: [{ name: "value / defaultValue", type: "string | null", description: "24-hour HH:mm." }, { name: "step", type: "number", default: "15", description: "Minutes between options." }, { name: "min / max", type: "string", description: "Limits." }, { name: "hourCycle", type: "12 | 24", description: "Default from the locale." }] },
+  { slug: "tour", name: "Tour", group: "Overlays", description: "A short guided walk: a spotlight on one element at a time.",
+    use: ["Three to five steps on a new screen."], a11y: ["The card is a labelled dialog that takes focus; Escape and Skip end it and return focus where it was."],
+    examples: [{ file: "content", fn: "TourBasic", title: "Three steps" }],
+    props: [{ name: "steps", type: "{ target?, title, body?, side?, align?, padding? }[]", description: "target is a selector, ref or element." }, { name: "open / defaultOpen / onOpenChange", type: "boolean", description: "State." }, { name: "step / onStepChange", type: "number", description: "Current step." }, { name: "onFinish / onSkip", type: "() => void", description: "How it ended." }] },
+  { slug: "table-of-contents", name: "TableOfContents", group: "Navigation", description: "An On this page list that follows the reader.",
+    use: ["Long docs pages."], a11y: ["A nav landmark; the current section has aria-current=location; clicking moves focus to the heading (smooth scroll unless reduced motion)."],
+    examples: [{ file: "content", fn: "TocBasic", title: "Inside a scrolling column" }],
+    props: [{ name: "items", type: "{ id, label, level? }[]", description: "Heading ids." }, { name: "root", type: "selector | ref | element", description: "The scrolling element, when not the window." }, { name: "offset", type: "number", default: "16", description: "Sticky header space." }, { name: "title", type: "ReactNode | false", default: "'On this page'", description: "Label." }] },
+  { slug: "comment-thread", name: "CommentThread", group: "Display", description: "People's conversation pinned to something, resolvable.",
+    use: ["Comments on tokens, components, proposals."], avoid: ["The AI assistant: it answers in its own panel."],
+    a11y: ["A labelled section; times are time elements; the reply box sends with ⌘ or Ctrl + Enter."],
+    examples: [{ file: "content", fn: "CommentThreadBasic", title: "On a component in Dark" }],
+    props: [{ name: "comments", type: "{ author: { name, src?, role? }, body, time?, edited? }[]", description: "Oldest first." }, { name: "anchor", type: "ReactNode", description: "What it's about." }, { name: "onReply", type: "(text) => void", description: "Shows the reply box." }, { name: "resolved / onResolvedChange", type: "boolean", description: "Resolving collapses it." }, { name: "commentActions", type: "(comment) => ReactNode", description: "A menu per comment." }] }
 ];
 
 export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];

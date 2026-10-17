@@ -47,3 +47,32 @@
 }
 @keyframes seed-collapsible-open { from { height: 0; } to { height: var(--radix-collapsible-content-height); } }
 @keyframes seed-collapsible-close { from { height: var(--radix-collapsible-content-height); } to { height: 0; } }
+
+/* Prose: rendered rich text and Markdown in Seed's reading styles (Typography). */
+@layer components {
+  .seed-prose { color: var(--text-primary); font-family: var(--font-reading); font-size: 1rem; line-height: 1.625; font-weight: 300; max-width: 68ch; }
+  .seed-prose > :first-child { margin-top: 0; }
+  .seed-prose > :last-child { margin-bottom: 0; }
+  .seed-prose p { margin: 0 0 var(--space-base); }
+  .seed-prose :is(h1, h2, h3, h4) { font-family: var(--font-primary); color: var(--text-primary); margin: var(--space-2xl) 0 var(--space-xs); }
+  .seed-prose h1 { font-family: var(--font-display); font-size: 2.375rem; line-height: 1.2; font-weight: 400; letter-spacing: -0.02em; margin-top: 0; }
+  .seed-prose h2 { font-size: 1.5rem; line-height: 2rem; font-weight: 600; }
+  .seed-prose h3 { font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; }
+  .seed-prose h4 { font-size: 1rem; line-height: 1.5rem; font-weight: 600; }
+  .seed-prose a { color: var(--text-link); text-decoration: underline; text-underline-offset: 3px; }
+  .seed-prose a:hover { color: var(--text-link-hover); }
+  .seed-prose strong { font-weight: 500; }
+  .seed-prose :is(ul, ol) { margin: 0 0 var(--space-base); padding-inline-start: var(--space-lg); }
+  .seed-prose li { margin: var(--space-xxs) 0; }
+  .seed-prose li::marker { color: var(--text-tertiary); }
+  .seed-prose blockquote { margin: 0 0 var(--space-base); padding: var(--space-xs) var(--space-base); border-radius: var(--radius-petal-tip) var(--radius-petal) var(--radius-petal) var(--radius-petal); background: var(--bg-secondary); color: var(--text-secondary); }
+  .seed-prose code { font-family: var(--font-mono); font-size: 0.9em; padding: 1px var(--space-xxs); border-radius: var(--radius-sm); background: var(--bg-tertiary); }
+  .seed-prose pre { margin: 0 0 var(--space-base); padding: var(--space-base); overflow-x: auto; background: var(--bg-inset); border: 1px solid var(--border-secondary); border-radius: var(--radius-petal-tip) var(--radius-petal) var(--radius-petal) var(--radius-petal); }
+  .seed-prose pre code { padding: 0; background: none; }
+  .seed-prose hr { border: 0; border-top: 1px solid var(--border-secondary); margin: var(--space-2xl) 0; }
+  .seed-prose table { width: 100%; border-collapse: collapse; margin: 0 0 var(--space-base); font-family: var(--font-primary); font-size: 0.875rem; line-height: 1.25rem; }
+  .seed-prose th { text-align: start; font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 1px solid var(--border-secondary); padding: var(--space-xs); }
+  .seed-prose td { border-bottom: 1px solid var(--border-tertiary); padding: var(--space-xs); color: var(--text-secondary); }
+  .seed-prose-small { font-size: 0.875rem; line-height: 1.375rem; }
+  .seed-prose-small :is(p, ul, ol) { margin-bottom: var(--space-sm); }
+}

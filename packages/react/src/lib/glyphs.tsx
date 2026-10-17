@@ -25,3 +25,6 @@ export const EyeGlyph = glyph(<><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 
 export const EyeOffGlyph = glyph(<><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c4.36 0 8.03 2.8 9.94 6.65a1 1 0 0 1 0 .7 10.8 10.8 0 0 1-1.44 2.49" /><path d="M14.08 14.16a3 3 0 0 1-4.24-4.24" /><path d="M17.48 17.5A10.75 10.75 0 0 1 2.06 12.35a1 1 0 0 1 0-.7 10.8 10.8 0 0 1 4.45-5.14" /><path d="m2 2 20 20" /></>);
 export const ArrowUpRightGlyph = glyph(<><path d="M7 7h10v10" /><path d="M7 17 17 7" /></>);
 export const ArrowLeftGlyph = glyph(<><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></>);
+export const ClockGlyph = glyph(<><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></>);
+export const MessageGlyph = glyph(<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />);
+export const RotateGlyph = glyph(<><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></>);
