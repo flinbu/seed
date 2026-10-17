@@ -1,0 +1,40 @@
+{
+  "name": "@flinbu/seed-tokens",
+  "version": "0.1.0",
+  "description": "Seed's design tokens as CSS variables, a Tailwind CSS v4 theme, DTCG JSON and typed data, plus createTheme() and the seed CLI for accessible brand themes.",
+  "license": "MIT",
+  "author": "Felipe Linares <felipe@flinbu.co>",
+  "repository": { "type": "git", "url": "git+https://github.com/flinbu/seed.git", "directory": "packages/tokens" },
+  "keywords": ["design-system", "design-tokens", "tailwindcss", "theming", "seed"],
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./tailwind.css": "./dist/tailwind.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./type.css": "./dist/type.css",
+    "./index.css": "./dist/index.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./fonts/*": "./dist/fonts/*",
+    "./package.json": "./package.json"
+  },
+  "bin": { "seed": "./dist/cli.js" },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "generate": "node scripts/generate.mjs ts",
+    "build": "node scripts/generate.mjs ts && tsup && node scripts/generate.mjs css",
+    "typecheck": "node scripts/generate.mjs ts && tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.3.3",
+    "tsup": "^9.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5",
+    "@types/node": "^22.10.0"
+  },
+  "publishConfig": { "access": "public" }
+}
