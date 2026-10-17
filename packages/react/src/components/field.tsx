@@ -3,7 +3,7 @@ import { cn } from "../lib/cn.js";
 import { Label } from "./label.js";
 
 /** What a control inside a Field receives. Seed controls read it with useField(); others get the same props cloned in. */
-export interface FieldContextValue { id: string; describedBy?: string; invalid?: boolean; required?: boolean; disabled?: boolean }
+export interface FieldContextValue { id: string; labelId?: string; describedBy?: string; invalid?: boolean; required?: boolean; disabled?: boolean }
 const FieldContext = React.createContext<FieldContextValue | null>(null);
 export function useField(): FieldContextValue | null { return React.useContext(FieldContext); }
 
@@ -29,13 +29,13 @@ export function Field({ label, labelAside, hint, error, required, disabled, id, 
   const cid = id ?? (children.props as { id?: string }).id ?? `seed-field-${auto}`;
   const hintId = hint ? `${cid}-hint` : undefined, errId = error ? `${cid}-error` : undefined;
   const describedBy = [hintId, errId].filter(Boolean).join(" ") || undefined;
-  const ctx: FieldContextValue = { id: cid, describedBy, invalid: !!error, required, disabled };
+  const ctx: FieldContextValue = { id: cid, labelId: label ? `${cid}-label` : undefined, describedBy, invalid: !!error, required, disabled };
   return (
     <FieldContext.Provider value={ctx}>
       <div className={cn("flex min-w-0 flex-col gap-xxs", className)}>
         {label || labelAside ? (
           <div className="flex items-baseline justify-between gap-xs">
-            {label ? <Label htmlFor={cid} required={required} disabled={disabled}>{label}</Label> : <span />}
+            {label ? <Label id={`${cid}-label`} htmlFor={cid} required={required} disabled={disabled}>{label}</Label> : <span />}
             {labelAside ? <span className="body-body-4-regular text-tertiary">{labelAside}</span> : null}
           </div>
         ) : null}

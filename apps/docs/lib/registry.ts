@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -173,7 +173,31 @@ export const COMPONENTS: ComponentDoc[] = [
     use: ["Tables and lists with more than one page."], avoid: ["Feeds people scroll: load more instead."],
     a11y: ["A nav landmark; the current page has aria-current=page; Previous and Next are named and disabled at the ends.", "On small screens it shows Page 3 of 23 between the arrows."],
     examples: [{ file: "navigation", fn: "PaginationBasic", title: "With a summary" }],
-    props: [{ name: "page", type: "number", description: "1-based current page." }, { name: "count", type: "number", description: "Number of pages." }, { name: "onPageChange", type: "(page: number) => void", description: "Called with the new page." }, { name: "siblings", type: "number", default: "1", description: "Pages shown on each side of the current one." }, { name: "summary", type: "ReactNode", description: "Text before the buttons." }, { name: "size", type: "'sm' | 'md'", default: "'sm'", description: "Button size." }] }
+    props: [{ name: "page", type: "number", description: "1-based current page." }, { name: "count", type: "number", description: "Number of pages." }, { name: "onPageChange", type: "(page: number) => void", description: "Called with the new page." }, { name: "siblings", type: "number", default: "1", description: "Pages shown on each side of the current one." }, { name: "summary", type: "ReactNode", description: "Text before the buttons." }, { name: "size", type: "'sm' | 'md'", default: "'sm'", description: "Button size." }] },
+  { slug: "slider", name: "Slider", group: "Forms", description: "Picks a number, or a range, on a track.",
+    use: ["Values people judge by feel: opacity, size, a range of steps."], avoid: ["Exact numbers: use an Input (or pair them)."],
+    a11y: ["Built on Radix Slider: arrow keys step, Page Up and Down jump, Home and End go to the ends.", "Inside Field the thumb is named by the label; range thumbs are Minimum and Maximum; formatValue sets aria-valuetext."],
+    examples: [{ file: "flow", fn: "SliderBasic", title: "Single and range" }],
+    props: [{ name: "value / defaultValue", type: "number | number[]", description: "One number, or two for a range." }, { name: "onValueChange", type: "(value) => void", description: "While dragging." }, { name: "onValueCommit", type: "(value) => void", description: "When the person lets go." }, { name: "min / max / step", type: "number", default: "0 / 100 / 1", description: "Scale." }, { name: "showValue", type: "boolean", description: "Value at the right." }, { name: "formatValue", type: "(v: number) => string", description: "Shown and announced text." }, { name: "thumbLabels", type: "string[]", description: "Names for each thumb." }] },
+  { slug: "otp-input", name: "OtpInput", group: "Forms", description: "One-time codes, one cell per character.",
+    use: ["Email and SMS verification, two-factor codes."], a11y: ["A labelled group of cells; each says Character 2 of 6.", "autocomplete=one-time-code lets phones offer the code; paste fills every cell."],
+    examples: [{ file: "flow", fn: "OtpBasic", title: "In a Field, grouped 3 + 3" }],
+    props: [{ name: "length", type: "number", default: "6", description: "Number of cells." }, { name: "value / defaultValue", type: "string", description: "The code." }, { name: "onChange", type: "(value: string) => void", description: "On every change." }, { name: "onComplete", type: "(value: string) => void", description: "Once every cell is filled." }, { name: "alphanumeric", type: "boolean", description: "Letters too; default digits only." }, { name: "groupSize", type: "number", description: "A gap after this many cells." }, { name: "invalid / disabled / autoFocus", type: "boolean", description: "States." }] },
+  { slug: "stepper", name: "Stepper", group: "Navigation", description: "Where someone is in a flow with a few known steps.",
+    use: ["Onboarding, imports, setup wizards of 3 to 6 steps."], avoid: ["Open-ended processes: use Progress or a Timeline."],
+    a11y: ["An ordered list; the current step has aria-current=step and each step says done or current.", "Finished steps become buttons when onStepClick is set."],
+    examples: [{ file: "flow", fn: "StepperBasic", title: "Horizontal, go back by clicking" }, { file: "flow", fn: "StepperVertical", title: "Vertical, small" }],
+    props: [{ name: "steps", type: "(string | { label, description?, optional? })[]", description: "The steps." }, { name: "current", type: "number", default: "0", description: "Index in progress; earlier ones are done." }, { name: "orientation", type: "'horizontal' | 'vertical'", default: "'horizontal'", description: "Layout." }, { name: "size", type: "'sm' | 'md'", default: "'md'", description: "Dot size." }, { name: "onStepClick", type: "(index: number) => void", description: "Lets finished steps go back." }] },
+  { slug: "sidebar", name: "Sidebar", group: "Navigation", description: "The app's main navigation. It collapses to icons with tooltips.",
+    use: ["Apps with several areas people move between all day."], avoid: ["Marketing sites: use a top bar."],
+    a11y: ["A nav landmark with lists; the current page has aria-current=page.", "Collapsed items keep their names (visually hidden) and show a tooltip; the collapse button reports aria-expanded."],
+    examples: [{ file: "flow", fn: "SidebarBasic", title: "Sections, a group, a badge and a footer", note: "Selection is neutral (bg-selected), never blue." }],
+    props: [{ name: "items", type: "SidebarItem[]", description: "{ label, icon?, href?, onClick?, active?, badge?, items?, defaultOpen? } or { type: 'section', label }." }, { name: "header / subheader", type: "ReactNode", description: "Logo row; a switcher under it (hidden when collapsed)." }, { name: "footer", type: "ReactNode | (collapsed) => ReactNode", description: "Account, credits." }, { name: "collapsible", type: "boolean", description: "Shows the collapse button." }, { name: "collapsed / defaultCollapsed", type: "boolean", description: "Icons only." }, { name: "onCollapsedChange", type: "(collapsed: boolean) => void", description: "Remember it per person." }, { name: "linkAs", type: "ElementType", default: "'a'", description: "Your router's Link." }] },
+  { slug: "hover-card", name: "HoverCard", group: "Overlays", description: "A preview of what a link points to, on hover.",
+    use: ["People, tokens and pages mentioned in text."], avoid: ["Actions or anything essential: keyboard and touch users go straight to the link."],
+    a11y: ["Built on Radix HoverCard: opens on hover and keyboard focus after a delay; the link still works on its own."],
+    examples: [{ file: "flow", fn: "HoverCardBasic", title: "A person" }],
+    props: [{ name: "content", type: "ReactNode", description: "The preview." }, { name: "children", type: "ReactElement", description: "One link." }, { name: "openDelay / closeDelay", type: "number", default: "500 / 200", description: "ms." }, { name: "side / align", type: "Side / Align", default: "'bottom' / 'start'", description: "Placement." }] }
 ];
 
 export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];

@@ -38,5 +38,10 @@ export { Breadcrumb, type BreadcrumbProps, type BreadcrumbItem } from "./compone
 export { Pagination, pageRange, type PaginationProps } from "./components/pagination.js";
 export { toast, Toaster, type ToastOptions, type ToasterProps } from "./components/toast.js";
 export { Combobox, type ComboboxProps, type ComboboxOption } from "./components/combobox.js";
+export { Slider, type SliderProps } from "./components/slider.js";
+export { HoverCard, type HoverCardProps } from "./components/hover-card.js";
+export { OtpInput, type OtpInputProps } from "./components/otp-input.js";
+export { Stepper, type StepperProps, type StepperStep } from "./components/stepper.js";
+export { Sidebar, type SidebarProps, type SidebarItem } from "./components/sidebar.js";
 export { ThemeProvider, ThemeScript, useTheme, type ThemeProviderProps, type ThemeMode } from "./components/theme.js";
 export type { ChoiceText } from "./components/choice.js";
