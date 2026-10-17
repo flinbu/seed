@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -219,7 +219,56 @@ export const COMPONENTS: ComponentDoc[] = [
   { slug: "file-tree", name: "FileTree", group: "Display", description: "Files and folders, like an export or a repo.",
     use: ["Previewing generated files; picking one to view."], a11y: ["The ARIA tree pattern: up and down move, right opens or goes in, left closes or goes to the parent, Enter selects; one tab stop."],
     examples: [{ file: "dates", fn: "FileTreeBasic", title: "An export" }],
-    props: [{ name: "items", type: "{ name, children?, meta?, icon? }[]", description: "The tree." }, { name: "selected / defaultSelected", type: "string | null", description: "Path, like css/tokens.css." }, { name: "onSelect", type: "(path: string) => void", description: "Files only." }, { name: "expanded / defaultExpanded", type: "string[]", description: "Open folders." }, { name: "expandAll", type: "boolean", description: "Opens every folder when uncontrolled." }] }
+    props: [{ name: "items", type: "{ name, children?, meta?, icon? }[]", description: "The tree." }, { name: "selected / defaultSelected", type: "string | null", description: "Path, like css/tokens.css." }, { name: "onSelect", type: "(path: string) => void", description: "Files only." }, { name: "expanded / defaultExpanded", type: "string[]", description: "Open folders." }, { name: "expandAll", type: "boolean", description: "Opens every folder when uncontrolled." }] },
+  { slug: "stack", name: "Stack and Inline", group: "Layout", description: "Columns and rows with token gaps. Use them instead of margins between siblings.",
+    use: ["Stack for forms, sections and lists; Inline for badges, button rows and a title with its actions."], a11y: ["Pure layout: no roles. Pass as to render a list (as=\"ul\")."],
+    examples: [{ file: "product", fn: "StackInline", title: "Gaps, dividers and a row with actions at both ends" }],
+    parts: ["Stack", "Inline"],
+    props: [{ name: "gap", type: "'none' | 'xxxs' … '4xl'", description: "Stack default base, Inline default xs." }, { name: "align / justify", type: "'start' | 'center' | 'end' | 'between' …", description: "Flex alignment. Inline centers by default." }, { name: "Stack: divider", type: "boolean", description: "A line between children." }, { name: "Inline: wrap", type: "boolean", default: "true", description: "Wrap onto new lines." }, { name: "as / asChild", type: "ElementType / boolean", description: "Render another element." }] },
+  { slug: "grid", name: "Grid", group: "Layout", description: "Equal columns that collapse on small screens, or as many as fit.",
+    use: ["Card grids, swatches, settings."], a11y: ["Pure layout. Reading order follows the source."],
+    examples: [{ file: "product", fn: "GridAuto", title: "As many columns as fit", note: "minChild keeps cards at least 16rem wide and wraps the rest." }],
+    props: [{ name: "columns", type: "1 | 2 | 3 | 4 | 6 | 12", default: "2", description: "Collapses to fewer on small screens." }, { name: "minChild", type: "'xs' | 'sm' | 'md' | 'lg'", description: "16, 18, 20 or 24rem minimum; overrides columns." }, { name: "gap", type: "'none' | 'xxxs' … '4xl'", description: "Default base." }] },
+  { slug: "container", name: "Container", group: "Layout", description: "Centers content at a readable width, with gutters that grow with the screen.",
+    use: ["Page content under the app shell."], a11y: ["Pure layout."],
+    examples: [{ file: "product", fn: "ContainerSizes", title: "Sizes" }],
+    props: [{ name: "size", type: "'sm' | 'md' | 'lg' | 'xl' | 'prose' | 'full'", default: "'lg'", description: "672, 768, 1024, 1280px, 65 characters, or none." }, { name: "padding", type: "boolean", default: "true", description: "16, 24, then 40px gutters." }] },
+  { slug: "visually-hidden", name: "VisuallyHidden", group: "Layout", description: "Text for screen readers only, and skip links.",
+    use: ["Context for a number or an icon; a Skip to content link."], avoid: ["Anything sighted people would benefit from: show it."], a11y: ["focusable shows it while focused, for skip links."],
+    examples: [{ file: "product", fn: "VisuallyHiddenBasic", title: "A skip link and extra context" }],
+    props: [{ name: "focusable", type: "boolean", description: "Visible while focused." }, { name: "as", type: "ElementType", default: "'span'", description: "Use a for skip links." }] },
+  { slug: "page-header", name: "PageHeader", group: "Layout", description: "The top of a page: where you are, what this is, and the main actions.",
+    use: ["Every screen in an app."], a11y: ["Renders the page's one h1."],
+    examples: [{ file: "product", fn: "PageHeaderBasic", title: "Breadcrumbs, meta, actions and tabs" }],
+    props: [{ name: "title", type: "ReactNode", description: "A noun." }, { name: "eyebrow / description / meta", type: "ReactNode", description: "Mono label, one or two sentences, Badges." }, { name: "actions", type: "ReactNode", description: "At most one primary Button." }, { name: "breadcrumbs / back", type: "ReactNode / { label, href, onClick }", description: "Where you came from." }, { name: "tabs", type: "ReactNode", description: "A TabsList under it." }, { name: "display", type: "boolean", description: "Domine title, for hero screens." }] },
+  { slug: "banner", name: "Banner", group: "Feedback", description: "One message about the whole app or page, edge to edge.",
+    use: ["A paused sync, a read-only version, a trial ending."], avoid: ["A message about one section: use Alert.", "Something that just happened: use a toast."],
+    a11y: ["Warnings and errors are announced (role alert); the rest use role status."],
+    examples: [{ file: "product", fn: "BannerVariants", title: "Variants" }],
+    props: [{ name: "variant", type: "'info' | 'neutral' | 'success' | 'warning' | 'error' | 'offer' | 'inverse'", default: "'info'", description: "Meaning." }, { name: "title", type: "ReactNode", description: "Bold lead-in with a period." }, { name: "action", type: "ReactNode", description: "One small Button." }, { name: "onDismiss", type: "() => void", description: "Shows a close button." }, { name: "sticky", type: "boolean", description: "Stays on top while scrolling." }] },
+  { slug: "tag", name: "Tag", group: "Display", description: "A small label people act on: filter by it, remove it, or read a token's color.",
+    use: ["Filters, chosen values, token chips."], avoid: ["Status nobody clicks: use Badge."],
+    a11y: ["onClick makes it a toggle button with aria-pressed; the remove button is named Remove {text}."],
+    examples: [{ file: "product", fn: "TagBasic", title: "Variants, filters and removable token chips" }],
+    props: [{ name: "variant", type: "'neutral' | 'accent' | 'success' | 'warning' | 'error'", default: "'neutral'", description: "Meaning." }, { name: "size", type: "'sm' | 'md'", default: "'md'", description: "24 or 32px." }, { name: "swatch", type: "string", description: "A CSS color chip." }, icon("icon", "Leading icon."), { name: "onClick / selected", type: "function / boolean", description: "A toggle." }, { name: "onRemove", type: "function", description: "Adds a remove button." }] },
+  { slug: "copy-field", name: "CopyField and CopyButton", group: "Forms", description: "A read-only value with a copy button, and the button on its own.",
+    use: ["Install commands, API keys, token names, URLs."], a11y: ["The button is named (Copy, or your label); Copied is announced and the icon turns into a check for 2 seconds."],
+    examples: [{ file: "product", fn: "CopyBasic", title: "Command, secret and a token" }],
+    parts: ["CopyField", "CopyButton", "useCopy"],
+    props: [{ name: "value", type: "string", description: "What gets copied." }, { name: "CopyField: secret / revealPrefix", type: "boolean / number", description: "Masks it with a Show button; keeps the first characters." }, { name: "label / copyLabel", type: "string", default: "'Copy'", description: "Tooltip and accessible name." }, { name: "onCopy", type: "(value) => void", description: "After copying." }] },
+  { slug: "description-list", name: "DescriptionList", group: "Display", description: "Pairs of labels and values.",
+    use: ["A token's details, a version's metadata, read-only settings."], a11y: ["A real dl; empty values show a dash; copy buttons appear on hover and focus."],
+    examples: [{ file: "product", fn: "DescriptionListBasic", title: "Horizontal and grid" }],
+    props: [{ name: "items", type: "{ term, description?, mono?, copy? }[]", description: "The pairs." }, { name: "layout", type: "'horizontal' | 'vertical' | 'grid'", default: "'horizontal'", description: "Stacks on small screens." }, { name: "columns", type: "2 | 3 | 4", default: "3", description: "For grid." }, { name: "dense", type: "boolean", description: "No dividers, tighter rows." }] },
+  { slug: "timeline", name: "Timeline", group: "Display", description: "Events in order: a version history, an activity feed, the steps of a sync.",
+    use: ["History and activity."], a11y: ["An ordered list; Date times show as relative text with the full date in a time element."],
+    examples: [{ file: "product", fn: "TimelineBasic", title: "Version history" }],
+    parts: ["Timeline", "formatRelative"],
+    props: [{ name: "items", type: "{ title, description?, time?, status?, icon?, content? }[]", description: "Newest first for activity." }, { name: "status", type: "'default' | 'accent' | 'success' | 'warning' | 'error'", description: "Colors the marker." }, { name: "now / locale", type: "Date / string", description: "For relative times." }, { name: "dense", type: "boolean", description: "Tighter spacing." }] },
+  { slug: "link", name: "Link", group: "Navigation", description: "Text that goes somewhere. Use Button for actions.",
+    use: ["Inline links, Back links, View all."], a11y: ["external opens a new tab with rel=noopener and says so to screen readers."],
+    examples: [{ file: "product", fn: "LinkBasic", title: "Inline, external, standalone and subtle" }],
+    props: [{ name: "variant", type: "'default' | 'subtle' | 'standalone'", default: "'default'", description: "Weight." }, { name: "external", type: "boolean", description: "New tab." }, icon("icon", "Leading icon."), { name: "asChild", type: "boolean", description: "Style your router Link." }] }
 ];
 
 export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];

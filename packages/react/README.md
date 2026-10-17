@@ -85,14 +85,15 @@ Then set `data-brand="acme"` on `<html>`, or on any element to theme just that p
 ## Components
 
 - **Actions:** Button, Toggle, ToggleGroup.
-- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload.
+- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload, CopyField + CopyButton.
 - **Overlays:** Dialog, Sheet, Popover, HoverCard, CommandPalette (⌘K), DropdownMenu (with checkbox, radio and sub menus), Tooltip.
-- **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons).
-- **Display:** Badge, Avatar, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree.
-- **Feedback:** Alert, toast + Toaster, Progress, Skeleton, Spinner, EmptyState.
+- **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons), Link.
+- **Display:** Badge, Avatar, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree, Tag, DescriptionList, Timeline.
+- **Feedback:** Alert, Banner, toast + Toaster, Progress, Skeleton, Spinner, EmptyState.
+- **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader.
 - **Theme:** ThemeProvider, ThemeScript, useTheme.
 
-More are coming from the Seed design system: layout primitives, product pieces (Tag, CopyField, Banner, PageHeader…), chat parts and design system tools.
+More are coming from the Seed design system: AlertDialog, Drawer, ContextMenu, Menubar, chat parts, design system tools and charts.
 
 ## Related
 

@@ -48,5 +48,13 @@ export { DatePicker, DateRangePicker, defaultRangePresets, formatRange, type Dat
 export { CommandPalette, type CommandPaletteProps, type CommandItem, type CommandGroup } from "./components/command-palette.js";
 export { FileUpload, formatBytes, type FileUploadProps, type UploadFile } from "./components/file-upload.js";
 export { FileTree, type FileTreeProps, type FileTreeNode } from "./components/file-tree.js";
+export { Stack, Inline, Grid, Container, VisuallyHidden, type StackProps, type InlineProps, type GridProps, type ContainerProps, type VisuallyHiddenProps, type Gap } from "./components/layout.js";
+export { Link, type LinkProps } from "./components/link.js";
+export { CopyButton, CopyField, useCopy, type CopyButtonProps, type CopyFieldProps } from "./components/copy.js";
+export { Tag, type TagProps } from "./components/tag.js";
+export { Banner, type BannerProps } from "./components/banner.js";
+export { PageHeader, type PageHeaderProps } from "./components/page-header.js";
+export { DescriptionList, type DescriptionListProps, type DescriptionItem } from "./components/description-list.js";
+export { Timeline, formatRelative, type TimelineProps, type TimelineItem } from "./components/timeline.js";
 export { ThemeProvider, ThemeScript, useTheme, type ThemeProviderProps, type ThemeMode } from "./components/theme.js";
 export type { ChoiceText } from "./components/choice.js";
