@@ -21,5 +21,16 @@ export { Skeleton, type SkeletonProps } from "./components/skeleton.js";
 export { Kbd } from "./components/kbd.js";
 export { Separator, type SeparatorProps } from "./components/separator.js";
 export { EmptyState, type EmptyStateProps } from "./components/empty-state.js";
+export { Popover, PopoverTrigger, PopoverAnchor, PopoverClose, PopoverContent, type PopoverContentProps } from "./components/popover.js";
+export { Tooltip, TooltipProvider, type TooltipProps } from "./components/tooltip.js";
+export {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioGroup, DropdownMenuRadioItem,
+  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent,
+  type DropdownMenuContentProps, type DropdownMenuItemProps, type DropdownMenuSubTriggerProps,
+} from "./components/dropdown-menu.js";
+export { Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator, type SelectTriggerProps, type SelectItemProps } from "./components/select.js";
+export { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, DialogClose, type DialogContentProps } from "./components/dialog.js";
+export { Tabs, TabsList, TabsTrigger, TabsContent, type TabsListProps, type TabsTriggerProps } from "./components/tabs.js";
+export { Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell, TableCaption, type TableProps, type TableRowProps, type TableHeadProps, type TableCellProps, type SortDirection } from "./components/table.js";
 export { ThemeProvider, ThemeScript, useTheme, type ThemeProviderProps, type ThemeMode } from "./components/theme.js";
 export type { ChoiceText } from "./components/choice.js";

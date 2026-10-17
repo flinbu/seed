@@ -16,8 +16,8 @@ export function exampleSource(file: string, fn: string): string {
   jsx = jsx.split("\n").map((l) => l.replace(/^ {4}/, "")).join("\n");
   if (/^<>\n/.test(jsx)) jsx = jsx.replace(/^<>\n/, "").replace(/\n<\/>$/, "").split("\n").map((l) => l.replace(/^ {2}/, "")).join("\n");
   const used = (n: string) => new RegExp(`<${n}[\\s>/]|\\b${n}\\b`).test(pre + jsx);
-  const seedImport = /import \{([^}]+)\} from "@flinbu\/seed";/.exec(src)?.[1].split(",").map((s) => s.trim()).filter(used) ?? [];
-  const lucide = /import \{([^}]+)\} from "lucide-react";/.exec(src)?.[1].split(",").map((s) => s.trim()).filter(used) ?? [];
+  const seedImport = /import \{([^}]+)\} from "@flinbu\/seed";/.exec(src)?.[1].split(",").map((s) => s.trim()).filter(Boolean).filter(used) ?? [];
+  const lucide = /import \{([^}]+)\} from "lucide-react";/.exec(src)?.[1].split(",").map((s) => s.trim()).filter(Boolean).filter(used) ?? [];
   const head = [seedImport.length ? `import { ${seedImport.join(", ")} } from "@flinbu/seed";` : "", lucide.length ? `import { ${lucide.join(", ")} } from "lucide-react";` : ""].filter(Boolean).join("\n");
   const state = pre ? pre.split("\n").map((l) => l.replace(/^ {2}/, "")).join("\n") + "\n\n" : "";
   return `${head}\n\n${state}${jsx}`;

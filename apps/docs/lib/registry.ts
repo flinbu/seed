@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -100,7 +100,48 @@ export const COMPONENTS: ComponentDoc[] = [
     use: ["Between menu groups, toolbar sections and stacked content."], a11y: ["Decorative by default; decorative={false} exposes role separator."],
     examples: [{ file: "display", fn: "SeparatorBasic", title: "Horizontal and vertical" }],
     props: [{ name: "orientation", type: "'horizontal' | 'vertical'", default: "'horizontal'", description: "Direction." }, { name: "decorative", type: "boolean", default: "true", description: "false exposes role separator." }, cls] },
+  { slug: "select", name: "Select", group: "Forms", description: "Picks one value from a list. Seed never uses the native select.",
+    use: ["5 to 15 options people recognize by name.", "Grouped options with labels and short descriptions."], avoid: ["2 to 4 options people should compare: use RadioGroup.", "Long lists people search: use Combobox (coming soon)."],
+    a11y: ["Built on Radix Select: role combobox with a listbox, arrow keys, typeahead, Home and End.", "Inside Field the trigger gets its label, hint and error, and aria-invalid."],
+    examples: [{ file: "overlays", fn: "SelectBasic", title: "In a Field, with groups and descriptions" }],
+    parts: ["Select", "SelectTrigger", "SelectContent", "SelectItem", "SelectGroup", "SelectLabel", "SelectSeparator"],
+    props: [{ name: "value / defaultValue", type: "string", description: "Selected value." }, { name: "onValueChange", type: "(value: string) => void", description: "Called on change." }, { name: "SelectTrigger: placeholder", type: "ReactNode", description: "Shown when nothing is selected." }, { name: "SelectTrigger: size", type: "'sm' | 'md' | 'lg'", default: "'md'", description: "Same heights as Input." }, icon("SelectTrigger: leftIcon", "Icon at the start of the field."), { name: "SelectTrigger: invalid", type: "boolean", description: "Error border. Field sets it from error." }, icon("SelectItem: icon", "Leading icon."), { name: "SelectItem: description", type: "ReactNode", description: "A second line." }, { name: "SelectItem: disabled", type: "boolean", description: "Shown but can't be picked." }] },
+  { slug: "dropdown-menu", name: "DropdownMenu", group: "Overlays", description: "A list of commands that opens from a button: row actions, More menus, view options.",
+    use: ["Actions on one thing (rename, duplicate, delete).", "Checkbox and radio rows for view options."], avoid: ["Picking a form value: use Select.", "Navigation: use links."],
+    a11y: ["Built on Radix DropdownMenu: role menu, arrow keys, typeahead, Escape returns focus to the trigger.", "Shortcuts are only shown; wire them yourself."],
+    examples: [{ file: "overlays", fn: "DropdownBasic", title: "Items, submenu, checkbox and radio rows", note: "Destructive items go last, after a separator." }],
+    parts: ["DropdownMenu", "DropdownMenuTrigger", "DropdownMenuContent", "DropdownMenuItem", "DropdownMenuCheckboxItem", "DropdownMenuRadioGroup", "DropdownMenuRadioItem", "DropdownMenuLabel", "DropdownMenuSeparator", "DropdownMenuSub", "DropdownMenuSubTrigger", "DropdownMenuSubContent"],
+    props: [icon("DropdownMenuItem: icon", "Leading icon."), { name: "DropdownMenuItem: shortcut", type: "ReactNode", description: "Shown at the end, like ⌘D." }, { name: "DropdownMenuItem: destructive", type: "boolean", description: "Red, for deleting." }, { name: "DropdownMenuItem: onSelect", type: "(e: Event) => void", description: "Runs the command; the menu closes." }, { name: "DropdownMenuContent: align / side", type: "'start' | 'center' | 'end' / Side", default: "'start' / 'bottom'", description: "Placement; flips to stay on screen." }] },
+  { slug: "dialog", name: "Dialog", group: "Overlays", description: "A blocking task on top of the page: a short form, a review, a decision.",
+    use: ["Tasks that need focus and finish in one step."], avoid: ["Long flows: use a page.", "Information people need while working: use a Popover or the page."],
+    a11y: ["Built on Radix Dialog: focus moves in and is trapped, Escape closes, focus returns to the trigger.", "DialogTitle names it and DialogDescription describes it."],
+    examples: [{ file: "overlays", fn: "DialogBasic", title: "A short form", note: "The confirm button repeats the title's verb; Cancel is always Cancel." }],
+    parts: ["Dialog", "DialogTrigger", "DialogContent", "DialogHeader", "DialogTitle", "DialogDescription", "DialogFooter", "DialogClose"],
+    props: [{ name: "open / defaultOpen", type: "boolean", description: "Controlled or initial state." }, { name: "onOpenChange", type: "(open: boolean) => void", description: "Called on open and close." }, { name: "DialogContent: size", type: "'sm' | 'md' | 'lg'", default: "'md'", description: "384, 512 or 672 px wide." }, { name: "DialogContent: hideClose", type: "boolean", description: "Hides the close button; keep a Cancel button." }, { name: "DialogContent: closeLabel", type: "string", default: "'Close'", description: "Accessible name of the close button." }] },
+  { slug: "popover", name: "Popover", group: "Overlays", description: "Content that floats next to its trigger: filters, a small form, details.",
+    use: ["Settings and filters that apply to what's on the page."], avoid: ["Commands: use DropdownMenu.", "A name for an icon button: use Tooltip."],
+    a11y: ["Built on Radix Popover: role dialog, Escape and outside clicks close it, focus returns to the trigger.", "Give it an aria-label or a heading."],
+    examples: [{ file: "overlays", fn: "PopoverBasic", title: "Filters" }],
+    parts: ["Popover", "PopoverTrigger", "PopoverContent", "PopoverClose", "PopoverAnchor"],
+    props: [{ name: "PopoverContent: side / align", type: "Side / 'start' | 'center' | 'end'", default: "'bottom' / 'start'", description: "Placement; flips to stay on screen." }, { name: "PopoverContent: inline", type: "boolean", description: "Render in place instead of a portal." }, cls] },
+  { slug: "tooltip", name: "Tooltip", group: "Overlays", description: "Names an icon button or explains a control, on hover and focus.",
+    use: ["Every icon-only button.", "A shortcut next to the action's name."], avoid: ["Anything people must read or click: put it on the page."],
+    a11y: ["Built on Radix Tooltip: opens on focus and hover, Escape closes it, linked with aria-describedby.", "Icon buttons still need their own aria-label."],
+    examples: [{ file: "overlays", fn: "TooltipBasic", title: "With shortcuts" }],
+    props: [{ name: "content", type: "ReactNode", description: "A few words." }, { name: "shortcut", type: "ReactNode", description: "Shown after the text." }, { name: "side", type: "Side", default: "'top'", description: "Placement." }, { name: "delay", type: "number", default: "300", description: "ms before it opens on hover." }, { name: "children", type: "ReactElement", description: "One focusable trigger." }] },
+  { slug: "tabs", name: "Tabs", group: "Navigation", description: "Switches between views of the same thing.",
+    use: ["line under a page's sections; pill for small views like Preview and Code."], avoid: ["Pages: use links.", "Filters: use ToggleGroup."],
+    a11y: ["Built on Radix Tabs: arrow keys move between tabs, Tab moves into the panel."],
+    examples: [{ file: "overlays", fn: "TabsLine", title: "Line, with counts" }, { file: "overlays", fn: "TabsPill", title: "Pill" }],
+    parts: ["Tabs", "TabsList", "TabsTrigger", "TabsContent"],
+    props: [{ name: "value / defaultValue", type: "string", description: "Active tab." }, { name: "onValueChange", type: "(value: string) => void", description: "Called on change." }, { name: "TabsList: variant", type: "'line' | 'pill'", default: "'line'", description: "Underline or segmented control." }, { name: "TabsList: fullWidth", type: "boolean", description: "Tabs share the width." }, icon("TabsTrigger: icon", "Leading icon."), { name: "TabsTrigger: count", type: "ReactNode", description: "A count after the label." }] },
+  { slug: "table", name: "Table", group: "Display", description: "Rows of records with sortable headers.",
+    use: ["Lists people compare or scan: tokens, members, versions."], avoid: ["Layout: use grids."],
+    a11y: ["Real table markup with scope on headers.", "Sortable headers are buttons and report aria-sort."],
+    examples: [{ file: "overlays", fn: "TableBasic", title: "Sortable, with a selected row" }],
+    parts: ["Table", "TableHeader", "TableBody", "TableFooter", "TableRow", "TableHead", "TableCell", "TableCaption"],
+    props: [{ name: "density", type: "'comfortable' | 'compact'", default: "'comfortable'", description: "48 or 40 px rows." }, { name: "frameClassName", type: "string", description: "Classes for the scrolling frame." }, { name: "TableRow: selected", type: "boolean", description: "Neutral selection color." }, { name: "TableHead: sort", type: "'ascending' | 'descending' | false", description: "Makes the header a sort button." }, { name: "TableHead: onSort", type: "() => void", description: "Called on click." }, { name: "TableHead / TableCell: align", type: "'left' | 'center' | 'right'", default: "'left'", description: "Right-align numbers." }] },
 ];
 
-export const GROUPS = ["Actions", "Forms", "Display", "Feedback", "Layout"];
+export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];
 export const bySlug = (s: string) => COMPONENTS.find((c) => c.slug === s);

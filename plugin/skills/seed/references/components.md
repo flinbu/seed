@@ -25,7 +25,7 @@
 - **Badge** (package): A short status or category label: one or two words, optionally with a dot or an icon
 - **Avatar** (package): A person's or workspace's picture, falling back to initials, then to the `user` icon
 - **Kbd** (package): A keyboard key, for shortcuts in menus, tooltips and help text
-- **Table** (design system): Displays rows of structured data with sorting, selection, loading and empty states
+- **Table** (package): Displays rows of structured data with sorting, selection, loading and empty states
 - **Item** (design system): A row for one thing, with media, a title, a description and actions: integrations, members, files, settings entries
 - **DataTable** (design system): A list of records with everything around it: search, sorting across all pages, column visibility, pagination, selection and bulk actions
 - **Chart** (design system): Bar, stacked bar, line and area charts drawn in Seed's chart palette, with a tooltip, keyboard reading and a table view built in
@@ -75,7 +75,7 @@
 - **Radio** (package): One option inside a `RadioGroup`
 - **Switch** (package): A toggle for a setting that takes effect immediately
 - **Field** (package): Wraps one form control with its label, hint and error, and wires them together
-- **Select** (design system): A single-choice dropdown for picking one value from a list too long for `RadioGroup` (about seven or more, or where space is tight)
+- **Select** (package): A single-choice dropdown for picking one value from a list too long for `RadioGroup` (about seven or more, or where space is tight)
 - **Combobox** (design system): A searchable single-choice list: type to filter, then pick
 - **Slider** (design system): Picks a number from a range by dragging, for values where the feel matters more than the exact number (volume, opacity, radius)
 - **Calendar** (design system): A month grid for picking a single date or a range
@@ -102,7 +102,7 @@
 
 - **Separator** (package): A 1px rule that divides content, horizontal or vertical
 - **Card** (package): A bordered container that groups related content and actions
-- **Tabs** (design system): Switches between views in the same context without leaving the page
+- **Tabs** (package): Switches between views in the same context without leaving the page
 - **ScrollArea** (design system): A scrolling region with Seed's thin scrollbars on every operating system, for lists and panels with a fixed height: sidebars, menus of results, a long token list in a card
 - **AspectRatio** (design system): Keeps media at a fixed shape while its width changes: thumbnails, video embeds, component previews, cover images
 - **Carousel** (design system): A row of slides that scrolls sideways: theme presets, templates, screenshots, onboarding cards
@@ -127,10 +127,10 @@
 
 ## Overlays
 
-- **Tooltip** (design system): A short label that appears on hover or focus, mainly to name icon-only buttons and show shortcuts
-- **Popover** (design system): A floating panel anchored to a trigger, for small forms, filters and details that belong to one control
-- **DropdownMenu** (design system): A menu of commands opened from a trigger: row actions, "More" menus, account menus
-- **Dialog** (design system): A modal window for focused tasks and confirmations that must be finished or dismissed before going back to the page
+- **Tooltip** (package): A short label that appears on hover or focus, mainly to name icon-only buttons and show shortcuts
+- **Popover** (package): A floating panel anchored to a trigger, for small forms, filters and details that belong to one control
+- **DropdownMenu** (package): A menu of commands opened from a trigger: row actions, "More" menus, account menus
+- **Dialog** (package): A modal window for focused tasks and confirmations that must be finished or dismissed before going back to the page
 - **Sheet** (design system): A panel that slides in from the edge of the screen for secondary tasks that need more room than a popover but should keep the page in view: filters, details, edit forms, mobile navigation
 - **HoverCard** (design system): A rich preview that appears when hovering or focusing a link: a person, a page, a record
 - **CommandPalette** (design system): A keyboard-first search for commands and pages, opened with Cmd/Ctrl+K

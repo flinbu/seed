@@ -8,8 +8,9 @@ import * as formsEx from "@/examples/forms";
 import * as choicesEx from "@/examples/choices";
 import * as displayEx from "@/examples/display";
 import * as feedbackEx from "@/examples/feedback";
+import * as overlaysEx from "@/examples/overlays";
 
-const FILES: Record<string, Record<string, () => React.ReactNode>> = { button: buttonEx, forms: formsEx, choices: choicesEx, display: displayEx, feedback: feedbackEx } as any;
+const FILES: Record<string, Record<string, () => React.ReactNode>> = { button: buttonEx, forms: formsEx, choices: choicesEx, display: displayEx, feedback: feedbackEx, overlays: overlaysEx } as any;
 
 export function generateStaticParams() { return COMPONENTS.map((c) => ({ slug: c.slug })); }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
