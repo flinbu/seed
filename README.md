@@ -27,3 +27,9 @@ pnpm test
 ## License
 
 MIT © Felipe Linares. Fonts are under the SIL Open Font License.
+
+## Use with AI
+
+- **Claude plugin**: [`plugin/`](plugin) packages the Seed skill (components, tokens, voice and writing, accessibility). In Claude Code: `/plugin marketplace add flinbu/seed`, then `/plugin install seed@seed`. In Claude, add `plugin/seed.plugin` from the plugin settings.
+- **Design system in Claude**: every component with live previews, the tokens and the guides, at [this link](https://claude.ai/artifact/3EcyStkY8yCeAxSM7a1biz).
+- **llms.txt**: [seed-lyart.vercel.app/llms.txt](https://seed-lyart.vercel.app/llms.txt).

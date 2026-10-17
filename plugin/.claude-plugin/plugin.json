@@ -1,0 +1,10 @@
+{
+  "name": "seed",
+  "version": "0.1.0",
+  "description": "Build and review UI with Seed, Fenly's open design system for React and Tailwind: tokens, components, voice and writing, accessibility.",
+  "author": { "name": "Felipe Linares" },
+  "homepage": "https://seed-lyart.vercel.app",
+  "repository": "https://github.com/flinbu/seed",
+  "license": "MIT",
+  "keywords": ["design-system", "react", "tailwind", "ui", "accessibility", "seed", "fenly"]
+}

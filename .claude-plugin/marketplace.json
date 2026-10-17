@@ -1,0 +1,11 @@
+{
+  "name": "seed",
+  "owner": { "name": "Felipe Linares" },
+  "plugins": [
+    {
+      "name": "seed",
+      "source": "./plugin",
+      "description": "Build and review UI with Seed: tokens, components, voice and writing, accessibility."
+    }
+  ]
+}

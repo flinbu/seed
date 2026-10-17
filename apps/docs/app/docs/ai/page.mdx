@@ -1,0 +1,33 @@
+export const metadata = { title: "Use with AI" };
+
+# Use with AI
+
+Seed ships the same knowledge for people and for AI agents: one skill that teaches Claude to build and review UI with Seed, and machine-readable docs for any other tool.
+
+## The Seed skill
+
+The skill tells Claude to pick Seed components before writing markup, style only with tokens, write copy in Seed's voice and check accessibility in Light and Dark before calling the work done. It also knows which parts are in `@flinbu/seed` today and which are only specified in the design system so far.
+
+### In Claude Code
+
+Working inside this repo, the skill is already there (`.claude/skills/seed`). For your own projects, add the plugin:
+
+```bash
+/plugin marketplace add flinbu/seed
+/plugin install seed@seed
+```
+
+### In Claude (Cowork and claude.ai)
+
+Add the `seed` plugin from this repo's [`plugin`](https://github.com/flinbu/seed/tree/main/plugin) folder (or the packaged `seed.plugin` file) in Claude's plugin settings. Organization owners can add it for the whole team.
+
+Then ask for things in plain words: "Build a settings page with Seed", "Review this form against Seed", "Make a teal Seed theme".
+
+## The design system in Claude
+
+Every Seed component, with live previews in Light and Dark, the tokens, and the guides for principles, voice and tone, writing and accessibility, lives in one Claude design system. [Open it](https://claude.ai/artifact/3EcyStkY8yCeAxSM7a1biz) and share its link: anyone with the link can browse it, and Claude can read it to design with Seed.
+
+## For other tools
+
+- [`/llms.txt`](/llms.txt): an index of these docs written for language models.
+- Every component page lists its props, accessibility notes and copy guidelines in plain text.
