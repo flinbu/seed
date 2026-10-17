@@ -147,8 +147,10 @@ function tailwindCss() {
     else if (kind === "border") { add("border-color-" + r, `var(--${s.name})`); add("ring-color-" + r, `var(--${s.name})`); add("outline-color-" + r, `var(--${s.name})`); add("divide-color-" + r, `var(--${s.name})`); }
     else add("color-" + s.name, `var(--${s.name})`); // icon-*, button-*: text-icon-secondary, fill-icon-secondary, bg-button-primary
   }
-  space.filter((p) => !/-(zero|px)$/.test(p.name)).forEach((p) => add("spacing-" + p.name.replace(/^space-/, ""), `var(--${p.name})`));
-  control.forEach((p) => add("spacing-" + p.name, `var(--${p.name})`));
+  // Seed's space names only apply to spacing utilities, so Tailwind's max-w-xl, w-sm and friends keep their usual meaning.
+  for (const ns of ["padding", "margin", "gap", "inset", "translate", "scroll-margin", "scroll-padding"])
+    space.filter((p) => !/-(zero|px)$/.test(p.name)).forEach((p) => add(`${ns}-` + p.name.replace(/^space-/, ""), `var(--${p.name})`));
+  for (const ns of ["height", "min-height", "max-height", "width", "min-width", "size"]) control.forEach((p) => add(`${ns}-` + p.name, `var(--${p.name})`));
   L.push("  --radius-*: initial;");
   radius.forEach((p) => add("radius-" + p.name.replace(/^radius-/, ""), `var(--seed-${p.name})`));
   L.push("  --shadow-*: initial;");
@@ -163,8 +165,9 @@ function tailwindCss() {
   return HEADER + `/* Seed for Tailwind CSS v4.
    @import "tailwindcss";
    @import "@flinbu/seed-tokens/tailwind.css";
-   Every token becomes a utility: bg-primary, text-secondary, border-primary, text-icon-secondary, p-base, gap-xs,
-   h-control-md, rounded-control, shadow-elevation-md, font-display, ease-out, and the type styles (label-label-2-medium). */
+   Every token becomes a utility: bg-primary, text-secondary, border-primary, text-icon-secondary, p-base, gap-xs, mt-lg,
+   h-control-md, rounded-control, shadow-elevation-md, font-display, ease-out, and the type styles (label-label-2-medium).
+   Space names apply to padding, margin, gap, inset and translate only; max-w-xl, w-sm and size-* keep Tailwind's meaning. */
 @import "./tokens.css";
 @import "./fonts.css";
 

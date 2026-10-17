@@ -1,0 +1,117 @@
+import { ThemeBuilder } from "@/components/theme-builder";
+
+export const metadata = { title: "Theming" };
+
+# Theming
+
+Seed is made to become your brand. A theme changes what the tokens point at; the components never change. Try it here, then copy the result.
+
+<ThemeBuilder />
+
+## How it works
+
+Seed has three layers of tokens:
+
+| Layer | Examples | Who uses it |
+|---|---|---|
+| Primitives | `blue-600`, `neutral-100`, `brand-500` | Themes, charts and illustration |
+| Semantic | `bg-primary`, `text-secondary`, `bg-accent-solid`, `border-accent-primary` | Your UI and Seed's components |
+| Component | `button-primary`, `button-primary-text` | One component that needs its own knob |
+
+Your code and Seed's components use semantic names. A theme points them at different primitives, so `bg-accent-solid` is blue in Seed and teal in your theme, everywhere at once, in Light and Dark.
+
+The accent is the themeable part. Seed's accent tokens point at a `brand` scale (50 to 950) that defaults to blue. Status colors (error, success, warning, info) stay the same, so red still means error under any brand.
+
+## Make a theme from your brand color
+
+```bash
+npx seed theme --brand "#0d9488" --name acme --out src/acme.css
+```
+
+The command does four things:
+
+1. Builds an 11-step scale around your color. Your exact color sits at the step that matches its lightness; the rest keep its hue.
+2. Points every accent token at the scale, in Light and Dark.
+3. Checks every accent pair against WCAG 2.2 AA: 4.5:1 for text (links, accent text, button labels, text on tints) and 3:1 for icons and focus borders, in both modes.
+4. Moves any token that fails one step along the scale until it passes, and tells you what it moved.
+
+Light brands like yellow or lime keep their own color on buttons, with near-black text. If a check can't pass, the command fails, so your CI catches an inaccessible brand before your users do.
+
+Then load the file after Seed and set the brand:
+
+```css
+@import "tailwindcss";
+@import "@flinbu/seed/styles.css";
+@import "./acme.css";
+```
+
+```tsx
+<ThemeProvider brand="acme">{children}</ThemeProvider>
+```
+
+`brand` sets `data-brand="acme"` on `<html>`. You can also put `data-brand` on any element, so one page can show several brands side by side, like a client preview in an agency tool.
+
+> Without `--name`, the theme replaces Seed's defaults on `:root` and needs no `data-brand`.
+
+## Options
+
+| Option | Values | What it changes |
+|---|---|---|
+| `--brand` | Any hex color | The accent scale |
+| `--radius` | `sharp`, `default`, `round`, `pill` | Every radius token; `pill` makes buttons and inputs fully round |
+| `--density` | `compact`, `default`, `comfortable` | Control heights: 28/36/44, 32/40/48 or 36/44/52 px |
+| `--neutral` | `neutral`, `gray`, `slate`, `zinc`, `stone` | Which grays surfaces, borders and text use |
+| `--font-primary` and `titles`, `display`, `reading`, `mono` | A CSS font stack | The family for that role |
+| `--on-accent` | `auto`, `white`, `dark` | Text on accent buttons |
+| `--json` | | Prints the scale, every check and every adjustment |
+
+## In code
+
+The same engine runs anywhere JavaScript does, including the browser (that's how the builder above works):
+
+```ts
+import { createTheme } from "@flinbu/seed-tokens";
+
+const theme = createTheme({ brand: "#0d9488", name: "acme", radius: "round" });
+
+theme.css;          // the stylesheet
+theme.scale;        // { 50: "#edf8f6", …, 950: "#00312c" }
+theme.checks;       // every contrast check with its ratio
+theme.adjustments;  // tokens it moved to pass
+theme.passed;       // false if any check fails
+```
+
+Use it to theme per customer at runtime: build the CSS on your server from the customer's color and inject it.
+
+## Fonts
+
+Load your fonts, then point a role at them:
+
+```bash
+npx seed theme --brand "#0d9488" --font-primary "Inter, system-ui, sans-serif" --font-display "Fraunces, Georgia, serif"
+```
+
+Browsers only download a font a page actually uses, so once every role points at your fonts, Seed's are never fetched. Display titles use `display`, page and section headings use `titles`, the interface uses `primary`, long reading text uses `reading` and code uses `mono`.
+
+## Change one component safely
+
+Every component takes `className`, and your classes win over Seed's:
+
+```tsx
+<Button className="rounded-full px-lg">Get started</Button>
+```
+
+For a change everywhere, theme a token instead of styling every button. For example, make every primary button your darker shade:
+
+```css
+[data-brand="acme"] {
+  --button-primary: var(--brand-700);
+  --button-primary-hover: var(--brand-800);
+}
+```
+
+Keep to tokens when you override (`var(--…)` and Seed's utilities), so Light, Dark and future themes keep working.
+
+## Dark mode
+
+Semantic tokens already switch between Light and Dark, so you rarely need `dark:`. When you do, it follows `data-theme="dark"` on the element or any parent, and the operating system when the theme is `system`.

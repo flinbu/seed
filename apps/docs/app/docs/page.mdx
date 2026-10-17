@@ -1,0 +1,23 @@
+export const metadata = { title: "Introduction" };
+
+# Seed
+
+Seed is a design system for React and Tailwind CSS. It is calm on purpose: true-gray surfaces with no tint, one accent color, and five status colors. Your brand is the only color that reads as brand on screen.
+
+## What's in it
+
+- **[@flinbu/seed-tokens](/docs/tokens)**: every color, space, radius, shadow and type style as CSS variables, a Tailwind CSS v4 theme, DTCG JSON for other tools, and the `seed` command that builds brand themes.
+- **[@flinbu/seed](/docs/components/button)**: React components built from those tokens. Interactive ones sit on [Radix](https://www.radix-ui.com/) for keyboard and screen reader support.
+
+You can use the tokens alone, in any framework, or both together.
+
+## Principles
+
+- **Tokens, never raw values.** Components only use tokens, and a test fails the build if one sneaks in. That's what makes a theme reach every corner.
+- **Semantic names.** Build with `bg-primary` and `text-secondary`, not `neutral-50`. A theme changes what the names point at; your code doesn't change.
+- **Accessible contrast is checked, not hoped for.** Seed's own palette passes WCAG 2.2 AA in Light and Dark, and every theme you make is checked the same way.
+- **Plain words.** Labels start with a verb, errors say what to do next, and nothing shouts.
+
+## Status
+
+Seed is in its first version: 20 components today, with selects, dialogs, menus, tabs, tables and more on the way. The API follows the Seed library used in [Fenly](https://fenly.io), so it's stable in shape.

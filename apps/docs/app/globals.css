@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "@flinbu/seed/styles.css";
+
+/* Code highlighting follows the docs theme: Shiki writes both palettes as variables. */
+.shiki, .shiki span { color: var(--shiki-light); background: transparent !important; }
+[data-theme="dark"] .shiki, [data-theme="dark"] .shiki span { color: var(--shiki-dark); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .shiki, :root:not([data-theme]) .shiki span,
+  [data-theme="system"] .shiki, [data-theme="system"] .shiki span { color: var(--shiki-dark); }
+}
+/* The dotted stage behind live examples, as in Fenly's docs. */
+@utility stage {
+  background-color: var(--bg-stage);
+  background-image: radial-gradient(var(--bg-stage-pattern) 1px, transparent 1px);
+  background-size: var(--space-base) var(--space-base);
+}
+html { scroll-padding-top: var(--space-6xl); }

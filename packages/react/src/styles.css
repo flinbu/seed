@@ -1,0 +1,14 @@
+/* Seed for apps that use Tailwind CSS v4:
+     @import "tailwindcss";
+     @import "@flinbu/seed/styles.css";
+   It brings Seed's tokens, fonts and type utilities, and tells Tailwind to read Seed's components for class names. */
+@import "@flinbu/seed-tokens/tailwind.css";
+@source "./";
+
+@theme {
+  --animate-seed-indeterminate: seed-indeterminate 1.4s ease-in-out infinite;
+}
+@keyframes seed-indeterminate {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}

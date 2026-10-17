@@ -1,0 +1,39 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Badge, Button, ToggleGroup, ToggleGroupItem, useTheme, cn } from "@flinbu/seed";
+import { Monitor, Moon, Sun, Sprout, ExternalLink } from "lucide-react";
+import { useSiteTheme } from "./site-theme";
+
+const NAV = [{ href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/components/button", label: "Components", match: "/docs/components" }, { href: "/docs/tokens", label: "Tokens" }];
+
+export function SiteHeader() {
+  const { theme, setTheme } = useTheme();
+  const { saved, apply } = useSiteTheme();
+  const path = usePathname();
+  return (
+    <header className="sticky top-0 z-20 flex h-(--space-5xl) items-center gap-lg border-b border-secondary bg-primary/90 px-lg backdrop-blur">
+      <Link href="/" className="inline-flex items-center gap-xs text-primary no-underline">
+        <Sprout size={20} aria-hidden className="text-icon-accent-primary" />
+        <span className="display-greeting-regular">Seed</span>
+      </Link>
+      <nav aria-label="Main" className="hidden items-center gap-xxs md:flex">
+        {NAV.map((n) => {
+          const on = path?.startsWith(n.match ?? n.href);
+          return <Link key={n.href} href={n.href} aria-current={on ? "page" : undefined}
+            className={cn("rounded-control px-sm py-xxs label-label-2-medium no-underline transition-colors", on ? "bg-selected text-primary" : "text-secondary hover:bg-secondary-hover hover:text-primary")}>{n.label}</Link>;
+        })}
+      </nav>
+      <div className="ml-auto flex items-center gap-xs">
+        {saved ? <Badge variant="accent" className="hidden sm:inline-flex">Your theme</Badge> : null}
+        {saved ? <Button size="sm" variant="ghost" onClick={() => apply(null)}>Reset</Button> : null}
+        <Button size="sm" variant="ghost" href="https://github.com/flinbu/seed" rightIcon={<ExternalLink />} className="hidden sm:inline-flex">GitHub</Button>
+        <ToggleGroup type="single" size="sm" variant="outline" value={theme} allowEmpty={false} onValueChange={(v) => setTheme(v as "light" | "dark" | "system")} aria-label="Theme">
+          <ToggleGroupItem value="light" icon={<Sun />} aria-label="Light" />
+          <ToggleGroupItem value="dark" icon={<Moon />} aria-label="Dark" />
+          <ToggleGroupItem value="system" icon={<Monitor />} aria-label="Match system" />
+        </ToggleGroup>
+      </div>
+    </header>
+  );
+}

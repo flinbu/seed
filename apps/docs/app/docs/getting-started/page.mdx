@@ -1,0 +1,90 @@
+export const metadata = { title: "Get started" };
+
+# Get started
+
+Seed works with React 18 or 19 and Tailwind CSS v4. Without Tailwind, use the prebuilt CSS.
+
+## Install
+
+```bash
+npm i @flinbu/seed @flinbu/seed-tokens lucide-react
+```
+
+`lucide-react` is optional: Seed takes any icon component, and Lucide is what the examples use.
+
+## With Tailwind CSS v4
+
+Import Tailwind, then Seed, in your main stylesheet:
+
+```css
+/* app.css */
+@import "tailwindcss";
+@import "@flinbu/seed/styles.css";
+```
+
+That one line brings Seed's tokens, fonts and type styles, and tells Tailwind to read Seed's components for their classes. Every token is now a utility you can use in your own code:
+
+```tsx
+<div className="rounded-xl border border-secondary bg-primary p-lg shadow-elevation-raised">
+  <h2 className="label-label-1-semibold text-primary">Tokens</h2>
+  <p className="body-body-3-regular text-secondary">435 tokens in Light and Dark.</p>
+</div>
+```
+
+## Without Tailwind
+
+```tsx
+import "@flinbu/seed/compiled.css";
+```
+
+It's the same styles, prebuilt: the tokens plus every class Seed's components use. Use the CSS variables in your own styles, like `var(--bg-primary)`.
+
+## Use a component
+
+```tsx
+import { Button, Field, Input } from "@flinbu/seed";
+import { Plus } from "lucide-react";
+
+export function NewToken() {
+  return (
+    <form className="flex items-end gap-xs">
+      <Field label="Name" hint="Lowercase, with dashes.">
+        <Input placeholder="bg-surface" />
+      </Field>
+      <Button type="submit" leftIcon={<Plus />}>Add token</Button>
+    </form>
+  );
+}
+```
+
+Components are client components: they work in the Next.js App Router from server components without extra setup.
+
+## Light, Dark and system
+
+Wrap your app in `ThemeProvider` and put `ThemeScript` in `<head>`. The script sets the theme before the first paint, so a dark page never flashes white.
+
+```tsx
+// app/layout.tsx (Next.js)
+import { ThemeProvider, ThemeScript } from "@flinbu/seed";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head><ThemeScript /></head>
+      <body><ThemeProvider>{children}</ThemeProvider></body>
+    </html>
+  );
+}
+```
+
+```tsx
+import { useTheme } from "@flinbu/seed";
+
+const { theme, resolvedTheme, setTheme } = useTheme(); // "light" | "dark" | "system"
+```
+
+Any element can also switch on its own with `data-theme="dark"`, for a dark panel in a light page.
+
+## Fonts
+
+`styles.css` includes Seed's fonts: Plus Jakarta Sans for the interface, Domine for display titles, Noto Serif for reading text and Inconsolata for code. All four use the SIL Open Font License. To use your own, see [fonts in Theming](/docs/theming#fonts).

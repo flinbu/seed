@@ -54,6 +54,16 @@ describe("tailwind.css", () => {
   it("keeps Tailwind's numeric spacing", async () => {
     expect(rule(await tailwind(["p-4"]), "p-4")).toMatch(/calc\(var\(--spacing\) \* 4\)/);
   });
+  it("keeps Tailwind's container sizes for width utilities", async () => {
+    const css = await tailwind(["max-w-xl", "w-sm", "-mt-xxs", "inset-x-base", "translate-x-xxxs", "w-control-md", "min-h-control-lg"]);
+    expect(rule(css, "max-w-xl")).toMatch(/var\(--container-xl\)/);
+    expect(rule(css, "w-sm")).toMatch(/var\(--container-sm\)/);
+    expect(css).toMatch(/margin-top: calc\(var\(--space-xxs\) \* -1\)/);
+    expect(rule(css, "inset-x-base")).toMatch(/var\(--space-base\)/);
+    expect(rule(css, "translate-x-xxxs")).toMatch(/var\(--space-xxxs\)/);
+    expect(rule(css, "w-control-md")).toMatch(/var\(--control-md\)/);
+    expect(rule(css, "min-h-control-lg")).toMatch(/var\(--control-lg\)/);
+  });
   it("dark: follows data-theme and the OS", async () => {
     const css = await tailwind(["dark:bg-secondary"]);
     expect(css).toContain('.dark\\:bg-secondary:where([data-theme="dark"], [data-theme="dark"] *)');
