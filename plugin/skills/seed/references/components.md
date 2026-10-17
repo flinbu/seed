@@ -51,7 +51,7 @@
 
 ## Disclosure
 
-- **Accordion** (design system): Stacked sections that expand and collapse, for FAQs, settings groups and long forms split into steps
+- **Accordion** (package): Stacked sections that expand and collapse, for FAQs, settings groups and long forms split into steps
 - **Collapsible** (design system): One section that shows and hides its content: "Show more" lists, advanced settings, the reasoning behind a suggestion
 
 ## Feedback
@@ -59,7 +59,7 @@
 - **Spinner** (package): An indeterminate loading indicator built on `Icon`
 - **Skeleton** (package): A pulsing placeholder that holds the shape of content while it loads
 - **Alert** (package): An inline message about the state of a page or section that stays until the situation changes
-- **Toast** (design system): A short, temporary notification about something that just happened, shown in a stack at a corner of the screen
+- **Toast** (package): A short, temporary notification about something that just happened, shown in a stack at a corner of the screen
 - **Progress** (package): A horizontal bar showing how far a task has progressed, or that it is running when the amount is unknown
 - **EmptyState** (package): Fills a space that has no content yet, explains why, and offers the next step
 - **Banner** (design system): A full-width message about the whole app or page: a paused sync, a read-only version, a trial ending
@@ -76,7 +76,7 @@
 - **Switch** (package): A toggle for a setting that takes effect immediately
 - **Field** (package): Wraps one form control with its label, hint and error, and wires them together
 - **Select** (package): A single-choice dropdown for picking one value from a list too long for `RadioGroup` (about seven or more, or where space is tight)
-- **Combobox** (design system): A searchable single-choice list: type to filter, then pick
+- **Combobox** (package): A searchable single-choice list: type to filter, then pick
 - **Slider** (design system): Picks a number from a range by dragging, for values where the feel matters more than the exact number (volume, opacity, radius)
 - **Calendar** (design system): A month grid for picking a single date or a range
 - **DatePicker** (design system): A date field: an Input-style trigger that opens a `Calendar` in a `Popover`
@@ -115,8 +115,8 @@
 
 ## Navigation
 
-- **Breadcrumb** (design system): Shows where a page sits in the hierarchy and links back up it
-- **Pagination** (design system): Moves through pages of a long list or table
+- **Breadcrumb** (package): Shows where a page sits in the hierarchy and links back up it
+- **Pagination** (package): Moves through pages of a long list or table
 - **Sidebar** (design system): The app's main navigation column: sections of links, nested groups, a header and a footer, collapsible to icons
 - **Stepper** (design system): Numbered steps for a flow people move through in order: onboarding, an import, a release
 - **FileTree** (design system): A folder tree for generated files: export bundles, a GitHub sync, a component's source
@@ -131,7 +131,7 @@
 - **Popover** (package): A floating panel anchored to a trigger, for small forms, filters and details that belong to one control
 - **DropdownMenu** (package): A menu of commands opened from a trigger: row actions, "More" menus, account menus
 - **Dialog** (package): A modal window for focused tasks and confirmations that must be finished or dismissed before going back to the page
-- **Sheet** (design system): A panel that slides in from the edge of the screen for secondary tasks that need more room than a popover but should keep the page in view: filters, details, edit forms, mobile navigation
+- **Sheet** (package): A panel that slides in from the edge of the screen for secondary tasks that need more room than a popover but should keep the page in view: filters, details, edit forms, mobile navigation
 - **HoverCard** (design system): A rich preview that appears when hovering or focusing a link: a person, a page, a record
 - **CommandPalette** (design system): A keyboard-first search for commands and pages, opened with Cmd/Ctrl+K
 - **AlertDialog** (design system): A modal that asks for one decision and waits for it: confirming a delete, discarding unsaved changes, leaving a flow halfway

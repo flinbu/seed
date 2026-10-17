@@ -24,3 +24,19 @@
 @keyframes seed-shrink { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(0.96); } }
 @keyframes seed-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes seed-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* Sheets slide in from their edge; toasts rise in. */
+@theme {
+  --animate-seed-sheet-right: seed-sheet-right var(--duration-slow) var(--ease-out);
+  --animate-seed-sheet-left: seed-sheet-left var(--duration-slow) var(--ease-out);
+  --animate-seed-sheet-bottom: seed-sheet-bottom var(--duration-slow) var(--ease-out);
+  --animate-seed-rise: seed-rise var(--duration-slow) var(--ease-spring);
+  --animate-seed-accordion-open: seed-accordion-open var(--duration-base) var(--ease-out);
+  --animate-seed-accordion-close: seed-accordion-close var(--duration-base) var(--ease-out);
+}
+@keyframes seed-sheet-right { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes seed-sheet-left { from { transform: translateX(-100%); } to { transform: none; } }
+@keyframes seed-sheet-bottom { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes seed-rise { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes seed-accordion-open { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
+@keyframes seed-accordion-close { from { height: var(--radix-accordion-content-height); } to { height: 0; } }

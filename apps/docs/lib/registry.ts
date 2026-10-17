@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -141,6 +141,39 @@ export const COMPONENTS: ComponentDoc[] = [
     examples: [{ file: "overlays", fn: "TableBasic", title: "Sortable, with a selected row" }],
     parts: ["Table", "TableHeader", "TableBody", "TableFooter", "TableRow", "TableHead", "TableCell", "TableCaption"],
     props: [{ name: "density", type: "'comfortable' | 'compact'", default: "'comfortable'", description: "48 or 40 px rows." }, { name: "frameClassName", type: "string", description: "Classes for the scrolling frame." }, { name: "TableRow: selected", type: "boolean", description: "Neutral selection color." }, { name: "TableHead: sort", type: "'ascending' | 'descending' | false", description: "Makes the header a sort button." }, { name: "TableHead: onSort", type: "() => void", description: "Called on click." }, { name: "TableHead / TableCell: align", type: "'left' | 'center' | 'right'", default: "'left'", description: "Right-align numbers." }] },
+  { slug: "combobox", name: "Combobox", group: "Forms", description: "A field you type into to find and pick one option from a long list.",
+    use: ["Long lists people search: tokens, components, people, countries."], avoid: ["Short lists people recognize: use Select."],
+    a11y: ["The ARIA combobox pattern: arrow keys move the active option, Enter picks, Escape closes, focus stays in the field.", "Inside Field it gets its label, hint and error."],
+    examples: [{ file: "navigation", fn: "ComboboxBasic", title: "Search tokens", note: "Matches names and keywords; disabled options are shown but skipped." }],
+    props: [{ name: "options", type: "ComboboxOption[]", description: "{ value, label, description?, icon?, keywords?, disabled? }." }, { name: "value / defaultValue", type: "string | null", description: "Selected value." }, { name: "onValueChange", type: "(value: string | null) => void", description: "Called on pick and clear." }, { name: "clearable", type: "boolean", description: "A clear button once something is picked." }, { name: "filter", type: "(option, query) => boolean", description: "Your own matching." }, { name: "emptyText", type: "ReactNode", default: "'No matches'", description: "Shown when nothing matches." }, sizes("Same heights as Input.")] },
+  { slug: "sheet", name: "Sheet", group: "Overlays", description: "A panel that slides in from an edge: details, filters, a form next to the page.",
+    use: ["Editing one item without leaving the list."], avoid: ["A short decision: use Dialog."],
+    a11y: ["Built on Radix Dialog: focus is trapped, Escape closes, focus returns to the trigger.", "SheetTitle names it."],
+    examples: [{ file: "navigation", fn: "SheetBasic", title: "Right and bottom" }],
+    parts: ["Sheet", "SheetTrigger", "SheetContent", "SheetHeader", "SheetTitle", "SheetDescription", "SheetFooter", "SheetClose"],
+    props: [{ name: "SheetContent: side", type: "'right' | 'left' | 'bottom'", default: "'right'", description: "The edge it slides from. Side sheets are up to 448px wide." }, { name: "SheetContent: hideClose", type: "boolean", description: "Hides the close button." }, { name: "SheetContent: closeLabel", type: "string", default: "'Close'", description: "Accessible name of the close button." }] },
+  { slug: "toast", name: "Toast", group: "Feedback", description: "A short message about something that just happened, with one action at most.",
+    use: ["Confirming an action: Token renamed, 12 tokens published.", "Undo for something that can be undone."], avoid: ["Errors people must act on: use Alert or a Banner on the page."],
+    a11y: ["Built on Radix Toast: announced politely (errors assertively), F8 moves focus to the toasts, swipe or Escape dismisses.", "Hovering or focusing pauses the timer; errors stay until dismissed."],
+    examples: [{ file: "navigation", fn: "ToastBasic", title: "Neutral, with Undo, and an error", note: "Past tense, no \"successfully\"." }],
+    parts: ["toast", "Toaster"],
+    props: [{ name: "toast(options | title)", type: "(ToastOptions | string) => id", description: "Shows a toast. Also toast.success, .error, .warning, .info and .dismiss(id?)." }, { name: "title", type: "ReactNode", description: "One short line." }, { name: "description", type: "ReactNode", description: "Optional detail." }, { name: "action", type: "{ label, onClick }", description: "One action, like Undo." }, { name: "duration", type: "number", default: "5000", description: "ms on screen; errors default to staying." }, { name: "Toaster: position", type: "'bottom-right' | 'bottom-left' | 'bottom-center' | 'top-…'", default: "'bottom-right'", description: "Where they appear. Render one Toaster near the root." }] },
+  { slug: "accordion", name: "Accordion", group: "Layout", description: "Sections that open and close in place.",
+    use: ["FAQs, grouped settings, long specs people scan."], avoid: ["Content everyone needs: show it."],
+    a11y: ["Built on Radix Accordion: each trigger is a button inside a real heading (level sets it), with aria-expanded and a labelled region."],
+    examples: [{ file: "navigation", fn: "AccordionBasic", title: "One open at a time" }],
+    parts: ["Accordion", "AccordionItem", "AccordionTrigger", "AccordionContent"],
+    props: [{ name: "type", type: "'single' | 'multiple'", description: "One or many open." }, { name: "collapsible", type: "boolean", description: "single only: the open one can close." }, { name: "value / defaultValue", type: "string | string[]", description: "Open sections." }, { name: "AccordionTrigger: level", type: "2 | 3 | 4 | 5 | 6", default: "3", description: "Heading level." }] },
+  { slug: "breadcrumb", name: "Breadcrumb", group: "Navigation", description: "Where the page sits, with the path back up.",
+    use: ["Pages two or more levels deep."], avoid: ["Flat sites, or as the only navigation."],
+    a11y: ["A nav landmark with an ordered list; the current page has aria-current=page.", "Collapsed levels open in a menu."],
+    examples: [{ file: "navigation", fn: "BreadcrumbBasic", title: "Short and collapsed" }],
+    props: [{ name: "items", type: "{ label, href?, onClick? }[]", description: "Top level first; the last is the current page." }, { name: "maxItems", type: "number", default: "4", description: "Collapse the middle into a menu above this." }, { name: "linkAs", type: "ElementType", default: "'a'", description: "Your router's Link." }] },
+  { slug: "pagination", name: "Pagination", group: "Navigation", description: "Moves through pages of results.",
+    use: ["Tables and lists with more than one page."], avoid: ["Feeds people scroll: load more instead."],
+    a11y: ["A nav landmark; the current page has aria-current=page; Previous and Next are named and disabled at the ends.", "On small screens it shows Page 3 of 23 between the arrows."],
+    examples: [{ file: "navigation", fn: "PaginationBasic", title: "With a summary" }],
+    props: [{ name: "page", type: "number", description: "1-based current page." }, { name: "count", type: "number", description: "Number of pages." }, { name: "onPageChange", type: "(page: number) => void", description: "Called with the new page." }, { name: "siblings", type: "number", default: "1", description: "Pages shown on each side of the current one." }, { name: "summary", type: "ReactNode", description: "Text before the buttons." }, { name: "size", type: "'sm' | 'md'", default: "'sm'", description: "Button size." }] }
 ];
 
 export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];

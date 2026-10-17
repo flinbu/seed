@@ -30,9 +30,12 @@ export interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<ty
   /** Red, for actions that delete or can't be undone. */
   destructive?: boolean;
 }
-export const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuItemProps>(function DropdownMenuItem({ icon, shortcut, destructive, className, children, ...rest }, ref) {
+export const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuItemProps>(function DropdownMenuItem({ icon, shortcut, destructive, className, children, asChild, ...rest }, ref) {
+  const cls = cn(menuItem, "no-underline", destructive && "text-error-primary data-[highlighted]:bg-error-primary", className);
+  // asChild: your element (a link) becomes the row; it keeps the row's look but brings its own content.
+  if (asChild) return <M.Item ref={ref} asChild className={cls} {...rest}>{children}</M.Item>;
   return (
-    <M.Item ref={ref} className={cn(menuItem, destructive && "text-error-primary data-[highlighted]:bg-error-primary", className)} {...rest}>
+    <M.Item ref={ref} className={cls} {...rest}>
       {icon ? <span className={cn(menuIcon, destructive && "text-icon-error-primary")}>{renderIcon(icon, "sm")}</span> : null}
       <span className="min-w-0 flex-1 truncate">{children}</span>
       {shortcut ? <span className={menuShortcut}>{shortcut}</span> : null}

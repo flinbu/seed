@@ -32,5 +32,11 @@ export { Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLa
 export { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, DialogClose, type DialogContentProps } from "./components/dialog.js";
 export { Tabs, TabsList, TabsTrigger, TabsContent, type TabsListProps, type TabsTriggerProps } from "./components/tabs.js";
 export { Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell, TableCaption, type TableProps, type TableRowProps, type TableHeadProps, type TableCellProps, type SortDirection } from "./components/table.js";
+export { Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription, type SheetContentProps } from "./components/sheet.js";
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent, type AccordionTriggerProps } from "./components/accordion.js";
+export { Breadcrumb, type BreadcrumbProps, type BreadcrumbItem } from "./components/breadcrumb.js";
+export { Pagination, pageRange, type PaginationProps } from "./components/pagination.js";
+export { toast, Toaster, type ToastOptions, type ToasterProps } from "./components/toast.js";
+export { Combobox, type ComboboxProps, type ComboboxOption } from "./components/combobox.js";
 export { ThemeProvider, ThemeScript, useTheme, type ThemeProviderProps, type ThemeMode } from "./components/theme.js";
 export type { ChoiceText } from "./components/choice.js";
