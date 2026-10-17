@@ -19,7 +19,10 @@ pnpm test
 
 ## Release
 
-Add a changeset to every pull request that changes a package (`pnpm changeset`). Merging to `main` and running `pnpm release` publishes to npm.
+1. With your change, run `pnpm changeset`: pick patch, minor or major and write one line for the changelog. Commit the file it creates.
+2. On `main`, the Release workflow opens a "Version packages" pull request that bumps both packages (they share one version) and writes the changelogs.
+3. Merging it builds, tests and stages both packages on npm through trusted publishing: no npm token is stored anywhere.
+4. Approve each one with 2FA in npm's Staged Packages tab (`@flinbu/seed-tokens` first). Only then is the release public.
 
 ## License
 
