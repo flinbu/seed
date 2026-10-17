@@ -16,7 +16,11 @@ export interface AvatarProps extends React.ComponentPropsWithoutRef<typeof Radix
   size?: keyof typeof SIZE;
   /** 'square' for workspaces and organizations. */
   shape?: "circle" | "square";
+  /** A presence dot. Read as part of the name: "Ana Ruiz, away". */
+  status?: "online" | "away" | "busy" | "offline";
 }
+
+const DOT = { online: "bg-success-secondary", away: "bg-warning-secondary", busy: "bg-error-secondary", offline: "bg-primary shadow-[0_0_0_2px_var(--bg-primary),inset_0_0_0_2px_var(--icon-tertiary)]" } as const;
 
 export function initials(name?: string): string {
   if (!name) return "";
@@ -25,7 +29,15 @@ export function initials(name?: string): string {
 }
 
 /** A person or a workspace: the photo when it loads, initials when it doesn't. */
-export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(function Avatar({ src, alt, name, size = "md", shape = "circle", className, ...rest }, ref) {
+export const Avatar: React.ForwardRefExoticComponent<AvatarProps & React.RefAttributes<HTMLSpanElement>> = React.forwardRef<HTMLSpanElement, AvatarProps>(function AvatarRender({ src, alt, name, size = "md", shape = "circle", status, className, ...rest }, ref) {
+  if (status) {
+    return (
+      <span ref={ref} role="img" aria-label={`${alt ?? name ?? "Avatar"}, ${status}`} className={cn("relative inline-flex shrink-0", className)}>
+        <Avatar src={src} name={name} size={size} shape={shape} aria-hidden="true" role="presentation" aria-label={undefined} {...rest} />
+        <span aria-hidden="true" className={cn("absolute -right-px -bottom-px rounded-full shadow-[0_0_0_2px_var(--bg-primary)]", size === "xs" ? "size-(--size-sm)" : "size-[calc(var(--size-sm)+var(--space-xxxs))]", DOT[status])} />
+      </span>
+    );
+  }
   return (
     <RadixAvatar.Root ref={ref} role="img" aria-label={alt ?? name}
       className={cn("relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden bg-tertiary text-secondary", SIZE[size],

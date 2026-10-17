@@ -18,7 +18,7 @@
 - **Button** (package): The one button in Seed
 - **Toggle** (package): A Button that stays pressed: formatting tools, view switches, filters that apply instantly
 - **ButtonGroup** (package): Joins related Buttons into one control: a split button with its menu, Undo and Redo, a zoom stepper, an Input with its action
-- **Toolbar** (design system): A row of related controls with one Tab stop: canvas tools, editor formatting, preview options
+- **Toolbar** (package): A row of related controls with one Tab stop: canvas tools, editor formatting, preview options
 
 ## Data display
 
@@ -26,14 +26,14 @@
 - **Avatar** (package): A person's or workspace's picture, falling back to initials, then to the `user` icon
 - **Kbd** (package): A keyboard key, for shortcuts in menus, tooltips and help text
 - **Table** (package): Displays rows of structured data with sorting, selection, loading and empty states
-- **Item** (design system): A row for one thing, with media, a title, a description and actions: integrations, members, files, settings entries
+- **Item** (package): A row for one thing, with media, a title, a description and actions: integrations, members, files, settings entries
 - **DataTable** (design system): A list of records with everything around it: search, sorting across all pages, column visibility, pagination, selection and bulk actions
 - **Chart** (design system): Bar, stacked bar, line and area charts drawn in Seed's chart palette, with a tooltip, keyboard reading and a table view built in
 - **StatTile** (design system): One number that answers a question at a glance: adoption, open issues, components, credits
 - **Tag** (package): A small label people can act on: filter by it, remove it, or read a token's color at a glance
 - **DescriptionList** (package): Pairs of labels and values: a token's details, a version's metadata, account settings to read
 - **Timeline** (package): Events in order: a version history, an activity feed, the steps of a sync
-- **AvatarGroup** (design system): A stack of people: who's in a file, who reviewed a change, who's online
+- **AvatarGroup** (package): A stack of people: who's in a file, who reviewed a change, who's online
 - **CommentThread** (design system): A conversation between people pinned to something: a token, a component, a proposal
 
 ## Design system
@@ -63,7 +63,7 @@
 - **Progress** (package): A horizontal bar showing how far a task has progressed, or that it is running when the amount is unknown
 - **EmptyState** (package): Fills a space that has no content yet, explains why, and offers the next step
 - **Banner** (package): A full-width message about the whole app or page: a paused sync, a read-only version, a trial ending
-- **Meter** (design system): A measured amount within a known range: credits used, adoption, storage
+- **Meter** (package): A measured amount within a known range: credits used, adoption, storage
 
 ## Forms
 
@@ -84,9 +84,9 @@
 - **RichTextEditor** (design system): A WYSIWYG editor for formatted text: descriptions, comments, release notes, help articles
 - **OtpInput** (package): A one-time code split into one cell per character: email codes, authenticator apps, SMS
 - **InputGroup** (package): An Input with add-ons inside its frame: a fixed prefix or suffix, an icon, a Button (copy, clear, show password), a `Kbd` hint, or toolbars above and below a multiline field such as Pluto's prompt
-- **TagInput** (design system): A field that turns typed text into tags: components in a release, keywords, aliases, people to notify
+- **TagInput** (package): A field that turns typed text into tags: components in a release, keywords, aliases, people to notify
 - **CopyField** (package): A read-only value with a copy button: install commands, API keys, token names, URLs
-- **PasswordInput** (design system): A password field with a Show/Hide toggle and, when creating a password, a live list of requirements
+- **PasswordInput** (package): A password field with a Show/Hide toggle and, when creating a password, a live list of requirements
 - **MentionInput** (design system): A text area that suggests people, tokens or components as you type a trigger: `@` to mention, `#` to link a token
 - **DateRangePicker** (package): Picks a start and end date, with presets for the common ranges
 - **TimePicker** (design system): Picks a time of day from a list or by typing
@@ -104,7 +104,7 @@
 - **Card** (package): A bordered container that groups related content and actions
 - **Tabs** (package): Switches between views in the same context without leaving the page
 - **ScrollArea** (package): A scrolling region with Seed's thin scrollbars on every operating system, for lists and panels with a fixed height: sidebars, menus of results, a long token list in a card
-- **AspectRatio** (design system): Keeps media at a fixed shape while its width changes: thumbnails, video embeds, component previews, cover images
+- **AspectRatio** (package): Keeps media at a fixed shape while its width changes: thumbnails, video embeds, component previews, cover images
 - **Carousel** (design system): A row of slides that scrolls sideways: theme presets, templates, screenshots, onboarding cards
 - **Resizable** (design system): Panels split by handles people drag: an editor with a list, a canvas and an inspector
 - **PageHeader** (package): The top of a page: where you are, what this is, and the main actions

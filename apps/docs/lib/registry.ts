@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -311,7 +311,36 @@ export const COMPONENTS: ComponentDoc[] = [
   { slug: "input-group", name: "InputGroup", group: "Forms", description: "The input shell with add-ons, or a prompt box with toolbars.",
     use: ["Prefixes and units, a search with a shortcut, a chat composer."], a11y: ["Inside Field the input gets its label, hint and error; add-on text is not part of the value."],
     examples: [{ file: "menus", fn: "InputGroupBasic", title: "Prefix and suffix, search, and a prompt" }],
-    props: [{ name: "start / end", type: "ReactNode", description: "Text, an icon, a small Button or a Kbd." }, { name: "multiline", type: "boolean", description: "A textarea with top and bottom bars." }, { name: "top / bottom", type: "ReactNode", description: "Bars around the multiline field." }, sizes("Same heights as Input.")] }
+    props: [{ name: "start / end", type: "ReactNode", description: "Text, an icon, a small Button or a Kbd." }, { name: "multiline", type: "boolean", description: "A textarea with top and bottom bars." }, { name: "top / bottom", type: "ReactNode", description: "Bars around the multiline field." }, sizes("Same heights as Input.")] },
+  { slug: "avatar-group", name: "AvatarGroup", group: "Display", description: "A stack of people, with presence. Avatar takes status too.",
+    use: ["Who's in a file, who reviewed a change, who's online."], avoid: ["Inside an AI conversation: no avatars there."],
+    a11y: ["A labelled group; every face has a tooltip and its name includes the status (Ana Ruiz, away); the +N chip lists the rest."],
+    examples: [{ file: "people", fn: "AvatarGroupBasic", title: "A group and presence" }],
+    props: [{ name: "people", type: "{ name, src?, status? }[]", description: "In order of relevance." }, { name: "max", type: "number", default: "4", description: "Faces before +N." }, { name: "size", type: "'xs' | 'sm' | 'md' | 'lg'", default: "'sm'", description: "Avatar size." }, { name: "label", type: "string", description: "Names the group." }, { name: "Avatar: status", type: "'online' | 'away' | 'busy' | 'offline'", description: "Presence dot." }] },
+  { slug: "password-input", name: "PasswordInput", group: "Forms", description: "A password field with Show and Hide, and live requirements.",
+    use: ["Sign-in and new passwords."], a11y: ["Show is a pressed/unpressed button named Show password; requirements are linked to the field and say done or not yet."],
+    examples: [{ file: "people", fn: "PasswordBasic", title: "Creating a password" }],
+    props: [{ name: "requirements", type: "{ label, test(value) }[]", description: "Rules, never errors." }, { name: "autoComplete", type: "string", default: "'current-password'", description: "new-password when creating one." }, { name: "…", type: "InputProps", description: "Everything Input takes." }] },
+  { slug: "tag-input", name: "TagInput", group: "Forms", description: "A field that turns typed text into tags.",
+    use: ["Components in a release, keywords, aliases."], a11y: ["Each add and remove is announced; suggestions follow the combobox pattern; errors are linked to the field."],
+    examples: [{ file: "people", fn: "TagInputBasic", title: "With suggestions and validation" }],
+    props: [{ name: "value / defaultValue / onValueChange", type: "string[]", description: "The tags." }, { name: "suggestions", type: "string[]", description: "Offered as people type." }, { name: "validate", type: "(tag) => true | string", description: "The message to show when it fails." }, { name: "max", type: "number", description: "Limit." }, { name: "swatchFor", type: "(tag) => string | undefined", description: "Color chips for tokens." }] },
+  { slug: "toolbar", name: "Toolbar", group: "Actions", description: "A row of related tools with one Tab stop.",
+    use: ["Canvas and editor tools."], a11y: ["Built on Radix Toolbar: Tab enters and leaves, arrow keys move between tools, toggles report their state. Give it an aria-label."],
+    examples: [{ file: "people", fn: "ToolbarBasic", title: "History, alignment and Share" }],
+    parts: ["Toolbar", "ToolbarButton", "ToolbarToggleGroup", "ToolbarToggleItem", "ToolbarSeparator", "ToolbarLink"],
+    props: [{ name: "orientation", type: "'horizontal' | 'vertical'", default: "'horizontal'", description: "Direction and arrow keys." }, { name: "ToolbarButton: asChild", type: "boolean", description: "Wrap a Seed Button so it joins the arrow-key order." }] },
+  { slug: "meter", name: "Meter and ProgressRing", group: "Feedback", description: "A level within a range, and circular progress.",
+    use: ["Credits used, adoption, storage; a health score; a sync."], avoid: ["Tasks that finish: use Progress."],
+    a11y: ["Meter has role meter with min, max, value and valuetext; color always comes with the number."],
+    examples: [{ file: "people", fn: "MeterBasic", title: "Levels and rings" }],
+    parts: ["Meter", "ProgressRing", "meterTone"],
+    props: [{ name: "value / min / max", type: "number", description: "The level." }, { name: "low / high / optimum", type: "number", description: "Colors it like HTML's meter." }, { name: "tone", type: "'accent' | 'success' | 'warning' | 'error' | 'neutral'", description: "Override." }, { name: "valueText", type: "string", description: "Shown and announced." }, { name: "ProgressRing: size", type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: "20, 40, 64 or 96px." }] },
+  { slug: "item", name: "Item and AspectRatio", group: "Layout", description: "A row for one thing, and media kept at a fixed shape.",
+    use: ["Integrations, members, files, settings; thumbnails and previews."], a11y: ["With href the title link covers the row and actions stay separate targets; inside ItemGroup rows are list items."],
+    examples: [{ file: "people", fn: "ItemBasic", title: "Integrations and a member" }, { file: "people", fn: "AspectRatioBasic", title: "AspectRatio" }],
+    parts: ["Item", "ItemGroup", "AspectRatio"],
+    props: [{ name: "title / description", type: "ReactNode", description: "Text." }, { name: "media", type: "IconProp | ReactNode", description: "An icon (in a tile) or an Avatar." }, { name: "actions", type: "ReactNode", description: "Buttons or Badges." }, { name: "href", type: "string", description: "The row becomes a link." }, { name: "variant", type: "'plain' | 'outline' | 'muted'", default: "'plain'", description: "Frame." }, { name: "AspectRatio: ratio", type: "number", default: "16/9", description: "Width over height." }] }
 ];
 
 export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];

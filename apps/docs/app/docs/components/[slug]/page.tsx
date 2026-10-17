@@ -14,8 +14,9 @@ import * as flowEx from "@/examples/flow";
 import * as datesEx from "@/examples/dates";
 import * as productEx from "@/examples/product";
 import * as menusEx from "@/examples/menus";
+import * as peopleEx from "@/examples/people";
 
-const FILES: Record<string, Record<string, () => React.ReactNode>> = { button: buttonEx, forms: formsEx, choices: choicesEx, display: displayEx, feedback: feedbackEx, overlays: overlaysEx, navigation: navigationEx, flow: flowEx, dates: datesEx, product: productEx, menus: menusEx } as any;
+const FILES: Record<string, Record<string, () => React.ReactNode>> = { button: buttonEx, forms: formsEx, choices: choicesEx, display: displayEx, feedback: feedbackEx, overlays: overlaysEx, navigation: navigationEx, flow: flowEx, dates: datesEx, product: productEx, menus: menusEx, people: peopleEx } as any;
 
 export function generateStaticParams() { return COMPONENTS.map((c) => ({ slug: c.slug })); }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

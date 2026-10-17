@@ -84,16 +84,16 @@ Then set `data-brand="acme"` on `<html>`, or on any element to theme just that p
 
 ## Components
 
-- **Actions:** Button, ButtonGroup, Toggle, ToggleGroup.
-- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload, CopyField + CopyButton, InputGroup.
+- **Actions:** Button, ButtonGroup, Toggle, ToggleGroup, Toolbar.
+- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload, CopyField + CopyButton, InputGroup, TagInput, PasswordInput.
 - **Overlays:** Dialog, AlertDialog, Sheet, Drawer, Popover, HoverCard, CommandPalette (⌘K), ContextMenu, DropdownMenu (with checkbox, radio and sub menus), Tooltip.
 - **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons), Menubar, Link.
-- **Display:** Badge, Avatar, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree, Tag, DescriptionList, Timeline.
-- **Feedback:** Alert, Banner, toast + Toaster, Progress, Skeleton, Spinner, EmptyState.
-- **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader, Collapsible, ScrollArea.
+- **Display:** Badge, Avatar (with presence), AvatarGroup, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree, Tag, DescriptionList, Timeline.
+- **Feedback:** Alert, Banner, toast + Toaster, Meter, ProgressRing, Progress, Skeleton, Spinner, EmptyState.
+- **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader, Collapsible, ScrollArea, Item + ItemGroup, AspectRatio.
 - **Theme:** ThemeProvider, ThemeScript, useTheme.
 
-More are coming from the Seed design system: TagInput, PasswordInput, AvatarGroup, Toolbar, Meter, chat parts, design system tools and charts.
+More are coming from the Seed design system: MentionInput, TimePicker, Tour, TableOfContents, CommentThread, chat parts, design system tools and charts.
 
 ## Related
 

@@ -70,5 +70,11 @@ export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./component
 export { ScrollArea, type ScrollAreaProps } from "./components/scroll-area.js";
 export { ButtonGroup, ButtonGroupText, type ButtonGroupProps } from "./components/button-group.js";
 export { InputGroup, type InputGroupProps, type InputGroupTextareaProps } from "./components/input-group.js";
+export { AvatarGroup, type AvatarGroupProps, type AvatarGroupPerson } from "./components/avatar-group.js";
+export { PasswordInput, type PasswordInputProps, type PasswordRequirement } from "./components/password-input.js";
+export { TagInput, type TagInputProps } from "./components/tag-input.js";
+export { Toolbar, ToolbarButton, ToolbarLink, ToolbarToggleGroup, ToolbarToggleItem, ToolbarSeparator, type ToolbarToggleItemProps } from "./components/toolbar.js";
+export { Meter, ProgressRing, meterTone, type MeterProps, type ProgressRingProps } from "./components/meter.js";
+export { Item, ItemGroup, AspectRatio, type ItemProps, type AspectRatioProps } from "./components/item.js";
 export { ThemeProvider, ThemeScript, useTheme, type ThemeProviderProps, type ThemeMode } from "./components/theme.js";
 export type { ChoiceText } from "./components/choice.js";
