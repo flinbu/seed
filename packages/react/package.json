@@ -1,6 +1,6 @@
 {
   "name": "@flinbu/seed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Seed's React components: accessible (Radix), styled with Tailwind CSS v4 and Seed tokens, themeable with createTheme.",
   "license": "MIT",
   "author": "Felipe Linares <felipe@flinbu.co>",
@@ -76,5 +76,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "homepage": "https://seed-lyart.vercel.app"
 }
