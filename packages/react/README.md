@@ -85,14 +85,14 @@ Then set `data-brand="acme"` on `<html>`, or on any element to theme just that p
 ## Components
 
 - **Actions:** Button, Toggle, ToggleGroup.
-- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput.
-- **Overlays:** Dialog, Sheet, Popover, HoverCard, DropdownMenu (with checkbox, radio and sub menus), Tooltip.
+- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload.
+- **Overlays:** Dialog, Sheet, Popover, HoverCard, CommandPalette (⌘K), DropdownMenu (with checkbox, radio and sub menus), Tooltip.
 - **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons).
-- **Display:** Badge, Avatar, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion.
+- **Display:** Badge, Avatar, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree.
 - **Feedback:** Alert, toast + Toaster, Progress, Skeleton, Spinner, EmptyState.
 - **Theme:** ThemeProvider, ThemeScript, useTheme.
 
-More are coming: Calendar and DatePicker, CommandPalette, FileUpload, FileTree, and the rest of the Seed design system.
+More are coming from the Seed design system: layout primitives, product pieces (Tag, CopyField, Banner, PageHeader…), chat parts and design system tools.
 
 ## Related
 

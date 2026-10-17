@@ -78,9 +78,9 @@
 - **Select** (package): A single-choice dropdown for picking one value from a list too long for `RadioGroup` (about seven or more, or where space is tight)
 - **Combobox** (package): A searchable single-choice list: type to filter, then pick
 - **Slider** (package): Picks a number from a range by dragging, for values where the feel matters more than the exact number (volume, opacity, radius)
-- **Calendar** (design system): A month grid for picking a single date or a range
-- **DatePicker** (design system): A date field: an Input-style trigger that opens a `Calendar` in a `Popover`
-- **FileUpload** (design system): Lets people add files by dropping them or browsing, and shows each file's state
+- **Calendar** (package): A month grid for picking a single date or a range
+- **DatePicker** (package): A date field: an Input-style trigger that opens a `Calendar` in a `Popover`
+- **FileUpload** (package): Lets people add files by dropping them or browsing, and shows each file's state
 - **RichTextEditor** (design system): A WYSIWYG editor for formatted text: descriptions, comments, release notes, help articles
 - **OtpInput** (package): A one-time code split into one cell per character: email codes, authenticator apps, SMS
 - **InputGroup** (design system): An Input with add-ons inside its frame: a fixed prefix or suffix, an icon, a Button (copy, clear, show password), a `Kbd` hint, or toolbars above and below a multiline field such as Pluto's prompt
@@ -88,7 +88,7 @@
 - **CopyField** (design system): A read-only value with a copy button: install commands, API keys, token names, URLs
 - **PasswordInput** (design system): A password field with a Show/Hide toggle and, when creating a password, a live list of requirements
 - **MentionInput** (design system): A text area that suggests people, tokens or components as you type a trigger: `@` to mention, `#` to link a token
-- **DateRangePicker** (design system): Picks a start and end date, with presets for the common ranges
+- **DateRangePicker** (package): Picks a start and end date, with presets for the common ranges
 - **TimePicker** (design system): Picks a time of day from a list or by typing
 
 ## Foundations
@@ -119,7 +119,7 @@
 - **Pagination** (package): Moves through pages of a long list or table
 - **Sidebar** (package): The app's main navigation column: sections of links, nested groups, a header and a footer, collapsible to icons
 - **Stepper** (package): Numbered steps for a flow people move through in order: onboarding, an import, a release
-- **FileTree** (design system): A folder tree for generated files: export bundles, a GitHub sync, a component's source
+- **FileTree** (package): A folder tree for generated files: export bundles, a GitHub sync, a component's source
 - **Menubar** (design system): A horizontal row of menus, as in a desktop app (File, Edit, View), for editors with many commands
 - **NavigationMenu** (design system): The main navigation of a site: plain links and menus that drop a panel of links with short descriptions (Product, Resources, Pricing)
 - **TableOfContents** (design system): An "On this page" list that follows the reader as they scroll and jumps to a section on click
@@ -133,7 +133,7 @@
 - **Dialog** (package): A modal window for focused tasks and confirmations that must be finished or dismissed before going back to the page
 - **Sheet** (package): A panel that slides in from the edge of the screen for secondary tasks that need more room than a popover but should keep the page in view: filters, details, edit forms, mobile navigation
 - **HoverCard** (package): A rich preview that appears when hovering or focusing a link: a person, a page, a record
-- **CommandPalette** (design system): A keyboard-first search for commands and pages, opened with Cmd/Ctrl+K
+- **CommandPalette** (package): A keyboard-first search for commands and pages, opened with Cmd/Ctrl+K
 - **AlertDialog** (design system): A modal that asks for one decision and waits for it: confirming a delete, discarding unsaved changes, leaving a flow halfway
 - **Drawer** (design system): A panel that rises from the bottom of the screen with a grab handle, for short tasks on touch screens: picking an option, a quick form, the actions for one item
 - **ContextMenu** (design system): A menu that opens where you right-click, holding the commands for the thing under the pointer: a canvas, a row, a file, a token
