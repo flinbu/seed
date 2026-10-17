@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Badge, Button, ToggleGroup, ToggleGroupItem, useTheme, cn } from "@flinbu/seed";
-import { Monitor, Moon, Sun, Sprout, ExternalLink } from "lucide-react";
+import { Monitor, Moon, Sun, ExternalLink } from "lucide-react";
+import { SeedLogo } from "./logo";
 import { useSiteTheme } from "./site-theme";
 
 const NAV = [{ href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/components/button", label: "Components", match: "/docs/components" }, { href: "/docs/tokens", label: "Tokens" }];
@@ -13,10 +14,7 @@ export function SiteHeader() {
   const path = usePathname();
   return (
     <header className="sticky top-0 z-20 flex h-(--space-5xl) items-center gap-lg border-b border-secondary bg-primary/90 px-lg backdrop-blur">
-      <Link href="/" className="inline-flex items-center gap-xs text-primary no-underline">
-        <Sprout size={20} aria-hidden className="text-icon-accent-primary" />
-        <span className="display-greeting-regular">Seed</span>
-      </Link>
+      <Link href="/" aria-label="Seed home" className="inline-flex items-center text-primary no-underline"><SeedLogo size={26} /></Link>
       <nav aria-label="Main" className="hidden items-center gap-xxs md:flex">
         {NAV.map((n) => {
           const on = path?.startsWith(n.match ?? n.href);

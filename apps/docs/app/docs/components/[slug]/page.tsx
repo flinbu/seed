@@ -24,7 +24,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   return (
     <article className="flex flex-col gap-2xl">
       <header className="flex flex-col gap-sm">
-        <Badge className="self-start">{c.group}</Badge>
+        <span className="mono-label-medium text-tertiary">{c.group}</span>
         <h1 className="m-0 display-title-regular text-primary">{c.name}</h1>
         <p className="m-0 reading-body-light text-secondary">{c.description}</p>
         <code className="self-start rounded-md bg-inset px-sm py-xs font-mono body-body-4-regular text-secondary">{`import { ${parts.join(", ")} } from "@flinbu/seed";`}</code>

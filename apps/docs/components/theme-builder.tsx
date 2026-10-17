@@ -42,7 +42,7 @@ export function ThemeBuilder() {
   const applied = saved && saved.brand === o.brand && saved.radius === o.radius && saved.density === o.density && saved.neutral === o.neutral;
 
   return (
-    <div className="not-prose my-xl flex flex-col overflow-hidden rounded-xl border border-secondary bg-primary">
+    <div className="not-prose my-xl flex flex-col overflow-hidden rounded-petal rounded-tl-petal-tip border border-secondary bg-primary">
       <div className="flex flex-col gap-base border-b border-secondary p-lg">
         <div className="flex flex-wrap items-end gap-base">
           <div className="flex flex-col gap-xxs">

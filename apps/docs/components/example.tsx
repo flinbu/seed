@@ -7,9 +7,9 @@ export function Example({ title, note, code, children }: { title?: string; note?
     <section className="flex flex-col gap-sm">
       {title ? <h3 className="m-0 label-label-1-semibold text-primary">{title}</h3> : null}
       {note ? <p className="m-0 reading-small-light text-secondary">{note}</p> : null}
-      <div className="overflow-hidden rounded-xl border border-secondary">
+      <div className="overflow-hidden rounded-petal rounded-tl-petal-tip border border-secondary">
         <div className="stage flex min-h-(--space-6xl) flex-wrap items-center justify-center gap-sm px-lg py-2xl">{children}</div>
-        <Code code={code} className="rounded-none border-0 border-t" />
+        <Code code={code} className="rounded-none rounded-tl-none border-0 border-t" />
       </div>
     </section>
   );

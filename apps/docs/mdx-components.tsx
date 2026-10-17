@@ -12,7 +12,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: (p) => <ul className="my-sm flex list-disc flex-col gap-xxs pl-lg reading-body-light text-secondary marker:text-tertiary" {...p} />,
     ol: (p) => <ol className="my-sm flex list-decimal flex-col gap-xxs pl-lg reading-body-light text-secondary marker:text-tertiary" {...p} />,
     strong: (p) => <strong className="font-medium text-primary" {...p} />,
-    table: (p) => <div className="my-base overflow-x-auto rounded-xl border border-secondary"><table className="w-full border-collapse body-body-3-regular" {...p} /></div>,
+    table: (p) => <div className="my-base overflow-x-auto rounded-petal rounded-tl-petal-tip border border-secondary"><table className="w-full border-collapse body-body-3-regular" {...p} /></div>,
     th: (p) => <th className="border-b border-secondary bg-secondary px-sm py-xs text-left mono-label-medium text-tertiary" {...p} />,
     td: (p) => <td className="border-b border-secondary px-sm py-xs align-top text-secondary [&_code]:whitespace-nowrap" {...p} />,
     blockquote: (p) => <blockquote className="my-base rounded-petal rounded-tl-petal-tip border border-info-secondary bg-info-primary px-base py-sm [&_p]:my-0" {...p} />,
