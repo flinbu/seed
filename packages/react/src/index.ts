@@ -56,5 +56,19 @@ export { Banner, type BannerProps } from "./components/banner.js";
 export { PageHeader, type PageHeaderProps } from "./components/page-header.js";
 export { DescriptionList, type DescriptionListProps, type DescriptionItem } from "./components/description-list.js";
 export { Timeline, formatRelative, type TimelineProps, type TimelineItem } from "./components/timeline.js";
+export { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel, type AlertDialogContentProps, type AlertDialogActionProps } from "./components/alert-dialog.js";
+export { Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription } from "./components/drawer.js";
+export {
+  ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuCheckboxItem, ContextMenuRadioGroup, ContextMenuRadioItem,
+  ContextMenuLabel, ContextMenuSeparator, ContextMenuGroup, ContextMenuSub, ContextMenuSubTrigger, ContextMenuSubContent, type ContextMenuItemProps,
+} from "./components/context-menu.js";
+export {
+  Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarCheckboxItem, MenubarRadioGroup, MenubarRadioItem,
+  MenubarLabel, MenubarSeparator, MenubarGroup, MenubarSub, MenubarSubTrigger, MenubarSubContent, type MenubarItemProps,
+} from "./components/menubar.js";
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/collapsible.js";
+export { ScrollArea, type ScrollAreaProps } from "./components/scroll-area.js";
+export { ButtonGroup, ButtonGroupText, type ButtonGroupProps } from "./components/button-group.js";
+export { InputGroup, type InputGroupProps, type InputGroupTextareaProps } from "./components/input-group.js";
 export { ThemeProvider, ThemeScript, useTheme, type ThemeProviderProps, type ThemeMode } from "./components/theme.js";
 export type { ChoiceText } from "./components/choice.js";

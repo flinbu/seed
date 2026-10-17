@@ -17,7 +17,7 @@
 
 - **Button** (package): The one button in Seed
 - **Toggle** (package): A Button that stays pressed: formatting tools, view switches, filters that apply instantly
-- **ButtonGroup** (design system): Joins related Buttons into one control: a split button with its menu, Undo and Redo, a zoom stepper, an Input with its action
+- **ButtonGroup** (package): Joins related Buttons into one control: a split button with its menu, Undo and Redo, a zoom stepper, an Input with its action
 - **Toolbar** (design system): A row of related controls with one Tab stop: canvas tools, editor formatting, preview options
 
 ## Data display
@@ -52,7 +52,7 @@
 ## Disclosure
 
 - **Accordion** (package): Stacked sections that expand and collapse, for FAQs, settings groups and long forms split into steps
-- **Collapsible** (design system): One section that shows and hides its content: "Show more" lists, advanced settings, the reasoning behind a suggestion
+- **Collapsible** (package): One section that shows and hides its content: "Show more" lists, advanced settings, the reasoning behind a suggestion
 
 ## Feedback
 
@@ -83,7 +83,7 @@
 - **FileUpload** (package): Lets people add files by dropping them or browsing, and shows each file's state
 - **RichTextEditor** (design system): A WYSIWYG editor for formatted text: descriptions, comments, release notes, help articles
 - **OtpInput** (package): A one-time code split into one cell per character: email codes, authenticator apps, SMS
-- **InputGroup** (design system): An Input with add-ons inside its frame: a fixed prefix or suffix, an icon, a Button (copy, clear, show password), a `Kbd` hint, or toolbars above and below a multiline field such as Pluto's prompt
+- **InputGroup** (package): An Input with add-ons inside its frame: a fixed prefix or suffix, an icon, a Button (copy, clear, show password), a `Kbd` hint, or toolbars above and below a multiline field such as Pluto's prompt
 - **TagInput** (design system): A field that turns typed text into tags: components in a release, keywords, aliases, people to notify
 - **CopyField** (package): A read-only value with a copy button: install commands, API keys, token names, URLs
 - **PasswordInput** (design system): A password field with a Show/Hide toggle and, when creating a password, a live list of requirements
@@ -103,7 +103,7 @@
 - **Separator** (package): A 1px rule that divides content, horizontal or vertical
 - **Card** (package): A bordered container that groups related content and actions
 - **Tabs** (package): Switches between views in the same context without leaving the page
-- **ScrollArea** (design system): A scrolling region with Seed's thin scrollbars on every operating system, for lists and panels with a fixed height: sidebars, menus of results, a long token list in a card
+- **ScrollArea** (package): A scrolling region with Seed's thin scrollbars on every operating system, for lists and panels with a fixed height: sidebars, menus of results, a long token list in a card
 - **AspectRatio** (design system): Keeps media at a fixed shape while its width changes: thumbnails, video embeds, component previews, cover images
 - **Carousel** (design system): A row of slides that scrolls sideways: theme presets, templates, screenshots, onboarding cards
 - **Resizable** (design system): Panels split by handles people drag: an editor with a list, a canvas and an inspector
@@ -120,7 +120,7 @@
 - **Sidebar** (package): The app's main navigation column: sections of links, nested groups, a header and a footer, collapsible to icons
 - **Stepper** (package): Numbered steps for a flow people move through in order: onboarding, an import, a release
 - **FileTree** (package): A folder tree for generated files: export bundles, a GitHub sync, a component's source
-- **Menubar** (design system): A horizontal row of menus, as in a desktop app (File, Edit, View), for editors with many commands
+- **Menubar** (package): A horizontal row of menus, as in a desktop app (File, Edit, View), for editors with many commands
 - **NavigationMenu** (design system): The main navigation of a site: plain links and menus that drop a panel of links with short descriptions (Product, Resources, Pricing)
 - **TableOfContents** (design system): An "On this page" list that follows the reader as they scroll and jumps to a section on click
 - **Link** (package): Text that goes somewhere
@@ -134,9 +134,9 @@
 - **Sheet** (package): A panel that slides in from the edge of the screen for secondary tasks that need more room than a popover but should keep the page in view: filters, details, edit forms, mobile navigation
 - **HoverCard** (package): A rich preview that appears when hovering or focusing a link: a person, a page, a record
 - **CommandPalette** (package): A keyboard-first search for commands and pages, opened with Cmd/Ctrl+K
-- **AlertDialog** (design system): A modal that asks for one decision and waits for it: confirming a delete, discarding unsaved changes, leaving a flow halfway
-- **Drawer** (design system): A panel that rises from the bottom of the screen with a grab handle, for short tasks on touch screens: picking an option, a quick form, the actions for one item
-- **ContextMenu** (design system): A menu that opens where you right-click, holding the commands for the thing under the pointer: a canvas, a row, a file, a token
+- **AlertDialog** (package): A modal that asks for one decision and waits for it: confirming a delete, discarding unsaved changes, leaving a flow halfway
+- **Drawer** (package): A panel that rises from the bottom of the screen with a grab handle, for short tasks on touch screens: picking an option, a quick form, the actions for one item
+- **ContextMenu** (package): A menu that opens where you right-click, holding the commands for the thing under the pointer: a canvas, a row, a file, a token
 - **Tour** (design system): A short guided walk through a screen: a spotlight on one element at a time with a card that explains it
 
 Also in the design system: `Seed.format` (numbers, percents, dates, relative times, ranges) and `Seed.color` (parse, contrast, OKLCH). The package adds `ThemeProvider`, `ThemeScript`, `useTheme` and `cn`.

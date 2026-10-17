@@ -40,3 +40,10 @@
 @keyframes seed-rise { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
 @keyframes seed-accordion-open { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
 @keyframes seed-accordion-close { from { height: var(--radix-accordion-content-height); } to { height: 0; } }
+
+@theme {
+  --animate-seed-collapsible-open: seed-collapsible-open var(--duration-base) var(--ease-out);
+  --animate-seed-collapsible-close: seed-collapsible-close var(--duration-base) var(--ease-out);
+}
+@keyframes seed-collapsible-open { from { height: 0; } to { height: var(--radix-collapsible-content-height); } }
+@keyframes seed-collapsible-close { from { height: var(--radix-collapsible-content-height); } to { height: 0; } }

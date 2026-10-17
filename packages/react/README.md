@@ -84,16 +84,16 @@ Then set `data-brand="acme"` on `<html>`, or on any element to theme just that p
 
 ## Components
 
-- **Actions:** Button, Toggle, ToggleGroup.
-- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload, CopyField + CopyButton.
-- **Overlays:** Dialog, Sheet, Popover, HoverCard, CommandPalette (⌘K), DropdownMenu (with checkbox, radio and sub menus), Tooltip.
-- **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons), Link.
+- **Actions:** Button, ButtonGroup, Toggle, ToggleGroup.
+- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload, CopyField + CopyButton, InputGroup.
+- **Overlays:** Dialog, AlertDialog, Sheet, Drawer, Popover, HoverCard, CommandPalette (⌘K), ContextMenu, DropdownMenu (with checkbox, radio and sub menus), Tooltip.
+- **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons), Menubar, Link.
 - **Display:** Badge, Avatar, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree, Tag, DescriptionList, Timeline.
 - **Feedback:** Alert, Banner, toast + Toaster, Progress, Skeleton, Spinner, EmptyState.
-- **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader.
+- **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader, Collapsible, ScrollArea.
 - **Theme:** ThemeProvider, ThemeScript, useTheme.
 
-More are coming from the Seed design system: AlertDialog, Drawer, ContextMenu, Menubar, chat parts, design system tools and charts.
+More are coming from the Seed design system: TagInput, PasswordInput, AvatarGroup, Toolbar, Meter, chat parts, design system tools and charts.
 
 ## Related
 

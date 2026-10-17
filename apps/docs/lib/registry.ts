@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -268,7 +268,50 @@ export const COMPONENTS: ComponentDoc[] = [
   { slug: "link", name: "Link", group: "Navigation", description: "Text that goes somewhere. Use Button for actions.",
     use: ["Inline links, Back links, View all."], a11y: ["external opens a new tab with rel=noopener and says so to screen readers."],
     examples: [{ file: "product", fn: "LinkBasic", title: "Inline, external, standalone and subtle" }],
-    props: [{ name: "variant", type: "'default' | 'subtle' | 'standalone'", default: "'default'", description: "Weight." }, { name: "external", type: "boolean", description: "New tab." }, icon("icon", "Leading icon."), { name: "asChild", type: "boolean", description: "Style your router Link." }] }
+    props: [{ name: "variant", type: "'default' | 'subtle' | 'standalone'", default: "'default'", description: "Weight." }, { name: "external", type: "boolean", description: "New tab." }, icon("icon", "Leading icon."), { name: "asChild", type: "boolean", description: "Style your router Link." }] },
+  { slug: "alert-dialog", name: "AlertDialog", group: "Overlays", description: "One hard-to-undo decision: delete, discard, overwrite.",
+    use: ["Confirming something that can't be undone."], avoid: ["Things that can be undone: do it and offer Undo in a toast."],
+    a11y: ["Built on Radix AlertDialog: role alertdialog, Cancel is focused first, there's no close button and clicking outside doesn't dismiss it."],
+    examples: [{ file: "menus", fn: "AlertDialogBasic", title: "Delete a token", note: "The title asks with the exact object; the action repeats its verb." }],
+    parts: ["AlertDialog", "AlertDialogTrigger", "AlertDialogContent", "AlertDialogHeader", "AlertDialogTitle", "AlertDialogDescription", "AlertDialogFooter", "AlertDialogCancel", "AlertDialogAction"],
+    props: [{ name: "AlertDialogContent: size", type: "'sm' | 'md'", default: "'sm'", description: "384 or 512px." }, { name: "AlertDialogAction: variant", type: "'destructive' | 'primary'", default: "'destructive'", description: "Weight of the action." }, { name: "AlertDialogCancel: children", type: "ReactNode", default: "'Cancel'", description: "Always Cancel." }] },
+  { slug: "drawer", name: "Drawer", group: "Overlays", description: "A panel that rises from the bottom with a grab handle.",
+    use: ["Phones: menus, filters, quick actions."], avoid: ["Desktop side panels: use Sheet."],
+    a11y: ["A Radix Dialog: focus is trapped and Escape closes it. Dragging the handle down is a shortcut, never the only way to close."],
+    examples: [{ file: "menus", fn: "DrawerBasic", title: "Filters" }],
+    parts: ["Drawer", "DrawerTrigger", "DrawerContent", "DrawerHeader", "DrawerTitle", "DrawerDescription", "DrawerFooter", "DrawerClose"],
+    props: [{ name: "open / defaultOpen / onOpenChange", type: "boolean", description: "Control it yourself." }] },
+  { slug: "context-menu", name: "ContextMenu", group: "Overlays", description: "Commands on right-click or long press.",
+    use: ["Shortcuts for actions that also live in the UI."], avoid: ["The only way to reach a command."],
+    a11y: ["Built on Radix ContextMenu: Shift+F10 or the menu key opens it from the keyboard; the same rows as DropdownMenu."],
+    examples: [{ file: "menus", fn: "ContextMenuBasic", title: "On a token row" }],
+    parts: ["ContextMenu", "ContextMenuTrigger", "ContextMenuContent", "ContextMenuItem", "ContextMenuCheckboxItem", "ContextMenuRadioItem", "ContextMenuSeparator", "ContextMenuSub"],
+    props: [icon("Item: icon", "Leading icon."), { name: "Item: shortcut", type: "ReactNode", description: "Shown at the end." }, { name: "Item: destructive", type: "boolean", description: "Red, for deleting." }, { name: "Item: onSelect", type: "(e: Event) => void", description: "Runs the command." }] },
+  { slug: "menubar", name: "Menubar", group: "Navigation", description: "Desktop-style menus in a row: File, Edit, View.",
+    use: ["Editors and canvases with many commands."], avoid: ["Site navigation: use links or the Sidebar."],
+    a11y: ["Built on Radix Menubar: role menubar, left and right move between menus, the same rows as DropdownMenu."],
+    examples: [{ file: "menus", fn: "MenubarBasic", title: "File, Edit, View" }],
+    parts: ["Menubar", "MenubarMenu", "MenubarTrigger", "MenubarContent", "MenubarItem", "MenubarCheckboxItem", "MenubarRadioItem", "MenubarSeparator", "MenubarSub"],
+    props: [icon("Item: icon", "Leading icon."), { name: "Item: shortcut", type: "ReactNode", description: "Shown at the end." }, { name: "Item: destructive", type: "boolean", description: "Red, for deleting." }, { name: "Item: onSelect", type: "(e: Event) => void", description: "Runs the command." }] },
+  { slug: "collapsible", name: "Collapsible", group: "Layout", description: "One section that opens and closes.",
+    use: ["Advanced settings, long details."], avoid: ["Several sections: use Accordion."],
+    a11y: ["Built on Radix Collapsible: the trigger reports aria-expanded and controls the content."],
+    examples: [{ file: "menus", fn: "CollapsibleBasic", title: "Advanced settings" }],
+    parts: ["Collapsible", "CollapsibleTrigger", "CollapsibleContent"],
+    props: [{ name: "open / defaultOpen / onOpenChange", type: "boolean", description: "State." }] },
+  { slug: "scroll-area", name: "ScrollArea", group: "Layout", description: "Native scrolling with Seed's thin scrollbars.",
+    use: ["Panels and lists with a fixed height."], a11y: ["The viewport is focusable so it scrolls with the keyboard; aria-label names it as a region."],
+    examples: [{ file: "menus", fn: "ScrollAreaBasic", title: "A changelog" }],
+    props: [{ name: "orientation", type: "'vertical' | 'horizontal' | 'both'", default: "'vertical'", description: "Scrollbars to show." }, { name: "aria-label", type: "string", description: "Names the region." }, { name: "viewportClassName", type: "string", description: "Classes for the viewport." }] },
+  { slug: "button-group", name: "ButtonGroup", group: "Actions", description: "Joins related buttons into one control.",
+    use: ["A split button with its menu, Undo and Redo, a zoom stepper."], a11y: ["role group: give it an aria-label."],
+    examples: [{ file: "menus", fn: "ButtonGroupBasic", title: "History, split button and stepper" }],
+    parts: ["ButtonGroup", "ButtonGroupText"],
+    props: [{ name: "orientation", type: "'horizontal' | 'vertical'", default: "'horizontal'", description: "Direction." }] },
+  { slug: "input-group", name: "InputGroup", group: "Forms", description: "The input shell with add-ons, or a prompt box with toolbars.",
+    use: ["Prefixes and units, a search with a shortcut, a chat composer."], a11y: ["Inside Field the input gets its label, hint and error; add-on text is not part of the value."],
+    examples: [{ file: "menus", fn: "InputGroupBasic", title: "Prefix and suffix, search, and a prompt" }],
+    props: [{ name: "start / end", type: "ReactNode", description: "Text, an icon, a small Button or a Kbd." }, { name: "multiline", type: "boolean", description: "A textarea with top and bottom bars." }, { name: "top / bottom", type: "ReactNode", description: "Bars around the multiline field." }, sizes("Same heights as Input.")] }
 ];
 
 export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];
