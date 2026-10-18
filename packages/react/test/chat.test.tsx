@@ -41,7 +41,7 @@ describe("chat parts render accessibly", () => {
 describe("Message and Bubble", () => {
   it("puts user strings in a neutral bubble on the end and marks failed sends", () => {
     const { container } = render(<><Message from="user" status="error">Hello</Message><Message from="assistant">Hi</Message></>);
-    const [user, assistant] = container.querySelectorAll("[data-from]");
+    const [user, assistant] = Array.from(container.querySelectorAll("[data-from]"));
     expect(user!.className).toContain("flex-row-reverse");
     expect(user!.querySelector(".bg-tertiary")?.textContent).toBe("Hello");
     expect(screen.getByText("Not sent")).toBeTruthy();

@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people" | "content" | "chat"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people" | "content" | "chat" | "tools"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -413,7 +413,57 @@ export const COMPONENTS: ComponentDoc[] = [
     a11y: ["Each question is a fieldset with its prompt as the legend.", "Number keys pick an answer; Enter goes next; a missing required answer shows an error."],
     examples: [{ file: "chat", fn: "QuestionnaireBasic", title: "Before a contrast check" }],
     props: [{ name: "items", type: "{ name, prompt, description?, required?, multiple?, choices?, input? }[]", description: "The questions." }, { name: "onSubmit", type: "(answers) => void", description: "Answers by name." }, { name: "onCancel / cancelLabel", type: "() => void / string", default: "'Not now'", description: "First step." }, { name: "submitLabel", type: "string", default: "'Send answers'", description: "Last step." }, { name: "step / onStepChange", type: "number", description: "Controlled position." }, { name: "shortcuts", type: "boolean", default: "true", description: "Number keys." }] },
+  { slug: "color-swatch", name: "ColorSwatch", group: "Design system", description: "One color token: its color, name, value and alias, with copy.",
+    use: ["Token pages and color lists.", "Showing a customer's colors on the stage."], avoid: ["Decoration: it's for reading a token."],
+    a11y: ["The copy Button is named 'Copy <token>'.", "The color sits on a checkerboard, so transparency reads as transparency."],
+    examples: [{ file: "tools", fn: "SwatchLayouts", title: "Cards and rows" }],
+    props: [{ name: "color", type: "string", description: "Any CSS color, usually var(--token)." }, { name: "name", type: "string", description: "Token name; copied." }, { name: "value", type: "ReactNode", description: "Shown instead of the measured value." }, { name: "alias", type: "ReactNode", description: "The primitive, for the theme shown." }, { name: "usage", type: "ReactNode", description: "Where it's used." }, { name: "layout", type: "'card' | 'row' | 'chip'", default: "'card'", description: "Layout." }, { name: "size / selected / copy", type: "…", description: "More." }] },
+  { slug: "color-scale", name: "ColorScale", group: "Design system", description: "A color ramp from 50 to 950 in one row.",
+    use: ["Reading a primitive scale.", "Picking a step."], avoid: ["Semantic tokens: use ColorSwatch."],
+    a11y: ["Selectable scales are a radio group with arrow keys.", "The brand step says 'brand color' in its name."],
+    examples: [{ file: "tools", fn: "ScaleBasic", title: "Read and pick" }],
+    props: [{ name: "steps / colors", type: "{ label, color }[] / Record", description: "The ramp, light to dark." }, { name: "name", type: "string", description: "Mono label." }, { name: "anchor", type: "string", description: "The brand step." }, { name: "showValues", type: "boolean", default: "false", description: "Hex under each step." }, { name: "value / onValueChange", type: "string", description: "Makes it selectable." }] },
+  { slug: "token-preview", name: "TokenPreview", group: "Design system", description: "What a non-color token does: a bar, a corner, a shadow, motion.",
+    use: ["Spacing, radius, shadow, border, opacity and duration scales."], avoid: ["Colors: use ColorSwatch."],
+    a11y: ["The drawing is decorative; the name and value are text.", "The duration preview stops under reduced motion."],
+    examples: [{ file: "tools", fn: "TokenPreviewKinds", title: "Rows and tiles" }],
+    props: [{ name: "kind", type: "'space' | 'size' | 'radius' | 'shadow' | 'border' | 'opacity' | 'duration'", default: "'space'", description: "What to draw." }, { name: "value", type: "string", description: "CSS value, usually var(--token)." }, { name: "display", type: "ReactNode", description: "Text in place of the value." }, { name: "name / usage", type: "…", description: "Labels." }, { name: "layout", type: "'row' | 'tile'", default: "'row'", description: "Layout." }] },
+  { slug: "type-specimen", name: "TypeSpecimen", group: "Design system", description: "One text style: its name, specs and a sample.",
+    use: ["Type scale pages."], avoid: ["Lorem ipsum: show the style at work."],
+    a11y: ["Specs are text, measured from the browser or given."],
+    examples: [{ file: "tools", fn: "TypeSpecimenBasic", title: "A type scale" }],
+    props: [{ name: "styleName", type: "string", description: "The type style class." }, { name: "sample", type: "ReactNode", default: "pangram", description: "Sample text." }, { name: "specs", type: "{ family, size, lineHeight, weight, tracking }", description: "Shown instead of measuring." }, { name: "usage", type: "ReactNode", description: "Where it's used." }, { name: "layout", type: "'row' | 'stack'", default: "'row'", description: "Layout." }] },
+  { slug: "contrast-pair", name: "ContrastPair", group: "Design system", description: "A WCAG contrast check for one pair, in Light and Dark.",
+    use: ["Checking tokens before publishing.", "Pluto's contrast findings."], avoid: ["Decorative pairs that carry no meaning."],
+    a11y: ["A failing pair says 'Fails 4.5:1' in words, not only in red.", "Ratios round down, so a pass is never overstated."],
+    examples: [{ file: "tools", fn: "ContrastPairs", title: "Text, and a focus ring" }],
+    props: [{ name: "fg / bg", type: "string", description: "CSS colors, usually tokens." }, { name: "kind", type: "'text' | 'large' | 'ui'", default: "'text'", description: "Threshold." }, { name: "themes", type: "string[]", description: "Side by side, each in its own data-theme." }, { name: "label / description", type: "ReactNode", description: "Heading." }] },
+  { slug: "color-picker", name: "ColorPicker", group: "Design system", description: "Pick a color by eye or by value, with OKLCH and swatches.",
+    use: ["A brand color.", "Any color a token points to."], avoid: ["Picking from existing tokens: use TokenInput."],
+    a11y: ["The area handle is a slider: arrows change saturation and brightness, Shift for bigger steps.", "Hue is a slider; hex takes typing and pasting."],
+    examples: [{ file: "tools", fn: "ColorPickerBasic", title: "In a field, and inline" }],
+    props: [{ name: "value / onValueChange", type: "string", default: "'#2563eb'", description: "Hex." }, { name: "swatches", type: "(string | { color, name })[]", description: "Suggestions." }, { name: "inline", type: "boolean", default: "false", description: "Panel without the trigger." }, { name: "size / invalid / disabled", type: "…", description: "Works in Field." }] },
+  { slug: "token-input", name: "TokenInput", group: "Design system", description: "Point at a token instead of a raw value.",
+    use: ["Setting a component property."], avoid: ["Free values: use NumberInput or ColorPicker."],
+    a11y: ["A Combobox: type to search by name or value, arrows to move, Enter to pick."],
+    examples: [{ file: "tools", fn: "TokenInputBasic", title: "Background token" }],
+    props: [{ name: "tokens", type: "{ name, value?, color?, kind?, icon?, group? }[]", description: "The options; semantic first." }, { name: "value / onValueChange", type: "string | null", description: "The token name." }, { name: "clearable / placeholder / size", type: "…", description: "Combobox props." }] },
+  { slug: "number-input", name: "NumberInput", group: "Design system", description: "A number with a unit and steppers.",
+    use: ["Radii, spacing, durations, opacity."], avoid: ["Choosing between a few values: use Select or ToggleGroup."],
+    a11y: ["A spinbutton: Up and Down step, Shift steps by ten.", "The steppers stay out of the Tab order."],
+    examples: [{ file: "tools", fn: "NumberInputBasic", title: "Units and steps" }],
+    props: [{ name: "value / onValueChange", type: "number | null", description: "The number." }, { name: "min / max / step", type: "number", default: "step 1", description: "Bounds; decimals follow the step." }, { name: "unit", type: "string", description: "px, ms, %." }, { name: "stepper", type: "boolean", default: "true", description: "Show the Buttons." }] },
+  { slug: "stage", name: "Stage", group: "Design system", description: "The frame where a component or a customer's design is shown.",
+    use: ["Component previews.", "Customer designs in Light and Dark."], avoid: ["Seed's own chrome: customer colors stay on the stage."],
+    a11y: ["A labelled region; theme and width are toggle groups."],
+    examples: [{ file: "tools", fn: "StageBasic", title: "A card in Light and Dark" }],
+    props: [{ name: "title / actions", type: "ReactNode", description: "Toolbar." }, { name: "theme / onThemeChange", type: "'light' | 'dark'", default: "'light'", description: "Themes only the frame." }, { name: "width / widths", type: "'full' | 'desktop' | 'tablet' | 'mobile'", default: "'full'", description: "Preview widths." }, { name: "background", type: "'checker' | 'plain'", default: "'checker'", description: "Canvas." }, { name: "height / align / toolbar", type: "…", description: "Layout." }] },
+  { slug: "props-table", name: "PropsTable", group: "Design system", description: "A component's API as a table.",
+    use: ["Component docs."], avoid: ["Long prose: keep descriptions to one line."],
+    a11y: ["A named table; required props say 'required' to screen readers."],
+    examples: [{ file: "tools", fn: "PropsTableBasic", title: "Button props" }],
+    props: [{ name: "props", type: "{ name, type?, default?, required?, description? }[]", description: "The rows." }, { name: "component", type: "string", description: "Names the table." }] },
 ];
 
-export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout", "AI chat"];
+export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout", "AI chat", "Design system"];
 export const bySlug = (s: string) => COMPONENTS.find((c) => c.slug === s);

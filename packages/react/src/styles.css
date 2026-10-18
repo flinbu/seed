@@ -88,3 +88,19 @@
   .seed-code-sm { font-size: 12px; line-height: 18px; }
   @media (prefers-reduced-motion: reduce) { .seed-shimmer { animation: none; background: none; color: var(--text-secondary); } }
 }
+
+/* Design system tools: the checkerboard behind colors, the color area and hue track, and the duration preview. */
+@keyframes seed-token-move { to { left: calc(100% - var(--size-md)); } }
+@layer components {
+  .seed-checker {
+    background-color: var(--bg-stage);
+    background-image: linear-gradient(45deg, var(--bg-stage-pattern) 25%, transparent 25%, transparent 75%, var(--bg-stage-pattern) 75%), linear-gradient(45deg, var(--bg-stage-pattern) 25%, transparent 25%, transparent 75%, var(--bg-stage-pattern) 75%);
+    background-size: 12px 12px; background-position: 0 0, 6px 6px;
+  }
+  .seed-color-area { background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0)), linear-gradient(to right, #fff, rgba(255, 255, 255, 0)); }
+  .seed-color-thumb { border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), var(--elevation-sm); }
+  .seed-color-thumb:focus-visible { outline: 0; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 4px var(--border-accent-primary); }
+  .seed-hue-track { background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); }
+  .seed-token-move { animation: seed-token-move 1s var(--easing-out) infinite alternate; }
+  @media (prefers-reduced-motion: reduce) { .seed-token-move { animation: none; } }
+}

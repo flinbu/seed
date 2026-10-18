@@ -38,16 +38,16 @@
 
 ## Design system
 
-- **ColorSwatch** (design system): One color token: its color on the checkerboard (so transparency reads as transparency), its name, value and alias, and a copy Button
-- **ColorScale** (design system): A color ramp from 50 to 950 in one row: to read a primitive scale, see where the brand color sits, or pick a step
-- **TokenPreview** (design system): Shows what a non-color token does: spacing as a bar, a radius as a corner, a shadow on a card, a border width, an opacity, a duration as motion
-- **TypeSpecimen** (design system): One text style: its name, its specs (family, size and line height, weight, tracking) and a sample set in it
-- **ContrastPair** (design system): A contrast check for one pair of colors: the pair drawn as a sample, the WCAG ratio, and whether it passes, in Light and Dark side by side
-- **ColorPicker** (design system): Pick a color by eye or by value: a saturation and brightness area, a hue slider, a hex field, the OKLCH reading, and suggested swatches
-- **TokenInput** (design system): A field to point at a token instead of a raw value: search by name or value, see each color or kind beside it
-- **NumberInput** (design system): A number field with a unit and steppers: radii, spacing, durations, opacity
-- **Stage** (design system): The frame where a component or a customer's design is shown: the checkerboard stage, a Light and Dark switch that themes only the frame, and preview widths
-- **PropsTable** (design system): A component's API as a table: each prop's name, type, default and description
+- **ColorSwatch** (package): One color token: its color on the checkerboard (so transparency reads as transparency), its name, value and alias, and a copy Button
+- **ColorScale** (package): A color ramp from 50 to 950 in one row: to read a primitive scale, see where the brand color sits, or pick a step
+- **TokenPreview** (package): Shows what a non-color token does: spacing as a bar, a radius as a corner, a shadow on a card, a border width, an opacity, a duration as motion
+- **TypeSpecimen** (package): One text style: its name, its specs (family, size and line height, weight, tracking) and a sample set in it
+- **ContrastPair** (package): A contrast check for one pair of colors: the pair drawn as a sample, the WCAG ratio, and whether it passes, in Light and Dark side by side
+- **ColorPicker** (package): Pick a color by eye or by value: a saturation and brightness area, a hue slider, a hex field, the OKLCH reading, and suggested swatches
+- **TokenInput** (package): A field to point at a token instead of a raw value: search by name or value, see each color or kind beside it
+- **NumberInput** (package): A number field with a unit and steppers: radii, spacing, durations, opacity
+- **Stage** (package): The frame where a component or a customer's design is shown: the checkerboard stage, a Light and Dark switch that themes only the frame, and preview widths
+- **PropsTable** (package): A component's API as a table: each prop's name, type, default and description
 
 ## Disclosure
 
