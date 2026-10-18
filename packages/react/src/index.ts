@@ -83,5 +83,13 @@ export { TimePicker, parseTime, formatTime, type TimePickerProps } from "./compo
 export { Tour, type TourProps, type TourStep } from "./components/tour.js";
 export { TableOfContents, type TableOfContentsProps, type TocItem } from "./components/table-of-contents.js";
 export { CommentThread, type CommentThreadProps, type ThreadComment } from "./components/comment-thread.js";
+export { Bubble, BubbleGroup, Message, MessageGroup, MessageScroller, Attachment, AttachmentGroup, Marker } from "./components/chat.js";
+export type { BubbleProps, BubbleReaction, BubbleGroupProps, MessageProps, MessageScrollerProps, AttachmentProps, MarkerProps } from "./components/chat.js";
+export { Trace } from "./components/trace.js";
+export type { TraceProps, TraceStep } from "./components/trace.js";
+export { CodeBlock, highlightLine } from "./components/code-block.js";
+export type { CodeBlockProps, CodeLanguage } from "./components/code-block.js";
+export { Questionnaire } from "./components/questionnaire.js";
+export type { QuestionnaireProps, QuestionItem, QuestionChoice, QuestionAnswer, QuestionAnswers } from "./components/questionnaire.js";
 export { ThemeProvider, ThemeScript, useTheme, type ThemeProviderProps, type ThemeMode } from "./components/theme.js";
 export type { ChoiceText } from "./components/choice.js";

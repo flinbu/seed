@@ -76,3 +76,15 @@
   .seed-prose-small { font-size: 0.875rem; line-height: 1.375rem; }
   .seed-prose-small :is(p, ul, ol) { margin-bottom: var(--space-sm); }
 }
+
+/* Shimmer: text that is still being worked on (a running step, a file uploading). */
+@keyframes seed-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@layer components {
+  .seed-shimmer {
+    background: linear-gradient(90deg, var(--text-tertiary) 0%, var(--text-primary) 45%, var(--text-tertiary) 90%);
+    background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: seed-shimmer 1.6s linear infinite;
+  }
+  .seed-code-sm { font-size: 12px; line-height: 18px; }
+  @media (prefers-reduced-motion: reduce) { .seed-shimmer { animation: none; background: none; color: var(--text-secondary); } }
+}

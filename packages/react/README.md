@@ -90,10 +90,11 @@ Then set `data-brand="acme"` on `<html>`, or on any element to theme just that p
 - **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons), Menubar, NavigationMenu, TableOfContents, Link.
 - **Display:** Badge, Avatar (with presence), AvatarGroup, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree, Tag, DescriptionList, Timeline, CommentThread, Typography + Heading + Text.
 - **Feedback:** Alert, Banner, toast + Toaster, Meter, ProgressRing, Progress, Skeleton, Spinner, EmptyState, Tour.
+- **AI chat:** Message + MessageGroup, Bubble + BubbleGroup, MessageScroller, Attachment + AttachmentGroup, CodeBlock, Marker, Trace, Questionnaire.
 - **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader, Collapsible, ScrollArea, Item + ItemGroup, AspectRatio.
 - **Theme:** ThemeProvider, ThemeScript, useTheme.
 
-More are coming from the Seed design system: chat parts (Message, CodeBlock, Attachment), design system tools (ColorScale, TokenPreview, ContrastPair, ColorPicker), DataTable and charts.
+More are coming from the Seed design system: design system tools (ColorScale, TokenPreview, ContrastPair, ColorPicker), DataTable and charts.
 
 ## Related
 

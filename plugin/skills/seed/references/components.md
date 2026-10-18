@@ -4,14 +4,14 @@
 
 ## AI and chat
 
-- **Message** (design system): One turn in a conversation: who said it, when, what, and what you can do with it
-- **Bubble** (design system): The framed surface of one chat turn
-- **MessageScroller** (design system): The scrolling transcript of a conversation
-- **Attachment** (design system): A file or image in a conversation or an upload list: its icon or preview, name, details, upload state and actions
-- **CodeBlock** (design system): Code, terminal commands, logs and diffs: in docs, in Pluto's answers, and in token change proposals
-- **Marker** (design system): A small inline line in a conversation: what is happening now, a system note, or a labeled divider such as a date
-- **Trace** (design system): The steps behind an answer: what Pluto read, checked, found and is doing now
-- **Questionnaire** (design system): A short set of questions asked one at a time, for when Pluto needs a decision before it can help: what to check, which themes, what to name something
+- **Message** (package): One turn in a conversation: who said it, when, what, and what you can do with it
+- **Bubble** (package): The framed surface of one chat turn
+- **MessageScroller** (package): The scrolling transcript of a conversation
+- **Attachment** (package): A file or image in a conversation or an upload list: its icon or preview, name, details, upload state and actions
+- **CodeBlock** (package): Code, terminal commands, logs and diffs: in docs, in Pluto's answers, and in token change proposals
+- **Marker** (package): A small inline line in a conversation: what is happening now, a system note, or a labeled divider such as a date
+- **Trace** (package): The steps behind an answer: what Pluto read, checked, found and is doing now
+- **Questionnaire** (package): A short set of questions asked one at a time, for when Pluto needs a decision before it can help: what to check, which themes, what to name something
 
 ## Actions
 

@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people" | "content"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people" | "content" | "chat"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -372,8 +372,48 @@ export const COMPONENTS: ComponentDoc[] = [
     use: ["Comments on tokens, components, proposals."], avoid: ["The AI assistant: it answers in its own panel."],
     a11y: ["A labelled section; times are time elements; the reply box sends with ⌘ or Ctrl + Enter."],
     examples: [{ file: "content", fn: "CommentThreadBasic", title: "On a component in Dark" }],
-    props: [{ name: "comments", type: "{ author: { name, src?, role? }, body, time?, edited? }[]", description: "Oldest first." }, { name: "anchor", type: "ReactNode", description: "What it's about." }, { name: "onReply", type: "(text) => void", description: "Shows the reply box." }, { name: "resolved / onResolvedChange", type: "boolean", description: "Resolving collapses it." }, { name: "commentActions", type: "(comment) => ReactNode", description: "A menu per comment." }] }
+    props: [{ name: "comments", type: "{ author: { name, src?, role? }, body, time?, edited? }[]", description: "Oldest first." }, { name: "anchor", type: "ReactNode", description: "What it's about." }, { name: "onReply", type: "(text) => void", description: "Shows the reply box." }, { name: "resolved / onResolvedChange", type: "boolean", description: "Resolving collapses it." }, { name: "commentActions", type: "(comment) => ReactNode", description: "A menu per comment." }] },
+  { slug: "message", name: "Message", group: "AI chat", description: "One turn in a conversation: who said it, what, and what you can do with it.",
+    use: ["Pluto's chat: your turns as bubbles on the right, Pluto's answers as reading text on the left.", "Chats between people, with avatar, name and time."], avoid: ["Avatars in Pluto's chat."],
+    a11y: ["Icon-only actions need an aria-label; they show on hover and focus, and always on touch screens.", "A failed send says 'Not sent' with an icon, not only color."],
+    examples: [{ file: "chat", fn: "MessageBasic", title: "You and Pluto" }],
+    props: [{ name: "from", type: "'user' | 'assistant' | 'system'", default: "'assistant'", description: "Sets side and look." }, { name: "children", type: "string | ReactNode", description: "A string becomes a Bubble." }, { name: "actions", type: "ReactNode", description: "Ghost Buttons, three or fewer." }, { name: "status", type: "'sending' | 'error'", description: "Send state." }, { name: "avatar / name / time / footer", type: "ReactNode", description: "Optional parts." }, { name: "scrollAnchor", type: "boolean", description: "For MessageScroller." }] },
+  { slug: "bubble", name: "Bubble", group: "AI chat", description: "The petal-shaped surface of one chat turn.",
+    use: ["Your turns (neutral).", "One note that must stand out (accent)."], avoid: ["A blue bubble for 'me': color is spent on Pluto."],
+    a11y: ["Reactions are Toggles named with their count."],
+    examples: [{ file: "chat", fn: "BubbleVariants", title: "Variants and reactions" }],
+    props: [{ name: "variant", type: "'neutral' | 'ghost' | 'outline' | 'muted' | 'accent' | 'error'", default: "'neutral'", description: "Surface." }, { name: "align", type: "'start' | 'end'", default: "'start'", description: "Where the tight corner points." }, { name: "size", type: "'md' | 'sm'", default: "'md'", description: "Padding." }, { name: "href", type: "string", description: "Makes it a link." }, { name: "reactions", type: "{ icon?, label, count?, pressed?, onPressedChange? }[]", description: "Small toggles under it." }] },
+  { slug: "message-scroller", name: "MessageScroller", group: "AI chat", description: "The transcript: follows new output, never moves you while you read back.",
+    use: ["Any chat with streamed answers."], avoid: ["Putting the composer inside it: keep it below."],
+    a11y: ["A focusable log announced politely.", "Scrolling up by wheel, touch or keyboard stops following; 'Jump to latest' brings you back."],
+    examples: [{ file: "chat", fn: "ConversationBasic", title: "A conversation with Pluto", note: "Send a message: your turn scrolls near the top and the reply grows below it." }],
+    props: [{ name: "autoScroll", type: "boolean", default: "true", description: "Follow output at the bottom." }, { name: "peek", type: "number", default: "48", description: "Previous turn left visible (px)." }, { name: "defaultScrollPosition", type: "'end' | 'start'", default: "'end'", description: "Where it starts." }, { name: "height", type: "number | string", description: "Or give the parent a height." }, { name: "jumpLabel", type: "string", default: "'Jump to latest'", description: "Button text." }] },
+  { slug: "attachment", name: "Attachment", group: "AI chat", description: "A file in a conversation or upload list, with its state.",
+    use: ["Files you send to Pluto.", "Upload lists."], avoid: ["Big image galleries."],
+    a11y: ["Busy rows carry aria-busy; errors are announced and say what to do.", "Remove is named 'Remove <file>'."],
+    examples: [{ file: "chat", fn: "AttachmentStates", title: "States and a group" }],
+    props: [{ name: "name", type: "string", description: "File name; picks the icon." }, { name: "description", type: "ReactNode", description: "Type and size, or the error." }, { name: "state", type: "'done' | 'idle' | 'uploading' | 'processing' | 'error'", default: "'done'", description: "Upload state." }, { name: "progress", type: "number", description: "0 to 100." }, { name: "src / icon", type: "string / icon", description: "Preview or icon." }, { name: "onRemove / actions / href", type: "…", description: "What you can do." }, { name: "size / orientation", type: "'md' | 'sm' / 'horizontal' | 'vertical'", description: "Layout." }] },
+  { slug: "code-block", name: "CodeBlock", group: "AI chat", description: "Code, commands, logs and diffs, with copy.",
+    use: ["Docs, Pluto's answers and token change proposals."], avoid: ["Inline code in a sentence: use code in Typography."],
+    a11y: ["The code is a focusable region.", "Added and removed lines say so to screen readers.", "Copy copies the code only."],
+    examples: [{ file: "chat", fn: "CodeBlockBasic", title: "With a title, and floating copy" }, { file: "chat", fn: "CodeBlockDiff", title: "A token change as a diff" }],
+    props: [{ name: "code", type: "string", description: "The code." }, { name: "language", type: "'tsx' | 'ts' | 'js' | 'jsx' | 'css' | 'json' | 'html' | 'bash' | 'text' | 'diff'", default: "'tsx'", description: "Highlighting." }, { name: "title", type: "ReactNode", description: "Adds the header." }, { name: "lineNumbers / startLine / highlightLines", type: "…", description: "Lines." }, { name: "maxLines", type: "number", description: "Collapse long code." }, { name: "highlight", type: "(line, language) => ReactNode", description: "Your own highlighter." }, { name: "variant / size", type: "'default' | 'error' / 'md' | 'sm'", description: "Look." }] },
+  { slug: "marker", name: "Marker", group: "AI chat", description: "A small inline line: what's happening, a note, or a labeled divider.",
+    use: ["'Checked 435 tokens', 'Today'."], avoid: ["Several steps of work: use Trace."],
+    a11y: ["Running markers are a polite status.", "A labeled separator keeps its text readable."],
+    examples: [{ file: "chat", fn: "MarkerVariants", title: "Variants" }],
+    props: [{ name: "variant", type: "'note' | 'border' | 'separator'", default: "'note'", description: "Look." }, { name: "icon", type: "icon", description: "Leading icon." }, { name: "status", type: "'running' | 'error'", description: "State." }, { name: "href", type: "string", description: "Link to what it mentions." }] },
+  { slug: "trace", name: "Trace", group: "AI chat", description: "The steps behind an answer, folded under one line.",
+    use: ["Above Pluto's answer, folded once it's complete."], avoid: ["Long logs: link to them."],
+    a11y: ["Each step's status is in its name, not only its icon.", "Steps with detail are disclosure buttons."],
+    examples: [{ file: "chat", fn: "TraceBasic", title: "Pluto's work on a contrast check" }],
+    props: [{ name: "steps", type: "{ title, description?, icon?, status?, detail?, href? }[]", description: "In order." }, { name: "summary", type: "ReactNode", description: "Folds the trace." }, { name: "open / defaultOpen / onOpenChange", type: "boolean", default: "true", description: "Folded state." }] },
+  { slug: "questionnaire", name: "Questionnaire", group: "AI chat", description: "A few questions, one at a time, before Pluto can help.",
+    use: ["A decision Pluto needs: what to check, which themes, a name."], avoid: ["Long forms: ask three questions or fewer."],
+    a11y: ["Each question is a fieldset with its prompt as the legend.", "Number keys pick an answer; Enter goes next; a missing required answer shows an error."],
+    examples: [{ file: "chat", fn: "QuestionnaireBasic", title: "Before a contrast check" }],
+    props: [{ name: "items", type: "{ name, prompt, description?, required?, multiple?, choices?, input? }[]", description: "The questions." }, { name: "onSubmit", type: "(answers) => void", description: "Answers by name." }, { name: "onCancel / cancelLabel", type: "() => void / string", default: "'Not now'", description: "First step." }, { name: "submitLabel", type: "string", default: "'Send answers'", description: "Last step." }, { name: "step / onStepChange", type: "number", description: "Controlled position." }, { name: "shortcuts", type: "boolean", default: "true", description: "Number keys." }] },
 ];
 
-export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout"];
+export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout", "AI chat"];
 export const bySlug = (s: string) => COMPONENTS.find((c) => c.slug === s);
