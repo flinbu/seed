@@ -5,6 +5,7 @@ import { Badge, Button, ToggleGroup, ToggleGroupItem, useTheme, cn } from "@flin
 import { Monitor, Moon, Sun, ExternalLink } from "lucide-react";
 import { SeedLogo } from "./logo";
 import { useSiteTheme } from "./site-theme";
+import { MobileNav } from "./mobile-nav";
 
 const NAV = [{ href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/components/button", label: "Components", match: "/docs/components" }, { href: "/docs/tokens", label: "Tokens" }];
 
@@ -13,7 +14,8 @@ export function SiteHeader() {
   const { saved, apply } = useSiteTheme();
   const path = usePathname();
   return (
-    <header className="sticky top-0 z-20 flex h-(--space-5xl) items-center gap-lg border-b border-secondary bg-primary/90 px-lg backdrop-blur">
+    <header className="sticky top-0 z-20 flex h-(--space-5xl) items-center gap-sm border-b md:gap-lg border-secondary bg-primary/90 px-lg backdrop-blur">
+      <MobileNav />
       <Link href="/" aria-label="Seed home" className="inline-flex items-center text-primary no-underline"><SeedLogo size={26} /></Link>
       <nav aria-label="Main" className="hidden items-center gap-xxs md:flex">
         {NAV.map((n) => {
