@@ -1,5 +1,25 @@
 # @flinbu/seed
 
+## 0.2.0
+
+### Minor Changes
+
+- ff512a3: Add the AI chat parts: Message and MessageGroup, Bubble and BubbleGroup, MessageScroller, Attachment and AttachmentGroup, CodeBlock (with a built-in highlighter and diffs), Marker, Trace and Questionnaire.
+- ef22190: Add content and navigation components: Typography, Heading and Text, NavigationMenu, TableOfContents, MentionInput, TimePicker (with parseTime and formatTime), Tour and CommentThread.
+- d727631: Add the last Seed design system components: DataTable, Chart (bar, stacked, line and area, with a validated palette and a table view), StatTile, Carousel, Resizable, DirectionProvider and RichTextEditor. Every component in the Seed design system is now in the package.
+- b700a49: Add the design system tools: ColorSwatch, ColorScale, TokenPreview, TypeSpecimen, ContrastPair, ColorPicker, TokenInput, NumberInput, Stage and PropsTable, and export the color math they use (parseColor, toHex, formatColor, contrastRatio, formatRatio, toOklch, formatOklch, blend).
+- 9f2f7dc: Layout and product pieces: Stack, Inline, Grid (fixed columns or auto-fill), Container, VisuallyHidden (skip links), PageHeader, Banner, Tag (toggle, remove, color chip), CopyField and CopyButton (with useCopy), DescriptionList, Timeline (with formatRelative) and Link (external links say they open a new tab).
+- f7abade: AlertDialog (Cancel first, no close button), Drawer (bottom panel with a drag handle), ContextMenu and Menubar (the same rows as DropdownMenu), Collapsible, ScrollArea (focusable, thin scrollbars), ButtonGroup (split buttons, steppers) and InputGroup (prefixes, units, and a multiline prompt with toolbars).
+- 91a72a8: TagInput (suggestions, validation, paste a list), PasswordInput (Show/Hide, live requirements), AvatarGroup and Avatar presence (status is part of the name), Toolbar (one tab stop, arrow keys), Meter and ProgressRing, Item and ItemGroup, and AspectRatio.
+- 1683ec7: Phase 2, second batch: Combobox (search with keywords, clearable), Sheet (right, left, bottom), toast and Toaster (one action, errors stay), Accordion (real headings), Breadcrumb (collapses into a menu) and Pagination (page ranges, compact on phones). DropdownMenuItem now supports asChild for links.
+- 28bdbd1: Phase 2, third batch: Slider (single and range, formatted values), OtpInput (paste, one-time-code autofill, groups), Stepper (horizontal and vertical, go back to finished steps), Sidebar (sections, nested groups, badges, collapses to icons with tooltips) and HoverCard. Field now gives its label an id, so controls that aren't inputs (Slider, OtpInput) are named by it.
+- 997e83f: Phase 2, first batch: Select, Dialog, Popover, DropdownMenu (checkbox, radio and sub menus), Tooltip, Tabs (line and pill, with counts) and Table (sortable headers, selected rows, density). All built on Radix, styled with Seed tokens, tested with axe.
+- 5ef143e: Phase 3: Calendar (single or range, one or two months, keyboard grid), DatePicker, DateRangePicker (presets, Apply), CommandPalette (⌘K, groups, keywords, shortcuts), FileUpload (type and size checks, progress) and FileTree (the ARIA tree pattern).
+
+### Patch Changes
+
+- @flinbu/seed-tokens@0.2.0
+
 ## 0.1.2
 
 ### Patch Changes
