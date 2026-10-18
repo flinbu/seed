@@ -1,6 +1,6 @@
 /* The component docs: what each one is for, its live examples (functions in /examples) and its props. */
 export type Prop = { name: string; type: string; default?: string; description: string };
-export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people" | "content" | "chat" | "tools"; fn: string; title: string; note?: string };
+export type ExampleRef = { file: "button" | "forms" | "choices" | "display" | "feedback" | "overlays" | "navigation" | "flow" | "dates" | "product" | "menus" | "people" | "content" | "chat" | "tools" | "data"; fn: string; title: string; note?: string };
 export type ComponentDoc = { slug: string; name: string; group: string; description: string; use: string[]; avoid?: string[]; a11y: string[]; examples: ExampleRef[]; props: Prop[]; parts?: string[] };
 
 const cls: Prop = { name: "className", type: "string", description: "Extra classes. They win over Seed's, so you can adjust one thing without forking." };
@@ -463,6 +463,41 @@ export const COMPONENTS: ComponentDoc[] = [
     a11y: ["A named table; required props say 'required' to screen readers."],
     examples: [{ file: "tools", fn: "PropsTableBasic", title: "Button props" }],
     props: [{ name: "props", type: "{ name, type?, default?, required?, description? }[]", description: "The rows." }, { name: "component", type: "string", description: "Names the table." }] },
+  { slug: "chart", name: "Chart", group: "Display", description: "Bar, stacked, line and area charts with a tooltip, keyboard reading and a table view.",
+    use: ["Trends and comparisons over a few categories or weeks."], avoid: ["A single figure: use StatTile.", "Two measures with different scales: two charts, never two y-axes."],
+    a11y: ["Arrow keys, Home and End read each point aloud.", "The table button shows the same data as a table.", "Two or more series get a legend; text never uses the series color."],
+    examples: [{ file: "data", fn: "ChartBar", title: "Grouped bars" }, { file: "data", fn: "ChartStacked", title: "Stacked" }, { file: "data", fn: "ChartLine", title: "Lines with end labels" }, { file: "data", fn: "ChartArea", title: "Area" }],
+    props: [{ name: "type", type: "'bar' | 'stacked' | 'line' | 'area'", default: "'bar'", description: "Form." }, { name: "data", type: "Record<string, number | string>[]", description: "Rows." }, { name: "x", type: "string", default: "'x'", description: "Key for the horizontal axis." }, { name: "series", type: "{ key, label?, color? }[]", description: "Stable order; palette in that order." }, { name: "title / description", type: "ReactNode", description: "Caption." }, { name: "height", type: "number", default: "240", description: "Plot height (px)." }, { name: "valueFormat / xFormat", type: "(v) => string", default: "compact", description: "Formatting." }, { name: "labels", type: "'end'", description: "Direct labels." }, { name: "legend / toolbar", type: "boolean", default: "true", description: "Legend and table toggle." }, { name: "defaultView", type: "'chart' | 'table'", default: "'chart'", description: "Start view." }] },
+  { slug: "stat-tile", name: "StatTile", group: "Display", description: "One number that answers a question at a glance.",
+    use: ["Dashboards and overviews."], avoid: ["Shapes over time: use Chart."],
+    a11y: ["The delta says 'better' or 'worse' for screen readers; color follows good or bad, not up or down."],
+    examples: [{ file: "data", fn: "StatTiles", title: "Three tiles" }],
+    props: [{ name: "label", type: "ReactNode", description: "Sentence case." }, { name: "value", type: "ReactNode", description: "Numbers get separators." }, { name: "delta", type: "number | { value, unit?, display?, period?, goodWhen? }", description: "Change." }, { name: "trend", type: "number[]", description: "Sparkline." }, { name: "icon / size / format", type: "…", description: "More." }] },
+  { slug: "data-table", name: "DataTable", group: "Display", description: "Records with search, sorting across pages, columns, pagination and bulk actions.",
+    use: ["Lists of components, tokens, people, versions."], avoid: ["A few rows with no actions: use Table."],
+    a11y: ["Sort headers are buttons with aria-sort.", "Select all covers the current page.", "A search with no results says so and offers to clear it."],
+    examples: [{ file: "data", fn: "DataTableBasic", title: "Components" }],
+    props: [{ name: "columns", type: "{ key, header, render?, align?, sortable?, sortValue?, hideable? }[]", description: "Columns." }, { name: "rows", type: "object[]", description: "Records." }, { name: "rowKey", type: "string | (row, i) => key", default: "'id'", description: "Identity." }, { name: "pageSize", type: "number", default: "10", description: "Rows per page." }, { name: "noun", type: "[string, string]", default: "['row', 'rows']", description: "Summary words." }, { name: "selectable / bulkActions", type: "boolean / (rows, clear) => ReactNode", description: "Selection." }, { name: "sort / onSortChange", type: "{ key, dir } | null", description: "Sorting." }, { name: "toolbar", type: "ReactNode", description: "Buttons on the right." }, { name: "loading / empty / density / onRowClick", type: "…", description: "More." }] },
+  { slug: "carousel", name: "Carousel", group: "Display", description: "A row of slides that scrolls sideways. No autoplay.",
+    use: ["Theme presets, templates, screenshots."], avoid: ["Anything people must see: put it first, not on slide 4."],
+    a11y: ["Each slide is a group named '3 of 6'; the track moves with arrow keys.", "Previous and Next disable at the ends unless loop."],
+    examples: [{ file: "data", fn: "CarouselBasic", title: "Theme presets" }],
+    props: [{ name: "items / children", type: "ReactNode[]", description: "Slides." }, { name: "slidesPerView", type: "number", default: "1", description: "Fractions hint at more." }, { name: "loop", type: "boolean", default: "false", description: "Wrap around." }, { name: "showDots", type: "boolean", default: "true", description: "Dots or '2 / 6'." }] },
+  { slug: "resizable", name: "Resizable", group: "Layout", description: "Panels split by handles people drag.",
+    use: ["Editors with a list, canvas and inspector.", "Code beside its preview."], avoid: ["Small screens: stack instead."],
+    a11y: ["Handles are focusable separators: arrows move 2%, Shift 10%, Home and End jump to the limits.", "Double-click splits two panels evenly."],
+    examples: [{ file: "data", fn: "ResizableBasic", title: "An editor layout" }],
+    props: [{ name: "direction", type: "'horizontal' | 'vertical'", default: "'horizontal'", description: "Split." }, { name: "sizes / onSizesChange", type: "number[]", description: "Remember a layout." }, { name: "withHandle", type: "boolean", default: "false", description: "Grip on handles." }, { name: "ResizablePanel", type: "{ defaultSize?, minSize?, maxSize?, label? }", default: "min 10, max 90", description: "Each panel." }] },
+  { slug: "direction-provider", name: "DirectionProvider", group: "Layout", description: "Sets right-to-left or left-to-right for everything inside.",
+    use: ["Arabic, Hebrew or Persian interfaces."], avoid: ["Mixing directions per component."],
+    a11y: ["Arrow keys follow the reading direction in Carousel, Resizable and Chart."],
+    examples: [{ file: "data", fn: "DirectionBasic", title: "Right to left" }],
+    props: [{ name: "dir", type: "'ltr' | 'rtl'", default: "'ltr'", description: "Direction." }, { name: "wrap", type: "boolean", default: "true", description: "Render a wrapper with dir." }] },
+  { slug: "rich-text-editor", name: "RichTextEditor", group: "Forms", description: "A WYSIWYG editor that emits clean HTML.",
+    use: ["Descriptions, comments, release notes, help articles."], avoid: ["Plain text: use Textarea.", "Collaboration, tables or images: a dedicated editor library."],
+    a11y: ["A labelled multiline textbox with a Formatting toolbar.", "⌘B, ⌘I, ⌘U, ⌘K for a link, Tab to indent list items.", "Paste is plain text unless pasteFormatting."],
+    examples: [{ file: "data", fn: "RichTextBasic", title: "Release notes" }, { file: "data", fn: "RichTextComment", title: "A trimmed comment box" }],
+    props: [{ name: "defaultValue / value / onChange", type: "string (HTML)", description: "Content." }, { name: "toolbar", type: "RteTool[]", default: "all", description: "Tools; '|' separates." }, { name: "placeholder", type: "string", description: "Empty text." }, { name: "minHeight / maxHeight", type: "number | string", default: "160", description: "Size." }, { name: "maxLength / showCount", type: "number / boolean", description: "Counting." }, { name: "readOnly / disabled / invalid", type: "boolean", default: "false", description: "States." }, { name: "pasteFormatting", type: "boolean", default: "false", description: "Keep formatting on paste." }] },
 ];
 
 export const GROUPS = ["Actions", "Forms", "Overlays", "Navigation", "Display", "Feedback", "Layout", "AI chat", "Design system"];

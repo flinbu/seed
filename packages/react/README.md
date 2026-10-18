@@ -85,17 +85,18 @@ Then set `data-brand="acme"` on `<html>`, or on any element to theme just that p
 ## Components
 
 - **Actions:** Button, ButtonGroup, Toggle, ToggleGroup, Toolbar.
-- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload, CopyField + CopyButton, InputGroup, TagInput, PasswordInput, MentionInput, TimePicker.
+- **Forms:** Input, Textarea, Field, Label, Checkbox, RadioGroup, Switch, Select, Combobox, Slider, OtpInput, Calendar, DatePicker, DateRangePicker, FileUpload, CopyField + CopyButton, InputGroup, TagInput, PasswordInput, MentionInput, TimePicker, RichTextEditor.
 - **Overlays:** Dialog, AlertDialog, Sheet, Drawer, Popover, HoverCard, CommandPalette (⌘K), ContextMenu, DropdownMenu (with checkbox, radio and sub menus), Tooltip.
 - **Navigation:** Tabs (line and pill, with counts), Breadcrumb, Pagination, Stepper, Sidebar (collapses to icons), Menubar, NavigationMenu, TableOfContents, Link.
 - **Display:** Badge, Avatar (with presence), AvatarGroup, Icon, Kbd, Card, Separator, Table (sortable headers, selected rows), Accordion, FileTree, Tag, DescriptionList, Timeline, CommentThread, Typography + Heading + Text.
 - **Feedback:** Alert, Banner, toast + Toaster, Meter, ProgressRing, Progress, Skeleton, Spinner, EmptyState, Tour.
 - **AI chat:** Message + MessageGroup, Bubble + BubbleGroup, MessageScroller, Attachment + AttachmentGroup, CodeBlock, Marker, Trace, Questionnaire.
 - **Design system tools:** ColorSwatch, ColorScale, TokenPreview, TypeSpecimen, ContrastPair, ColorPicker, TokenInput, NumberInput, Stage, PropsTable, plus the color math (parseColor, contrastRatio, formatRatio, formatOklch).
-- **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader, Collapsible, ScrollArea, Item + ItemGroup, AspectRatio.
+- **Data:** DataTable, Chart (bar, stacked, line, area), StatTile, Carousel.
+- **Layout:** Stack, Inline, Grid, Container, VisuallyHidden, PageHeader, Collapsible, ScrollArea, Item + ItemGroup, AspectRatio, Resizable, DirectionProvider.
 - **Theme:** ThemeProvider, ThemeScript, useTheme.
 
-More are coming from the Seed design system: DataTable, Chart, StatTile, Carousel, Resizable, DirectionProvider and RichTextEditor.
+Every component in the Seed design system is now in the package.
 
 ## Related
 

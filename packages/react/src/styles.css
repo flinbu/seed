@@ -104,3 +104,53 @@
   .seed-token-move { animation: seed-token-move 1s var(--easing-out) infinite alternate; }
   @media (prefers-reduced-motion: reduce) { .seed-token-move { animation: none; } }
 }
+
+/* Chart palette: eight Seed primitives in a fixed order, validated for color vision deficiency
+   (worst adjacent ΔE 8.4 Light, 8.8 Dark) and 3:1 against the page. Dark is its own selection, never a flip. */
+:root, [data-theme="light"] {
+  --seed-chart-1: var(--blue-600); --seed-chart-2: var(--orange-600); --seed-chart-3: var(--teal-600); --seed-chart-4: var(--amber-600);
+  --seed-chart-5: var(--pink-600); --seed-chart-6: var(--green-700); --seed-chart-7: var(--violet-600); --seed-chart-8: var(--red-600);
+}
+[data-theme="dark"] {
+  --seed-chart-1: var(--blue-500); --seed-chart-2: var(--orange-600); --seed-chart-3: var(--teal-600); --seed-chart-4: var(--amber-600);
+  --seed-chart-5: var(--pink-500); --seed-chart-6: var(--green-600); --seed-chart-7: var(--violet-500); --seed-chart-8: var(--red-500);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]), [data-theme="system"] {
+    --seed-chart-1: var(--blue-500); --seed-chart-2: var(--orange-600); --seed-chart-3: var(--teal-600); --seed-chart-4: var(--amber-600);
+    --seed-chart-5: var(--pink-500); --seed-chart-6: var(--green-600); --seed-chart-7: var(--violet-500); --seed-chart-8: var(--red-500);
+  }
+}
+@layer components {
+  .seed-chart-grid { stroke: var(--border-tertiary); stroke-width: 1; shape-rendering: crispEdges; }
+  .seed-chart-base { stroke: var(--border-secondary); stroke-width: 1; shape-rendering: crispEdges; }
+  .seed-chart-tick, .seed-chart-value { fill: var(--text-tertiary); font-family: var(--font-primary); font-size: 11px; font-weight: 400; font-variant-numeric: tabular-nums; }
+  .seed-chart-value { fill: var(--text-secondary); font-weight: 500; }
+  .seed-chart-bar { transition: opacity var(--duration-fast) var(--easing-out); }
+  .seed-chart-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .seed-chart-area { opacity: 0.1; }
+  .seed-chart-dot { stroke: var(--bg-primary); stroke-width: 2; }
+  .seed-chart-cross { stroke: var(--border-primary); stroke-width: 1; shape-rendering: crispEdges; }
+  .seed-chart-band { fill: var(--bg-tertiary); opacity: 0.6; }
+  .seed-spark-line { fill: none; stroke: var(--icon-tertiary); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+  .seed-spark-dot { fill: var(--seed-chart-1); stroke: var(--bg-primary); stroke-width: 2; }
+  @media (prefers-reduced-motion: reduce) { .seed-chart-bar { transition: none; } }
+}
+
+/* RichTextEditor: the editable area. Type classes come from Seed's type styles and are stripped from the HTML it emits. */
+@layer components {
+  .seed-rte-content { position: relative; overflow-y: auto; outline: 0; color: var(--text-primary); font-family: var(--font-reading); overflow-wrap: anywhere; }
+  .seed-rte-content[data-empty="true"]::before { content: attr(data-placeholder); position: absolute; color: var(--text-placeholder); pointer-events: none; }
+  .seed-rte-content > * { margin: 0 0 var(--space-sm); }
+  .seed-rte-content > *:last-child { margin-bottom: 0; }
+  .seed-rte-content :is(h2, h3) { margin-top: var(--space-base); color: var(--text-primary); }
+  .seed-rte-content > :is(h2, h3):first-child { margin-top: 0; }
+  .seed-rte-content :is(ul, ol) { padding-inline-start: var(--space-lg); }
+  .seed-rte-content ul { list-style: disc; }
+  .seed-rte-content ol { list-style: decimal; }
+  .seed-rte-content li + li { margin-top: var(--space-xxs); }
+  .seed-rte-content blockquote { padding-inline-start: var(--space-base); border-inline-start: 3px solid var(--border-primary); color: var(--text-secondary); }
+  .seed-rte-content a { color: var(--text-link); text-decoration: underline; text-underline-offset: 3px; }
+  .seed-rte-content code { padding: 0 var(--space-xxs); border-radius: var(--radius-sm); background: var(--bg-tertiary); font-family: var(--font-mono); font-size: 0.92em; }
+  .seed-rte-content pre { padding: var(--space-sm) var(--space-base); border-radius: var(--radius-md); background: var(--bg-tertiary); font-family: var(--font-mono); white-space: pre-wrap; }
+}

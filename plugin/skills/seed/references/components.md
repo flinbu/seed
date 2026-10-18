@@ -1,6 +1,6 @@
 # Seed components
 
-*package*: import from `@flinbu/seed` today. *design system*: specified in the Seed design system (live previews and props at https://claude.ai/artifact/3EcyStkY8yCeAxSM7a1biz); not in the npm package yet, so compose it from package parts and tokens following that spec.
+Every component below ships in `@flinbu/seed` (marked *package*). Live previews and the full specs are in the Seed design system: https://claude.ai/artifact/3EcyStkY8yCeAxSM7a1biz.
 
 ## AI and chat
 
@@ -27,9 +27,9 @@
 - **Kbd** (package): A keyboard key, for shortcuts in menus, tooltips and help text
 - **Table** (package): Displays rows of structured data with sorting, selection, loading and empty states
 - **Item** (package): A row for one thing, with media, a title, a description and actions: integrations, members, files, settings entries
-- **DataTable** (design system): A list of records with everything around it: search, sorting across all pages, column visibility, pagination, selection and bulk actions
-- **Chart** (design system): Bar, stacked bar, line and area charts drawn in Seed's chart palette, with a tooltip, keyboard reading and a table view built in
-- **StatTile** (design system): One number that answers a question at a glance: adoption, open issues, components, credits
+- **DataTable** (package): A list of records with everything around it: search, sorting across all pages, column visibility, pagination, selection and bulk actions
+- **Chart** (package): Bar, stacked bar, line and area charts drawn in Seed's chart palette, with a tooltip, keyboard reading and a table view built in
+- **StatTile** (package): One number that answers a question at a glance: adoption, open issues, components, credits
 - **Tag** (package): A small label people can act on: filter by it, remove it, or read a token's color at a glance
 - **DescriptionList** (package): Pairs of labels and values: a token's details, a version's metadata, account settings to read
 - **Timeline** (package): Events in order: a version history, an activity feed, the steps of a sync
@@ -81,7 +81,7 @@
 - **Calendar** (package): A month grid for picking a single date or a range
 - **DatePicker** (package): A date field: an Input-style trigger that opens a `Calendar` in a `Popover`
 - **FileUpload** (package): Lets people add files by dropping them or browsing, and shows each file's state
-- **RichTextEditor** (design system): A WYSIWYG editor for formatted text: descriptions, comments, release notes, help articles
+- **RichTextEditor** (package): A WYSIWYG editor for formatted text: descriptions, comments, release notes, help articles
 - **OtpInput** (package): A one-time code split into one cell per character: email codes, authenticator apps, SMS
 - **InputGroup** (package): An Input with add-ons inside its frame: a fixed prefix or suffix, an icon, a Button (copy, clear, show password), a `Kbd` hint, or toolbars above and below a multiline field such as Pluto's prompt
 - **TagInput** (package): A field that turns typed text into tags: components in a release, keywords, aliases, people to notify
@@ -95,7 +95,7 @@
 
 - **Icon** (package): The single source of icons in Seed: the full Lucide set (version 1.49.0, 1,857 icons, ISC license), drawn through one component
 - **Typography** (package): Seed's type for reading: `Typography` styles rendered rich text and Markdown (headings, paragraphs, lists, quotes, code, tables), and `Heading` and `Text` set single pieces of copy with the right type style
-- **DirectionProvider** (design system): Sets the reading direction for everything inside it: right-to-left for Arabic, Hebrew or Persian, left-to-right otherwise
+- **DirectionProvider** (package): Sets the reading direction for everything inside it: right-to-left for Arabic, Hebrew or Persian, left-to-right otherwise
 - **VisuallyHidden** (package): Hides content on screen but keeps it for screen readers: extra context on a number, a label for a field whose purpose is visible, a skip link
 
 ## Layout
@@ -105,8 +105,8 @@
 - **Tabs** (package): Switches between views in the same context without leaving the page
 - **ScrollArea** (package): A scrolling region with Seed's thin scrollbars on every operating system, for lists and panels with a fixed height: sidebars, menus of results, a long token list in a card
 - **AspectRatio** (package): Keeps media at a fixed shape while its width changes: thumbnails, video embeds, component previews, cover images
-- **Carousel** (design system): A row of slides that scrolls sideways: theme presets, templates, screenshots, onboarding cards
-- **Resizable** (design system): Panels split by handles people drag: an editor with a list, a canvas and an inspector
+- **Carousel** (package): A row of slides that scrolls sideways: theme presets, templates, screenshots, onboarding cards
+- **Resizable** (package): Panels split by handles people drag: an editor with a list, a canvas and an inspector
 - **PageHeader** (package): The top of a page: where you are, what this is, and the main actions
 - **Stack** (package): Vertical layout with token gaps
 - **Inline** (package): Horizontal layout that wraps: badges, button rows, a title with its actions
