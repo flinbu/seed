@@ -55,6 +55,8 @@ export function CommandPalette({ groups, open, defaultOpen = false, onOpenChange
   const current = flat[Math.min(active, flat.length - 1)];
   const optId = (it: CommandItem) => `${id}-${flat.indexOf(it)}`;
   React.useEffect(() => { if (current) listRef.current?.querySelector(`[id="${optId(current)}"]`)?.scrollIntoView({ block: "nearest" }); }, [active, t]);
+  /** The footer keys are a step smaller, like the prototype's. */
+  const k = "h-(--size-lg) min-w-(--size-lg)";
   function run(it: CommandItem) { setOpen(false); it.onSelect?.(); }
   function onKey(e: React.KeyboardEvent) {
     if (e.key === "ArrowDown") { e.preventDefault(); setActive((a) => (a + 1) % Math.max(flat.length, 1)); }
@@ -69,16 +71,15 @@ export function CommandPalette({ groups, open, defaultOpen = false, onOpenChange
       <D.Portal>
         <D.Overlay className="fixed inset-0 z-40 bg-overlay-alpha-secondary data-[state=open]:animate-seed-fade-in motion-reduce:animate-none" />
         <D.Content aria-label={label} aria-describedby={undefined}
-          className="fixed top-[12dvh] left-1/2 z-40 flex max-h-[70dvh] w-[calc(100%-var(--space-xl))] max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-2xl border border-secondary bg-elevated text-primary shadow-elevation-xl font-primary outline-none data-[state=open]:animate-seed-grow motion-reduce:animate-none">
+          className="fixed top-[12dvh] left-1/2 z-40 flex max-h-[76dvh] w-[calc(100%-var(--space-xl))] max-w-lg -translate-x-1/2 flex-col overflow-hidden rounded-2xl border border-secondary bg-elevated text-primary shadow-elevation-xl font-primary outline-none data-[state=open]:animate-seed-grow motion-reduce:animate-none">
           <D.Title className="sr-only">{label}</D.Title>
-          <div className="flex h-control-lg items-center gap-xs border-b border-secondary px-base">
+          <div className="flex h-control-lg shrink-0 items-center gap-xs border-b border-secondary px-base">
             <SearchGlyph className="shrink-0 text-icon-tertiary" />
             <input autoFocus value={q} onChange={(e) => { setQ(e.target.value); setActive(0); }} onKeyDown={onKey} placeholder={placeholder}
               role="combobox" aria-expanded aria-controls={`${id}-list`} aria-autocomplete="list" aria-activedescendant={current ? optId(current) : undefined} aria-label={placeholder}
               className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 font-primary text-primary outline-none placeholder:text-placeholder body-body-2-regular" />
-            <Kbd>Esc</Kbd>
           </div>
-          <div ref={listRef} id={`${id}-list`} role="listbox" aria-label="Results" className="min-h-0 flex-1 overflow-y-auto p-xxs">
+          <div ref={listRef} id={`${id}-list`} role="listbox" aria-label="Results" className="max-h-80 min-h-0 flex-1 overflow-y-auto p-xxs">
             {shown.length ? shown.map((g, gi) => (
               <div key={gi} role="group" aria-label={g.label}>
                 {g.label ? <div className={menuLabel} aria-hidden="true">{g.label}</div> : null}
@@ -89,7 +90,7 @@ export function CommandPalette({ groups, open, defaultOpen = false, onOpenChange
                     <div key={it.label} id={it.disabled ? undefined : optId(it)} role="option" aria-selected={on} aria-disabled={it.disabled || undefined}
                       data-highlighted={on ? "" : undefined} data-disabled={it.disabled ? "" : undefined}
                       onMouseMove={() => { if (!it.disabled) setActive(flat.indexOf(it)); }} onClick={() => { if (!it.disabled) run(it); }}
-                      className={cn(menuItem, "min-h-control-md", it.description && "items-start py-xs")}>
+                      className={cn(menuItem, it.description && "items-start py-xs")}>
                       {it.icon ? <span className={cn(menuIcon, it.description && "pt-xxxs")}>{renderIcon(it.icon, "sm")}</span> : null}
                       <span className="flex min-w-0 flex-1 flex-col"><span className="truncate">{it.label}</span>
                         {it.description ? <span className="text-tertiary body-body-4-regular">{it.description}</span> : null}</span>
@@ -99,6 +100,11 @@ export function CommandPalette({ groups, open, defaultOpen = false, onOpenChange
                 })}
               </div>
             )) : <p className="m-0 px-xs py-lg text-center text-tertiary body-body-3-regular">{emptyText}</p>}
+          </div>
+          <div aria-hidden="true" className="flex shrink-0 flex-wrap gap-base border-t border-secondary bg-secondary px-base py-xs text-tertiary body-body-4-regular">
+            <span className="inline-flex items-center gap-xxxs"><Kbd className={k}>↑</Kbd><Kbd className={k}>↓</Kbd> to navigate</span>
+            <span className="inline-flex items-center gap-xxxs"><Kbd className={k}>↵</Kbd> to select</span>
+            <span className="inline-flex items-center gap-xxxs"><Kbd className={k}>Esc</Kbd> to close</span>
           </div>
         </D.Content>
       </D.Portal>

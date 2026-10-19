@@ -18,7 +18,7 @@ export interface ProgressProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   size?: "sm" | "md";
 }
 
-export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(function Progress({ value, max = 100, label, showValue, valueText, variant = "accent", size = "md", className, ...rest }, ref) {
+export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(function Progress({ value, max = 100, label, showValue, valueText, variant = "accent", size = "md", className, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, ...rest }, ref) {
   const auto = React.useId();
   const lid = `seed-progress-${auto}`;
   const pct = value == null ? null : Math.max(0, Math.min(100, (value / max) * 100));
@@ -31,7 +31,7 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(function
           {showValue && text ? <span className="tabular-nums text-secondary">{text}</span> : null}
         </div>
       ) : null}
-      <RadixProgress.Root value={value ?? null} max={max} getValueLabel={() => text ?? ""} aria-labelledby={label ? lid : undefined}
+      <RadixProgress.Root value={value ?? null} max={max} getValueLabel={() => text ?? ""} aria-labelledby={label ? lid : ariaLabelledBy} aria-label={label || ariaLabelledBy ? undefined : ariaLabel}
         className={cn("relative overflow-hidden rounded-full bg-tertiary", size === "sm" ? "h-(--size-xs)" : "h-(--size-sm)")}>
         <RadixProgress.Indicator className={cn("h-full rounded-full", BAR[variant], pct == null ? "absolute w-2/5 motion-safe:animate-seed-indeterminate" : "transition-[width] duration-(--duration-slow)")}
           style={pct == null ? undefined : { width: `${pct}%` }} />

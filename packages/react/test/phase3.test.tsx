@@ -97,6 +97,15 @@ describe("CommandPalette", () => {
     expect(run).toHaveBeenCalled();
     expect(screen.queryByRole("dialog")).toBeNull();
   });
+
+  it("shows group labels as written and the keys at the bottom", async () => {
+    const user = userEvent.setup();
+    render(<CommandPalette groups={[{ label: "Go to", items: [{ label: "Settings" }] }]} />);
+    await user.keyboard("{Control>}k{/Control}");
+    const dialog = screen.getByRole("dialog", { name: "Command palette" });
+    expect(within(dialog).getByText("Go to").className).not.toContain("uppercase");
+    expect(within(dialog).getByText(/to navigate/)).toBeTruthy();
+  });
 });
 
 describe("FileUpload", () => {

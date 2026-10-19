@@ -120,6 +120,10 @@ describe("display", () => {
     expect(p.getAttribute("aria-valuenow")).toBe("30");
     expect(p.getAttribute("aria-valuetext")).toBe("50%");
   });
+  it("Progress without a visible label takes its aria-label on the bar", () => {
+    render(<Progress value={8} max={10} aria-label="8 of 10 credits left" />);
+    expect(screen.getByRole("progressbar", { name: "8 of 10 credits left" })).toBeTruthy();
+  });
   it("Avatar falls back to initials", () => {
     expect(initials("Felipe Linares")).toBe("FL");
     render(<Avatar name="Ana Ruiz" />);

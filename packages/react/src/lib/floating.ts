@@ -13,5 +13,5 @@ export const menuItem = cn(
 );
 export const menuIcon = "inline-flex shrink-0 leading-none text-icon-secondary";
 export const menuShortcut = "ml-auto pl-base font-mono text-tertiary body-body-4-regular";
-export const menuLabel = "px-xs pt-xs pb-xxs mono-label-medium uppercase text-tertiary";
+export const menuLabel = "px-xs pt-xs pb-xxs label-label-3-medium text-tertiary";
 export const menuSeparator = "-mx-xxs my-xxs h-px bg-(--border-secondary)";

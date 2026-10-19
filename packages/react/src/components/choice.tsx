@@ -17,7 +17,7 @@ export function ChoiceLayout({ id, label, description, disabled, control, classN
       {control}
       <span className="flex flex-col gap-xxxs">
         {label ? <Label htmlFor={id} disabled={disabled} className="body-body-3-regular">{label}</Label> : null}
-        {description ? <span id={`${id}-desc`} className={cn("body-body-4-regular", disabled ? "text-disabled" : "text-tertiary")}>{description}</span> : null}
+        {description ? <span id={`${id}-desc`} className={cn("body-body-3-regular", disabled ? "text-disabled" : "text-tertiary")}>{description}</span> : null}
       </span>
     </div>
   );

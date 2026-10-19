@@ -35,7 +35,7 @@ const PanelGlyph = () => <svg width={16} height={16} viewBox="0 0 24 24" fill="n
 const row = cn("group flex h-control-sm w-full min-w-0 cursor-pointer items-center gap-xs rounded-control border-0 bg-transparent px-xs text-left font-primary no-underline",
   "text-secondary label-label-2-regular transition-colors duration-(--duration-fast) hover:bg-secondary-hover hover:text-primary",
   "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent-primary");
-const on = "bg-selected text-primary label-label-2-medium hover:bg-selected-hover";
+const on = "bg-primary text-primary label-label-2-medium shadow-elevation-raised hover:bg-primary";
 
 function Entry({ it, depth, small, L }: { it: Extract<SidebarItem, { type?: "item" }>; depth: number; small: boolean; L: React.ElementType }) {
   const kids = it.items?.length ? it.items : null;
