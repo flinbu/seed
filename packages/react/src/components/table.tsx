@@ -53,7 +53,7 @@ export const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
   const Arrow = sort === "ascending" ? ArrowUpGlyph : sort === "descending" ? ArrowDownGlyph : ChevronsUpDownGlyph;
   return (
     <th ref={ref} scope={scope ?? "col"} aria-sort={sortable ? (sort || "none") : undefined}
-      className={cn("h-control-md whitespace-nowrap border-b border-secondary text-secondary label-label-3-medium", d === "compact" ? "px-sm" : "px-base",
+      className={cn("h-control-md whitespace-nowrap border-b border-secondary text-tertiary mono-label-medium", d === "compact" ? "px-sm" : "px-base",
         align === "right" ? "text-right" : align === "center" ? "text-center" : "text-left", className)} {...rest}>
       {sortable ? (
         <button type="button" onClick={onSort} className={cn("-mx-xxs inline-flex cursor-pointer items-center gap-xxs rounded-sm border-0 bg-transparent px-xxs py-xxxs font-primary text-inherit [font:inherit]",

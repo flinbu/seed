@@ -45,7 +45,7 @@ function Entry({ it, depth, small, L }: { it: Extract<SidebarItem, { type?: "ite
     <>
       {it.icon ? <span className={cn("inline-flex shrink-0 leading-none", it.active ? "text-icon-primary" : "text-icon-tertiary group-hover:text-icon-secondary")}>{renderIcon(it.icon, "sm")}</span> : null}
       {small ? <span className="sr-only">{it.label}</span> : <span className="min-w-0 flex-1 truncate">{it.label}</span>}
-      {!small && it.badge != null ? <span className="ml-auto inline-flex h-(--size-xl) min-w-(--size-xl) items-center justify-center rounded-full bg-tertiary px-xxs text-secondary label-label-3-medium">{it.badge}</span> : null}
+      {!small && it.badge != null ? <span className="ml-auto inline-flex items-center text-tertiary label-label-3-medium tabular-nums [font-family:var(--font-mono)]">{it.badge}</span> : null}
       {!small && kids ? <ChevronDownGlyph size={14} className={cn("ml-auto shrink-0 text-icon-tertiary transition-transform duration-(--duration-fast)", !open && "-rotate-90 rtl:rotate-90")} /> : null}
     </>
   );

@@ -10,3 +10,4 @@ Match the reference design in six places:
 - Stepper: each step reads number, then name, with the line running to the next step.
 - Checkbox, Radio and Switch descriptions use body 3, like the label.
 - Progress: without a visible label, its aria-label names the bar itself.
+- Table headers and Sidebar counts use the mono spec voice: uppercase mono headers in the tertiary color, plain mono counts.
