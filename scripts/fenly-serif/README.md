@@ -10,6 +10,7 @@ Build it (Python 3 with `fonttools[woff]`):
 npm pack @fontsource-variable/literata && tar -xzf fontsource-variable-literata-*.tgz
 python3 scripts/fenly-serif/build.py package/files
 cp FenlySerif-Variable.woff2 FenlySerif-Italic-Variable.woff2 packages/tokens/src/fonts/
+cp FenlySerif*.woff2 FenlySerif*.ttf fonts/fenly-serif/
 ```
 
-The license ships next to the fonts as `packages/tokens/src/fonts/FenlySerif-OFL.txt`.
+The license ships next to the fonts as `packages/tokens/src/fonts/FenlySerif-OFL.txt`. The files to download and install live in [`fonts/fenly-serif`](../../fonts/fenly-serif).

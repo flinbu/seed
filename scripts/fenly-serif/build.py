@@ -172,6 +172,7 @@ def family(style):
     vf["OS/2"].fsSelection = (vf["OS/2"].fsSelection & ~0b1100001) | (0b1 if ital else 0b1000000)
     vf["head"].macStyle = 2 if ital else 0
     vf["post"].italicAngle = vf["post"].italicAngle
+    vf.save(f"FenlySerif{'-Italic' if ital else ''}[wght].ttf")  # for desktop apps (Font Book, Figma)
     vf.flavor = "woff2"; out = f"FenlySerif-{'Italic-' if ital else ''}Variable.woff2"; vf.save(out); print(out, os.path.getsize(out) // 1024, "KB")
 
 if __name__ == "__main__":

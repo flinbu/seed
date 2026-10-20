@@ -95,6 +95,7 @@ export default function FenlySerifPage() {
             <div className="flex flex-wrap gap-xs">
               <Button size="lg" asChild><a href="/fonts/FenlySerif-Variable.woff2" download><Download aria-hidden />Roman</a></Button>
               <Button size="lg" variant="secondary" asChild><a href="/fonts/FenlySerif-Italic-Variable.woff2" download><Download aria-hidden />Italic</a></Button>
+              <Button size="lg" variant="ghost" href="https://github.com/flinbu/seed/tree/main/fonts/fenly-serif" leftIcon={<Download />}>Desktop (TTF)</Button>
               <Button size="lg" variant="ghost" href="/fonts/FenlySerif-OFL.txt" leftIcon={<FileText />}>License</Button>
             </div>
           </div>

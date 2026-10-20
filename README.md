@@ -26,7 +26,7 @@ pnpm test
 
 ## License
 
-MIT © Felipe Linares. Fonts are under the SIL Open Font License.
+MIT © Felipe Linares. Fonts are under the SIL Open Font License. [Fenly Serif](fonts/fenly-serif), Seed's own serif, is there to download and install.
 
 ## Use with AI
 
