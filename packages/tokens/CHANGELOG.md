@@ -1,5 +1,11 @@
 # @flinbu/seed-tokens
 
+## 0.3.2
+
+### Patch Changes
+
+- e241b49: Fenly Serif's roman s takes Domine's ball terminals instead of squared serifs, fitted to its x-height, width and weight. At ExtraBold and Black it's a little lighter than the letters around it.
+
 ## 0.3.1
 
 ### Patch Changes
