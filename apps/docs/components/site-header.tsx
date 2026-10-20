@@ -27,6 +27,7 @@ export function SiteHeader() {
       <div className="ml-auto flex items-center gap-xs">
         {saved ? <Badge variant="accent" className="hidden sm:inline-flex">Your theme</Badge> : null}
         {saved ? <Button size="sm" variant="ghost" onClick={() => apply(null)}>Reset</Button> : null}
+        <Button size="sm" variant="ghost" href="/docs/figma" aria-current={path?.startsWith("/docs/figma") ? "page" : undefined} className="hidden sm:inline-flex">Figma</Button>
         <Button size="sm" variant="ghost" href="https://github.com/flinbu/seed" rightIcon={<ExternalLink />} className="hidden sm:inline-flex">GitHub</Button>
         <ToggleGroup type="single" size="sm" variant="outline" value={theme} allowEmpty={false} onValueChange={(v) => setTheme(v as "light" | "dark" | "system")} aria-label="Theme">
           <ToggleGroupItem value="light" icon={<Sun />} aria-label="Light" />

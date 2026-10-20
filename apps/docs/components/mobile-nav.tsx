@@ -29,7 +29,10 @@ export function MobileNav() {
           <SheetDescription className="sr-only">Every page in the Seed docs.</SheetDescription>
         </div>
         <Sidebar />
-        <Button variant="secondary" size="sm" href="https://github.com/flinbu/seed" rightIcon={<ExternalLink />} className="self-start">GitHub</Button>
+        <div className="flex flex-wrap gap-xs">
+          <Button variant="secondary" size="sm" href="/docs/figma">Figma</Button>
+          <Button variant="secondary" size="sm" href="https://github.com/flinbu/seed" rightIcon={<ExternalLink />}>GitHub</Button>
+        </div>
       </SheetContent>
     </Sheet>
   );

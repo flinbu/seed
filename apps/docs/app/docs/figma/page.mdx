@@ -1,0 +1,28 @@
+import { FigmaLinks } from "./figma-links";
+
+export const metadata = { title: "Figma", description: "Seed's Figma library: variables, styles and components built from the same tokens as the code." };
+
+# Figma
+
+Seed's Figma library is on the Figma Community. Duplicate it into your drafts, publish it as a library for your team, and design with the same tokens and components you ship in code.
+
+<FigmaLinks />
+
+## What's inside
+
+- **Variables**: the primitive color scales, and the semantic colors (`bg-primary`, `text-secondary`, `border-primary`…) aliased to them, with Light and Dark modes. Spacing, size and radius as number variables.
+- **Styles**: the type styles (`body-body-2-regular`, `display-title-regular`…) and the shadows.
+- **Components**: Seed's components, with variants for their sizes and states, built on those variables instead of raw values.
+
+Names match the code: a fill bound to `bg-accent-solid` in Figma is the `bg-accent-solid` class in React, so a handoff needs no translation.
+
+## Use it
+
+1. Open the file on the Figma Community and choose **Open in Figma** to get your own copy.
+2. Install the fonts first, so text styles render: [Fenly Serif](https://github.com/flinbu/seed/tree/main/fonts/fenly-serif), [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) and [Inconsolata](https://fonts.google.com/specimen/Inconsolata).
+3. Publish the copy as a team library (Assets, then Libraries), and turn it on in the files where you design.
+4. Switch between Light and Dark with the Semantic collection's mode on a frame.
+
+## Keep it in sync
+
+The code is the source of truth: values come from `@flinbu/seed-tokens`. When Seed releases new token values, the release notes say what changed; update the variables in your copy to match, or duplicate the library again.

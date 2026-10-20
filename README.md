@@ -7,6 +7,10 @@ A calm, neutral-first design system for React and Tailwind CSS: true-gray surfac
 | [`@flinbu/seed-tokens`](packages/tokens) | Tokens as CSS variables, a Tailwind v4 theme, DTCG JSON, `createTheme()` and the `seed` CLI |
 | `@flinbu/seed` | React components (coming next) |
 
+## Figma
+
+The Seed library on the Figma Community: [figma.com/community/file/1694480861909658527](https://www.figma.com/community/file/1694480861909658527). Variables (primitives, and semantics in Light and Dark), styles and components, named like the code. Setup: [seed-lyart.vercel.app/docs/figma](https://seed-lyart.vercel.app/docs/figma).
+
 ## Develop
 
 ```bash
