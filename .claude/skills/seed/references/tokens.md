@@ -53,8 +53,8 @@ Icons 16 in labels and inputs, 20 in buttons, 24 standalone. Controls: `h-contro
 - Label (controls): `label-label-1/2/3-{regular,medium,semibold}` (16/14/12). Default control label `label-label-2-medium`.
 - Body: `body-body-1..4-regular` (18/16/14/12). Default paragraph `body-body-2-regular`; dense UI `body-body-3-regular`.
 - Heading: `heading-h1..h6-semibold` (56 to 20). One H1 per page.
-- Reading (long text): `reading-body-light` (Noto Serif 16/26), `reading-small-light` (14/22).
-- Display (Domine): `display-title-regular` 38, `display-headline-regular` 28, `display-number-regular` 30.
+- Reading (long text): `reading-body-light` (Fenly Serif 16/26), `reading-small-light` (14/22).
+- Display (Fenly Serif): `display-title-regular` 38, `display-headline-regular` 28, `display-number-regular` 30.
 - Mono: `mono-label-medium` (11, uppercase, 0.1em), `mono-value-regular` (13).
 
 ## Motion

@@ -6,7 +6,7 @@ export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   size?: "body" | "small";
   as?: React.ElementType;
 }
-/** Styles rendered rich text and Markdown with Seed's reading styles: Noto Serif Light, real headings, quiet tables. */
+/** Styles rendered rich text and Markdown with Seed's reading styles: Fenly Serif Light, real headings, quiet tables. */
 export const Typography = React.forwardRef<HTMLElement, TypographyProps>(function Typography({ size = "body", as: As = "div", className, ...rest }, ref) {
   return <As ref={ref} className={cn("seed-prose", size === "small" && "seed-prose-small", className)} {...rest} />;
 });
@@ -17,7 +17,7 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   /** The look, when it differs from the level. */
   size?: 1 | 2 | 3 | 4 | 5 | 6;
-  /** Domine display title, for hero screens only. */
+  /** Fenly Serif display title, for hero screens only. */
   display?: boolean;
 }
 /** A heading whose level (structure) and size (look) are set separately. */

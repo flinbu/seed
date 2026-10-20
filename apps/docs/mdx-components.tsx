@@ -1,7 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import { Code } from "@/components/code";
 
-/* Docs typography: Domine for page titles, Plus Jakarta for headings, Noto Serif for reading text. */
+/* Docs typography: Fenly Serif for page titles and reading text, Plus Jakarta for headings. */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: (p) => <h1 className="m-0 mb-base display-title-regular text-primary text-balance" {...p} />,

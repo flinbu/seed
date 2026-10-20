@@ -97,4 +97,4 @@ contrast("#2563eb", "#ffffff"); // 5.17
 
 ## Fonts
 
-`tailwind.css` and `index.css` include Seed's fonts (Plus Jakarta Sans, Domine, Noto Serif, Inconsolata, all SIL Open Font License). Import `tokens.css` alone if you load fonts yourself.
+`tailwind.css` and `index.css` include Seed's fonts (Plus Jakarta Sans, Fenly Serif, Domine, Noto Serif, Inconsolata, all SIL Open Font License). Fenly Serif is Seed's own serif, built from Literata; Domine and Noto Serif are its fallbacks. Import `tokens.css` alone if you load fonts yourself.

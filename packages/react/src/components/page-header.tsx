@@ -21,7 +21,7 @@ export interface PageHeaderProps extends Omit<React.HTMLAttributes<HTMLElement>,
   /** A TabsList under the header. */
   tabs?: React.ReactNode;
   icon?: IconProp;
-  /** Sets the title in Domine, for hero screens and onboarding only. */
+  /** Sets the title in Fenly Serif, for hero screens and onboarding only. */
   display?: boolean;
 }
 

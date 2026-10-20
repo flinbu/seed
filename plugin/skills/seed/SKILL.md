@@ -30,7 +30,7 @@ Seed is a calm, neutral-first design system: true-gray surfaces, one blue accent
 - Show customer content (their colors, components) on `bg-stage`, not on tinted chrome.
 - Borders before shadows. Shadows only for things that float.
 - Radii: `rounded-control` (4px) on every control; cards `rounded-xl`; containers that hold content (tables, alerts, popovers) use the petal: 12px with a 4px top-left corner. Never the petal on controls or floating panels.
-- Type: Plus Jakarta Sans Light (300) is the normal UI weight; Medium for controls, SemiBold for headings. Domine only for hero titles, empty-state headlines and one big number, never under 20px. Inconsolata uppercase (`mono-label-medium`) for spec labels and token names.
+- Type: Plus Jakarta Sans Light (300) is the normal UI weight; Medium for controls, SemiBold for headings. Fenly Serif display only for hero titles, empty-state headlines and one big number, never under 20px. Inconsolata uppercase (`mono-label-medium`) for spec labels and token names.
 - Icons are Lucide, passed as elements (`leftIcon={<Plus />}`). Icon-only buttons need `aria-label` and a tooltip.
 - Status is never color alone: pair it with an icon or a word.
 - Never use native `<select>`: use Seed's Select or Combobox.
