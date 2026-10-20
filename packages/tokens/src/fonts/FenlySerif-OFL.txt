@@ -1,4 +1,5 @@
 Copyright 2017 The Literata Project Authors (https://github.com/googlefonts/literata)
+Roman s: Copyright 2020 The Domine Project Authors (https://github.com/googlefonts/domine)
 Fenly Serif changes copyright 2026 Felipe Linares
 
 

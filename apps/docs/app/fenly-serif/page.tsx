@@ -30,8 +30,8 @@ const SAMPLE: Record<string, string> = {
 };
 const STATS: [string, string][] = [["Weights", "200 to 900"], ["Styles", "Roman, Italic"], ["Characters", "230"], ["Format", "Variable WOFF2"], ["License", "SIL OFL 1.1"]];
 const DETAILS: [string, string][] = [
-  ["Based on", "Literata, by The Literata Project Authors (TypeTogether for Google)"],
-  ["Changes", "A roman s with rounded terminals, lighter at every weight (Regular is Literata at 330), x-height 500, 10 units more room on each side of every letter, the text optical size for every size"],
+  ["Based on", "Literata, by The Literata Project Authors (TypeTogether for Google); the roman s from Domine, by The Domine Project Authors"],
+  ["Changes", "The roman s from Domine, with its ball terminals; lighter at every weight (Regular is Literata at 330), x-height 500, 10 units more room on each side of every letter, the text optical size for every size"],
   ["Axis", "wght 200 to 900, default 400"],
   ["Files", "FenlySerif-Variable.woff2 (90 KB), FenlySerif-Italic-Variable.woff2 (93 KB)"],
   ["Languages", "English, Spanish, Portuguese, French, German, Italian and most Western European languages"],
