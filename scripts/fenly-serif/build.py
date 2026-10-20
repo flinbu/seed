@@ -157,10 +157,16 @@ def family(style):
     n.setName(f"2.000;Fenly;FenlySerif-{sub}", 3, 3, 1, 0x409); n.setName(f"{fam} {sub}", 4, 3, 1, 0x409)
     n.setName(f"FenlySerif-{sub}", 6, 3, 1, 0x409); n.setName(LICENSE, 13, 3, 1, 0x409); n.setName("https://openfontlicense.org", 14, 3, 1, 0x409)
     n.setName(f"FenlySerif{'Italic' if ital else ''}", 25, 3, 1, 0x409)
-    for inst in vf["fvar"].instances:
-        w = inst.coordinates["wght"]
-        inst.subfamilyNameID = n.addMultilingualName({"en": (NAMES.get(int(w), str(int(w))) + (" Italic" if ital else "")).replace("Regular Italic", "Italic")}, mac=False)
-    vf["fvar"].instances = [i for i in vf["fvar"].instances]
+    # Named weights, so desktop apps (Font Book, Figma) list ExtraLight to Black instead of one "Regular".
+    from fontTools.ttLib.tables._f_v_a_r import NamedInstance
+    vf["fvar"].instances = []
+    for w in (200, 300, 400, 500, 600, 700, 800, 900):
+        inst = NamedInstance()
+        inst.coordinates = {"wght": w}
+        style = (NAMES[w] + (" Italic" if ital else "")).replace("Regular Italic", "Italic")
+        inst.subfamilyNameID = n.addMultilingualName({"en": style}, mac=False)
+        inst.postscriptNameID = n.addMultilingualName({"en": f"FenlySerif-{style.replace(' ', '')}"}, mac=False)
+        vf["fvar"].instances.append(inst)
     buildStatTable(vf, [{"tag": "wght", "name": "Weight", "values": [{"value": w, "name": NAMES[w], **({"flags": 2, "linkedValue": 700} if w == 400 else {})} for w in (200, 300, 400, 500, 600, 700, 800, 900)]},
                         {"tag": "ital", "name": "Italic", "values": [{"value": 1 if ital else 0, "name": "Italic" if ital else "Roman", **({} if ital else {"flags": 2, "linkedValue": 1})}]}])
     vf["OS/2"].fsSelection = (vf["OS/2"].fsSelection & ~0b1100001) | (0b1 if ital else 0b1000000)
