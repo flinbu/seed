@@ -66,6 +66,26 @@ def drop_feature(f, tag):
             ls.FeatureIndex = [remap[i] for i in ls.FeatureIndex if i in remap]; ls.FeatureCount = len(ls.FeatureIndex)
             if ls.ReqFeatureIndex != 0xFFFF: ls.ReqFeatureIndex = remap.get(ls.ReqFeatureIndex, 0xFFFF)
 
+ROUND = float(os.environ.get("FS_ROUND", "0.85"))  # how far the rounded s terminals bulge: 1 is a half circle
+
+def round_cap(co, fl, a, spur, inner, outward):
+    """Replace a squared serif spur (4 points: spur) with a rounded cap from the stroke's outer edge (point a) to
+    its inner edge (a point moved along the inner curve). Same point count and flags in every master."""
+    ax, ay = co[a]; i0, i1 = inner
+    bx = co[i0][0] + 0.75 * (co[i1][0] - co[i0][0]); by = co[i0][1] + 0.75 * (co[i1][1] - co[i0][1])
+    mx, my = (ax + bx) / 2, (ay + by) / 2; dx, dy = bx - ax, by - ay; ln = (dx * dx + dy * dy) ** 0.5
+    nx, ny = -dy / ln, dx / ln
+    if nx * outward[0] + ny * outward[1] < 0: nx, ny = -nx, -ny
+    r = ln / 2 * ROUND
+    pts = [(ax + nx * r, ay + ny * r), (mx + nx * r, my + ny * r), (bx + nx * r, by + ny * r), (bx, by)]
+    for k, (idx, pt) in enumerate(zip(spur, pts)):
+        co[idx] = pt; fl[idx] = (fl[idx] & ~1) | (1 if k in (1, 3) else 0)
+
+def round_s(co, fl):
+    """Fenly Serif's roman s ends in rounded terminals instead of Literata's squared serifs. (Its italic already does.)"""
+    round_cap(co, fl, 25, (26, 27, 28, 29), (29, 30), (1, 0))   # top: the spur on the right
+    round_cap(co, fl, 51, (52, 0, 1, 2), (2, 3), (-1, 0))      # bottom: the spur on the left
+
 def master(style, w, out):
     base = os.path.join(SRC, f"literata-latin-standard-{style}.woff2")
     f = instancer.instantiateVariableFont(TTFont(base), {"opsz": OPSZ, "wght": literata_weight(w)})
@@ -75,6 +95,8 @@ def master(style, w, out):
     glyf, hm = f["glyf"], f["hmtx"]
     for g in f.getGlyphOrder():
         co, ep, fl = P[g]; isl = g in lo
+        if g == "s" and style == "normal":
+            co, fl = list(co), list(fl); round_s(co, fl)
         gl = Glyph()
         if co:
             gl.numberOfContours = len(ep)
