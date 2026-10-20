@@ -1,5 +1,5 @@
 """Fenly Serif: a variable serif (wght 200 to 900, roman and italic) built from Literata (SIL OFL 1.1).
-Changes from Literata: optical size fixed at 12, x-height 500, letters spaced 10 units wider on each side,
+Changes from Literata: lighter weights (Regular is Literata 330), optical size fixed at 12, x-height 500, letters spaced 10 units wider on each side,
 renamed. Everything else is Literata's drawing."""
 import glob, os
 from fontTools.ttLib import TTFont
@@ -15,6 +15,13 @@ import sys
 SRC = sys.argv[1] if len(sys.argv) > 1 else "package/files"
 OPSZ, XH, TRACK = 12, 500, 10
 WEIGHTS = (200, 300, 400, 500, 700, 900)
+# Fenly Serif runs lighter than Literata: its Regular (400) is Literata at 330, its Bold (700) Literata at 620.
+WEIGHT_MAP = ((200, 200), (400, 330), (700, 620), (900, 900))
+
+def literata_weight(w):
+    for (a, la), (b, lb) in zip(WEIGHT_MAP, WEIGHT_MAP[1:]):
+        if a <= w <= b: return la + (lb - la) * (w - a) / (b - a)
+    raise ValueError(w)
 NAMES = {200: "ExtraLight", 300: "Light", 400: "Regular", 500: "Medium", 600: "SemiBold", 700: "Bold", 800: "ExtraBold", 900: "Black"}
 LICENSE = "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org"
 COPYRIGHT = "Copyright 2017 The Literata Project Authors (https://github.com/googlefonts/literata). Fenly Serif changes copyright 2026 Felipe Linares."
@@ -61,7 +68,7 @@ def drop_feature(f, tag):
 
 def master(style, w, out):
     base = os.path.join(SRC, f"literata-latin-standard-{style}.woff2")
-    f = instancer.instantiateVariableFont(TTFont(base), {"opsz": OPSZ, "wght": w})
+    f = instancer.instantiateVariableFont(TTFont(base), {"opsz": OPSZ, "wght": literata_weight(w)})
     lo = lowers(f); P = flat(f)
     xh0 = 507; r = XH / xh0; ov = xh0 * 1.02; shift = ov - ov * r
     fy = lambda y: y if y < 0 else (y * r if y <= ov else y - shift)
