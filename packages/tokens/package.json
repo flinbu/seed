@@ -1,6 +1,6 @@
 {
   "name": "@flinbu/seed-tokens",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Seed's design tokens as CSS variables, a Tailwind CSS v4 theme, DTCG JSON and typed data, plus createTheme() and the seed CLI for accessible brand themes.",
   "license": "MIT",
   "author": "Felipe Linares <felipe@flinbu.co>",
