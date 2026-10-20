@@ -7,7 +7,7 @@ import { SeedLogo } from "./logo";
 import { useSiteTheme } from "./site-theme";
 import { MobileNav } from "./mobile-nav";
 
-const NAV = [{ href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/components/button", label: "Components", match: "/docs/components" }, { href: "/docs/tokens", label: "Tokens" }];
+const NAV = [{ href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/components/button", label: "Components", match: "/docs/components" }, { href: "/docs/tokens", label: "Tokens" }, { href: "/fenly-serif", label: "Fenly Serif" }];
 
 export function SiteHeader() {
   const { theme, setTheme } = useTheme();

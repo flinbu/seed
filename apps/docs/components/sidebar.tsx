@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@flinbu/seed";
 import { COMPONENTS, GROUPS } from "@/lib/registry";
 
-const START = [{ href: "/docs", label: "Introduction" }, { href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/tokens", label: "Tokens" }, { href: "/docs/ai", label: "Use with AI" }];
+const START = [{ href: "/docs", label: "Introduction" }, { href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/tokens", label: "Tokens" }, { href: "/fenly-serif", label: "Fenly Serif" }, { href: "/docs/ai", label: "Use with AI" }];
 
 function Item({ href, label }: { href: string; label: string }) {
   const on = usePathname() === href;

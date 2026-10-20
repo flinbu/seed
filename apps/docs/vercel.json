@@ -2,5 +2,5 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm --filter @flinbu/seed-tokens --filter @flinbu/seed build && next build"
+  "buildCommand": "pnpm --filter @flinbu/seed-tokens --filter @flinbu/seed build && node scripts/copy-fonts.mjs && next build"
 }
