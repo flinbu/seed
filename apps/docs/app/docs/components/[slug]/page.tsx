@@ -3,6 +3,7 @@ import { Badge } from "@flinbu/seed";
 import { COMPONENTS, bySlug } from "@/lib/registry";
 import { exampleSource } from "@/lib/examples";
 import { Example } from "@/components/example";
+import { ReportBug } from "@/components/report-bug";
 import * as buttonEx from "@/examples/button";
 import * as formsEx from "@/examples/forms";
 import * as choicesEx from "@/examples/choices";
@@ -39,6 +40,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
         <h1 className="m-0 display-title-regular text-primary">{c.name}</h1>
         <p className="m-0 reading-body-light text-secondary">{c.description}</p>
         <code className="self-start rounded-md bg-inset px-sm py-xs font-mono body-body-4-regular text-secondary">{`import { ${parts.join(", ")} } from "@flinbu/seed";`}</code>
+        <ReportBug component={c.name} variant="link" />
       </header>
       {c.examples.map((e) => {
         const Fn = FILES[e.file][e.fn];

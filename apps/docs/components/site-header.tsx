@@ -6,6 +6,7 @@ import { Monitor, Moon, Sun, ExternalLink } from "lucide-react";
 import { SeedLogo } from "./logo";
 import { useSiteTheme } from "./site-theme";
 import { MobileNav } from "./mobile-nav";
+import { ReportBug } from "./report-bug";
 
 const NAV = [{ href: "/docs/getting-started", label: "Get started" }, { href: "/docs/theming", label: "Theming" }, { href: "/docs/components/button", label: "Components", match: "/docs/components" }, { href: "/docs/tokens", label: "Tokens" }, { href: "/fenly-serif", label: "Fenly Serif" }];
 
@@ -28,6 +29,7 @@ export function SiteHeader() {
         {saved ? <Badge variant="accent" className="hidden sm:inline-flex">Your theme</Badge> : null}
         {saved ? <Button size="sm" variant="ghost" onClick={() => apply(null)}>Reset</Button> : null}
         <Button size="sm" variant="ghost" href="/docs/figma" aria-current={path?.startsWith("/docs/figma") ? "page" : undefined} className="hidden sm:inline-flex">Figma</Button>
+        <ReportBug />
         <Button size="sm" variant="ghost" href="https://github.com/flinbu/seed" rightIcon={<ExternalLink />} className="hidden sm:inline-flex">GitHub</Button>
         <ToggleGroup type="single" size="sm" variant="outline" value={theme} allowEmpty={false} onValueChange={(v) => setTheme(v as "light" | "dark" | "system")} aria-label="Theme">
           <ToggleGroupItem value="light" icon={<Sun />} aria-label="Light" />
