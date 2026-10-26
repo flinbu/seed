@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ThemeProvider, ThemeScript } from "@flinbu/seed";
 import { SiteHeader } from "@/components/site-header";
 import { SiteThemeProvider } from "@/components/site-theme";
@@ -7,7 +7,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: "Seed · A calm design system for React and Tailwind", template: "%s · Seed" },
   description: "Seed is a neutral-first design system for React and Tailwind CSS: accessible components on Radix, tokens as Tailwind utilities, and brand themes that pass WCAG AA.",
+  applicationName: "Seed",
+  appleWebApp: { title: "Seed" },
 };
+
+export const viewport: Viewport = { themeColor: "#2563eb" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
