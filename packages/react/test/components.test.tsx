@@ -44,12 +44,55 @@ describe("every component renders accessibly", () => {
 });
 
 describe("Button", () => {
-  it("is a button by default and disables while loading", () => {
-    render(<Button loading>Save</Button>);
-    const b = screen.getByRole("button", { name: /save/i });
-    expect(b).toHaveProperty("type", "button");
-    expect(b.hasAttribute("disabled")).toBe(true);
+  it("is a button by default", () => {
+    render(<Button>Save</Button>);
+    expect(screen.getByRole("button", { name: "Save" })).toHaveProperty("type", "button");
+  });
+  it("stays readable and focusable while loading, and ignores clicks", async () => {
+    const click = vi.fn(), submit = vi.fn((e: React.FormEvent) => e.preventDefault());
+    const { container } = render(<form onSubmit={submit}><Button type="submit" loading onClick={click}>Applying</Button></form>);
+    const b = screen.getByRole("button", { name: "Applying" });
+    // Not the native disabled attribute: that would grey the label out (1.48:1) and drop it from the tab order.
+    expect(b.hasAttribute("disabled")).toBe(false);
+    expect(b.getAttribute("aria-disabled")).toBe("true");
     expect(b.getAttribute("aria-busy")).toBe("true");
+    expect(b.className).toContain("bg-button-primary");
+    expect(b.querySelector("svg.motion-safe\\:animate-spin")).toBeTruthy();
+    await userEvent.tab();
+    expect(document.activeElement).toBe(b);
+    await userEvent.click(b);
+    await userEvent.keyboard("{Enter}");
+    expect(click).not.toHaveBeenCalled();
+    expect(submit).not.toHaveBeenCalled();
+    expect(await violations(container)).toEqual([]);
+  });
+  it("clicks again once loading ends", async () => {
+    const click = vi.fn();
+    const { rerender } = render(<Button loading onClick={click}>Save</Button>);
+    rerender(<Button onClick={click}>Save</Button>);
+    const b = screen.getByRole("button", { name: "Save" });
+    expect(b.hasAttribute("aria-disabled")).toBe(false);
+    expect(b.hasAttribute("aria-busy")).toBe(false);
+    await userEvent.click(b);
+    expect(click).toHaveBeenCalledTimes(1);
+  });
+  it("keeps the native disabled attribute for disabled buttons", async () => {
+    const click = vi.fn();
+    render(<Button disabled loading onClick={click}>Save</Button>);
+    const b = screen.getByRole("button", { name: "Save" });
+    expect(b.hasAttribute("disabled")).toBe(true);
+    expect(b.hasAttribute("aria-disabled")).toBe(false);
+    await userEvent.click(b);
+    expect(click).not.toHaveBeenCalled();
+  });
+  it("ignores clicks on a loading link", async () => {
+    const click = vi.fn();
+    render(<Button href="/x" loading onClick={click}>Go</Button>);
+    const a = screen.getByText("Go").closest("a")!;
+    expect(a.getAttribute("aria-disabled")).toBe("true");
+    expect(a.getAttribute("aria-busy")).toBe("true");
+    await userEvent.click(a);
+    expect(click).not.toHaveBeenCalled();
   });
   it("renders a link with href", () => {
     render(<Button href="/x">Go</Button>);
@@ -84,6 +127,14 @@ describe("choices", () => {
     await userEvent.click(screen.getByLabelText("Include Dark"));
     expect(on).toHaveBeenCalledWith(true);
     expect(screen.getByRole("checkbox").getAttribute("data-state")).toBe("checked");
+  });
+  it("keeps a disabled control's description readable", () => {
+    render(<><Checkbox label="Audit in the background" description="Needs a Pro plan." disabled /><Switch label="Sync" description="Needs a release." disabled /></>);
+    for (const text of ["Needs a Pro plan.", "Needs a release."]) {
+      const d = screen.getByText(text);
+      expect(d.className).toContain("text-tertiary");
+      expect(d.className).not.toContain("text-disabled");
+    }
   });
   it("Checkbox shows indeterminate", () => {
     render(<Checkbox aria-label="All" indeterminate />);

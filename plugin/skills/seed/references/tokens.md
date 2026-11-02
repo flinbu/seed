@@ -17,7 +17,7 @@ Use semantic tokens; they switch between Light and Dark. Primitive scales (`blue
 | Hover partners | `bg-primary-hover`, `bg-secondary-hover`… |
 | Body and headings | `text-primary` |
 | Supporting copy | `text-secondary` |
-| Meta, helper (14px+) | `text-tertiary` |
+| Meta, helper, descriptions (14px+) | `text-tertiary` |
 | Links | `text-link` |
 | Icons | `text-icon-primary`, `text-icon-secondary`, `text-icon-tertiary` |
 | Cards, dividers | `border-secondary` |
@@ -30,7 +30,7 @@ Use semantic tokens; they switch between Light and Dark. Primitive scales (`blue
 | Inverse (tooltips, toasts) | `bg-black-solid` + `text-on-dark-color` |
 | Scrims | `bg-overlay-alpha-primary` (popovers, drawers), `-secondary` (modals) |
 
-Decorative only (below 3:1): every `*-secondary` status text, `text-placeholder`, `text-disabled`.
+Decorative only (below 3:1): every `*-secondary` status text, `text-disabled`. `text-disabled` is for the labels of disabled controls only; their descriptions and hints stay `text-tertiary`. `text-placeholder` matches `text-tertiary` and holds 4.5:1.
 
 ## Space (4px base)
 

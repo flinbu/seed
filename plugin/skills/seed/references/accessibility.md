@@ -2,7 +2,7 @@
 
 ## Seed handles
 
-Contrast of semantic text and icon tokens; a visible 2px `border-accent-primary` focus ring (never remove it); keyboard patterns in menus, tabs, listboxes, dialogs (focus trap and return), Escape closes floating things; ARIA roles and states; reduced motion; RTL mirroring with `DirectionProvider`.
+Contrast of semantic text and icon tokens (placeholders and helper text included, 4.5:1 on every neutral surface); loading buttons that keep their contrast and focus (`aria-busy`, `aria-disabled`, clicks ignored); a visible 2px `border-accent-primary` focus ring (never remove it); keyboard patterns in menus, tabs, listboxes, dialogs (focus trap and return), Escape closes floating things; ARIA roles and states; reduced motion; RTL mirroring with `DirectionProvider`.
 
 ## The builder handles
 
