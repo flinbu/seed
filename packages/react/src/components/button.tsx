@@ -49,7 +49,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   icon?: IconProp;
   leftIcon?: IconProp;
   rightIcon?: IconProp;
-  /** Shows a Spinner in place of the left icon and disables the button. */
+  /** Shows a Spinner in place of the left icon and ignores clicks. The button keeps its colors and stays focusable:
+   * it's aria-busy and aria-disabled, not disabled, so its label still reads at full contrast. */
   loading?: boolean;
   /** Renders a link with the same styling. */
   href?: string;
@@ -58,12 +59,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = "primary", size = "md", icon, leftIcon, rightIcon, loading = false, fullWidth, href, asChild, className, children, disabled, type, ...rest },
+  { variant = "primary", size = "md", icon, leftIcon, rightIcon, loading = false, fullWidth, href, asChild, className, children, disabled, type, onClick, ...rest },
   ref,
 ) {
   const s = size ?? "md";
   const iconOnly = !!icon;
-  const classes = cn(buttonVariants({ variant, size: s, iconOnly, fullWidth }), loading && "cursor-progress", className);
+  const classes = cn(buttonVariants({ variant, size: s, iconOnly, fullWidth }), loading && "cursor-progress aria-disabled:cursor-progress", className);
+  // While loading the button keeps its colors and focus but ignores clicks, including a form submit.
+  const click = (blocked: boolean) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (blocked) { e.preventDefault(); return; }
+    onClick?.(e);
+  };
   const lead = loading ? <Spinner size={ICON[s]} label={null} /> : renderIcon(iconOnly ? icon : leftIcon, ICON[s]);
   const content = (
     <>
@@ -72,16 +78,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
       {!iconOnly && rightIcon ? <span className="inline-flex leading-none">{renderIcon(rightIcon, ICON[s])}</span> : null}
     </>
   );
-  if (asChild) return <Slot.Root ref={ref} className={classes} {...rest}>{children}</Slot.Root>;
+  if (asChild) return <Slot.Root ref={ref} className={classes} onClick={onClick} {...rest}>{children}</Slot.Root>;
   if (href) {
     const off = disabled || loading;
     return (
       <a ref={ref as unknown as React.Ref<HTMLAnchorElement>} href={off ? undefined : href} aria-disabled={off || undefined} aria-busy={loading || undefined}
-        className={classes} {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>{content}</a>
+        className={classes} onClick={click(off) as unknown as React.MouseEventHandler<HTMLAnchorElement>} {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>{content}</a>
     );
   }
   return (
-    <button ref={ref} type={type ?? "button"} disabled={disabled || loading} aria-busy={loading || undefined} className={classes} {...rest}>
+    <button ref={ref} type={type ?? "button"} disabled={disabled} aria-disabled={(loading && !disabled) || undefined} aria-busy={loading || undefined}
+      className={classes} onClick={click(loading)} {...rest}>
       {content}
     </button>
   );
