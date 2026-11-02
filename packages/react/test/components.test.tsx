@@ -85,6 +85,14 @@ describe("choices", () => {
     expect(on).toHaveBeenCalledWith(true);
     expect(screen.getByRole("checkbox").getAttribute("data-state")).toBe("checked");
   });
+  it("keeps a disabled control's description readable", () => {
+    render(<><Checkbox label="Audit in the background" description="Needs a Pro plan." disabled /><Switch label="Sync" description="Needs a release." disabled /></>);
+    for (const text of ["Needs a Pro plan.", "Needs a release."]) {
+      const d = screen.getByText(text);
+      expect(d.className).toContain("text-tertiary");
+      expect(d.className).not.toContain("text-disabled");
+    }
+  });
   it("Checkbox shows indeterminate", () => {
     render(<Checkbox aria-label="All" indeterminate />);
     expect(screen.getByRole("checkbox").getAttribute("aria-checked")).toBe("mixed");
