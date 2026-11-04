@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Badge } from "@flinbu/seed";
+import { Alert, Badge } from "@flinbu/seed";
 import { COMPONENTS, bySlug } from "@/lib/registry";
 import { exampleSource } from "@/lib/examples";
 import { Example } from "@/components/example";
@@ -47,15 +47,15 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
         return <Example key={e.fn} title={e.title} note={e.note} code={exampleSource(e.file, e.fn)}><Fn /></Example>;
       })}
       <section className="grid gap-base sm:grid-cols-2">
-        <div className="flex flex-col gap-xs rounded-xl border border-success-secondary bg-success-primary p-base">
-          <h2 className="m-0 label-label-2-semibold text-primary">Use it for</h2>
-          <ul className="m-0 flex flex-col gap-xxs pl-base reading-small-light text-secondary">{c.use.map((u) => <li key={u}>{u}</li>)}</ul>
-        </div>
+        <Alert variant="success" toneLabel={false}>
+          <h2 className="m-0 mb-xxs text-primary label-label-2-semibold">Use it for</h2>
+          <ul className="m-0 flex flex-col gap-xxs pl-base">{c.use.map((u) => <li key={u}>{u}</li>)}</ul>
+        </Alert>
         {c.avoid ? (
-          <div className="flex flex-col gap-xs rounded-xl border border-warning-secondary bg-warning-primary p-base">
-            <h2 className="m-0 label-label-2-semibold text-primary">Use something else for</h2>
-            <ul className="m-0 flex flex-col gap-xxs pl-base reading-small-light text-secondary">{c.avoid.map((u) => <li key={u}>{u}</li>)}</ul>
-          </div>
+          <Alert variant="warning" toneLabel={false}>
+            <h2 className="m-0 mb-xxs text-primary label-label-2-semibold">Use something else for</h2>
+            <ul className="m-0 flex flex-col gap-xxs pl-base">{c.avoid.map((u) => <li key={u}>{u}</li>)}</ul>
+          </Alert>
         ) : null}
       </section>
       <section className="flex flex-col gap-sm">

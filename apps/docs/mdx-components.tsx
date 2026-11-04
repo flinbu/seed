@@ -15,7 +15,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     table: (p) => <div className="my-base overflow-x-auto rounded-petal rounded-tl-petal-tip border border-secondary"><table className="w-full border-collapse body-body-3-regular" {...p} /></div>,
     th: (p) => <th className="border-b border-secondary bg-secondary px-sm py-xs text-left mono-label-medium text-tertiary" {...p} />,
     td: (p) => <td className="border-b border-secondary px-sm py-xs align-top text-secondary [&_code]:whitespace-nowrap" {...p} />,
-    blockquote: (p) => <blockquote className="my-base rounded-petal rounded-tl-petal-tip border border-info-secondary bg-info-primary px-base py-sm [&_p]:my-0" {...p} />,
+    blockquote: (p) => <blockquote className="my-base rounded-petal rounded-tl-petal-tip border border-secondary bg-primary px-base py-sm [&_p]:my-0" {...p} />,
     code: (p) => <code className="rounded-sm bg-tertiary px-xxs py-px font-mono text-primary text-[0.9em]" {...p} />,
     pre: (p: any) => {
       const child = p.children?.props;
