@@ -73,13 +73,30 @@ describe("CopyField", () => {
 });
 
 describe("Banner, PageHeader, Link, Timeline", () => {
-  it("announces warnings and dismisses", async () => {
+  it("announces a live error and dismisses", async () => {
     const user = userEvent.setup();
     const off = vi.fn();
-    render(<Banner variant="error" onDismiss={off}>Nothing was published.</Banner>);
-    expect(screen.getByRole("alert").textContent).toContain("Nothing was published.");
+    render(<Banner live variant="error" onDismiss={off}>Nothing was published.</Banner>);
+    expect(screen.getByRole("alert").textContent).toBe("Error: Nothing was published.");
     await user.click(screen.getByRole("button", { name: "Dismiss" }));
     expect(off).toHaveBeenCalled();
+  });
+  it("has no live role when rendered with the page; a live warning is a status", () => {
+    const { container, rerender } = render(<Banner variant="warning" title="Sync paused.">Saved here.</Banner>);
+    expect(container.querySelector("[role]")).toBeNull();
+    rerender(<Banner live variant="warning" title="Sync paused.">Saved here.</Banner>);
+    expect(screen.getByRole("status").textContent).toBe("Warning: Sync paused. Saved here.");
+  });
+  it("is subtle by default and loud with the tone's bottom hairline", () => {
+    const { container } = render(<><Banner variant="error">A</Banner><Banner variant="error" emphasis="loud">B</Banner><Banner variant="inverse" emphasis="loud">C</Banner></>);
+    const [a, b, c] = Array.from(container.children) as HTMLElement[];
+    expect(a.className).toContain("bg-primary");
+    expect(a.className).toContain("border-secondary");
+    expect(a.className).not.toContain("bg-error");
+    expect(b.className).toContain("border-error-subtle");
+    expect(b.className).toContain("bg-primary");
+    expect(c.className).toContain("bg-black-solid");
+    expect(c.textContent).toBe("C");
   });
   it("has one h1 and a back link", () => {
     render(<PageHeader title="Color" back={{ href: "/t", label: "Tokens" }} />);

@@ -58,11 +58,11 @@ Every component below ships in `@flinbu/seed` (marked *package*). Live previews 
 
 - **Spinner** (package): An indeterminate loading indicator built on `Icon`
 - **Skeleton** (package): A pulsing placeholder that holds the shape of content while it loads
-- **Alert** (package): An inline message about the state of a page or section that stays until the situation changes
+- **Alert** (package): An inline message about the state of a page or section that stays until the situation changes. `emphasis="subtle"` (default) is a neutral surface where only the icon has color; `emphasis="loud"` adds a hairline in the tone, only for alerts that must stand out (a health drop, no credits, a failed sync, a blocking error). Add `live` when it appears after the page loads
 - **Toast** (package): A short, temporary notification about something that just happened, shown in a stack at a corner of the screen
 - **Progress** (package): A horizontal bar showing how far a task has progressed, or that it is running when the amount is unknown
 - **EmptyState** (package): Fills a space that has no content yet, explains why, and offers the next step
-- **Banner** (package): A full-width message about the whole app or page: a paused sync, a read-only version, a trial ending
+- **Banner** (package): A full-width message about the whole app or page: a paused sync, a read-only version, a trial ending. Same `emphasis` (subtle or loud) and `live` props as Alert
 - **Meter** (package): A measured amount within a known range: credits used, adoption, storage
 
 ## Forms

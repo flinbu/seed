@@ -27,6 +27,7 @@ Use semantic tokens; they switch between Light and Dark. Primitive scales (`blue
 | Soft highlight | `bg-accent-primary` |
 | Status soft fill + text | `bg-{error,success,warning,info,offer}-primary` + `text-{status}-primary` |
 | Status solid | `bg-{status}-secondary` |
+| Loud Alert and Banner hairline | `border-{error,success,warning,info,offer}-subtle` (decorative, on `bg-primary`) |
 | Inverse (tooltips, toasts) | `bg-black-solid` + `text-on-dark-color` |
 | Scrims | `bg-overlay-alpha-primary` (popovers, drawers), `-secondary` (modals) |
 

@@ -104,7 +104,7 @@ export function ThemeBuilder() {
             ))}
           </ul>
           {theme?.adjustments.length ? <p className="m-0 body-body-4-regular text-tertiary">Seed moved {theme.adjustments.length} {theme.adjustments.length === 1 ? "token" : "tokens"} along the scale so they pass.</p> : null}
-          {theme && theme.onAccent !== "#ffffff" ? <Alert variant="neutral" title="Near-black text on buttons">White doesn’t reach 4.5:1 on this brand, so buttons keep your color with dark text.</Alert> : null}
+          {theme && theme.onAccent !== "#ffffff" ? <Alert live variant="neutral" title="Near-black text on buttons">White doesn’t reach 4.5:1 on this brand, so buttons keep your color with dark text.</Alert> : null}
           <div className="mt-auto flex flex-wrap gap-xs">
             <Button size="sm" onClick={() => apply(applied ? null : o)} variant={applied ? "secondary" : "primary"}>{applied ? "Remove from this site" : "Try it on this site"}</Button>
             <Button size="sm" variant="secondary" leftIcon={copied === "css" ? Check : Copy} onClick={() => copy("css", cssOut)}>{copied === "css" ? "Copied" : "Copy CSS"}</Button>

@@ -28,6 +28,7 @@ describe("every component renders accessibly", () => {
         <Avatar name="Ana Ruiz" />
         <Card><CardHeader><CardTitle>Tokens</CardTitle><CardDescription>435 tokens</CardDescription></CardHeader><CardContent>Body</CardContent><CardFooter><Button size="sm">Open</Button></CardFooter></Card>
         <Alert variant="warning" title="Contrast below AA" onDismiss={() => {}}>Four text colors fail in Light.</Alert>
+        <Alert live emphasis="loud" variant="error" title="Sync failed" action={<Button size="sm" variant="secondary">Try again</Button>}>Figma didn’t respond. <a href="/status">See status</a></Alert>
         <Progress value={40} label="Uploading" showValue />
         <Progress label="Syncing" />
         <Skeleton width={120} />
@@ -160,10 +161,54 @@ describe("choices", () => {
 });
 
 describe("display", () => {
-  it("Alert is announced for errors and warnings only", () => {
-    render(<><Alert variant="error" title="Failed" /><Alert variant="success" title="Saved" /></>);
+  it("Alert rendered with the page has no live role", () => {
+    const { container } = render(<><Alert variant="error" title="Failed" /><Alert variant="warning" title="Low" /></>);
+    expect(screen.queryByRole("alert")).toBeNull();
+    expect(screen.queryByRole("status")).toBeNull();
+    expect(container.querySelectorAll("[role]").length).toBe(0);
+  });
+  it("live Alert is a status, or an alert for errors only", () => {
+    render(<><Alert live variant="error" title="Failed" /><Alert live variant="warning" title="Low" /><Alert live variant="success" title="Saved" /><Alert live variant="info" title="New" /></>);
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
     expect(screen.getByRole("alert").textContent).toContain("Failed");
-    expect(screen.getByRole("status").textContent).toContain("Saved");
+    expect(screen.getAllByRole("status").map((s) => s.textContent)).toEqual(["Warning: Low", "Success: Saved", "Info: New"]);
+  });
+  it("Alert reads its tone before the message, never by color alone", () => {
+    render(<><Alert variant="warning" title="Contrast below AA">Four fail.</Alert><Alert variant="error">Nothing synced.</Alert><Alert variant="neutral" title="Note" /></>);
+    expect(screen.getByText("Warning:", { exact: false }).className).toContain("sr-only");
+    expect(screen.getByText("Contrast below AA").textContent).toBe("Warning: Contrast below AA");
+    expect(screen.getByText("Nothing synced.", { exact: false }).textContent).toBe("Error: Nothing synced.");
+    expect(screen.getByText("Note").textContent).toBe("Note");
+  });
+  it("Alert's tone label can be translated or left out", () => {
+    render(<><Alert variant="error" title="Falló" toneLabel="Error" /><Alert variant="success" title="Listo" toneLabel="Éxito" /><Alert variant="info" title="Plain" toneLabel={false} /></>);
+    expect(screen.getByText("Listo").textContent).toBe("Éxito: Listo");
+    expect(screen.getByText("Plain").textContent).toBe("Plain");
+  });
+  it("Alert is subtle by default: neutral surface and hairline, the icon in the tone", () => {
+    const { container } = render(<Alert variant="warning" title="Low credits">Add more.</Alert>);
+    const box = container.firstElementChild as HTMLElement;
+    expect(box.dataset.emphasis).toBe("subtle");
+    expect(box.className).toContain("bg-primary");
+    expect(box.className).toContain("border-secondary");
+    expect(box.className).not.toMatch(/bg-warning|border-warning/);
+    expect(box.querySelector("svg")!.parentElement!.className).toContain("text-icon-warning-primary-hover");
+    expect(screen.getByText("Low credits", { exact: false }).className).toContain("text-primary");
+  });
+  it("loud Alert keeps the surface and takes the tone's hairline", () => {
+    const tones = ["info", "success", "warning", "error", "offer"] as const;
+    const { container } = render(<>{tones.map((t) => <Alert key={t} variant={t} emphasis="loud" title={t} />)}<Alert variant="neutral" emphasis="loud" title="n" /></>);
+    const boxes = Array.from(container.children) as HTMLElement[];
+    tones.forEach((t, i) => {
+      expect(boxes[i].className).toContain(`border-${t}-subtle`);
+      expect(boxes[i].className).toContain("bg-primary");
+      expect(boxes[i].className).not.toContain("border-secondary");
+    });
+    expect(boxes[5].className).toContain("border-primary");
+  });
+  it("links in an Alert use the accent text color", () => {
+    const { container } = render(<Alert title="New">Read <a href="/x">the guide</a>.</Alert>);
+    expect(container.querySelector("a")!.parentElement!.className).toContain("[&_a]:text-accent-primary");
   });
   it("Progress exposes its value", () => {
     render(<Progress value={30} max={60} label="Upload" />);

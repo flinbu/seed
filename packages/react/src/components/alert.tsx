@@ -1,16 +1,18 @@
 import * as React from "react";
 import { cn } from "../lib/cn.js";
 import { renderIcon, type IconProp } from "../lib/icon.js";
+import { LOUD_BORDER, TONE_LABEL, liveRole, type Emphasis, type MessageTone } from "../lib/tone.js";
 import { Button } from "./button.js";
 
-type Variant = "neutral" | "info" | "success" | "warning" | "error" | "offer";
-const TONE: Record<Variant, [string, string]> = {
-  neutral: ["bg-secondary border-secondary", "text-icon-secondary"],
-  info: ["bg-info-primary border-info-secondary", "text-icon-info-primary"],
-  success: ["bg-success-primary border-success-secondary", "text-icon-success-primary-hover"],
-  warning: ["bg-warning-primary border-warning-secondary", "text-icon-warning-primary-hover"],
-  error: ["bg-error-primary border-error-secondary", "text-icon-error-primary"],
-  offer: ["bg-offer-primary border-offer-secondary", "text-icon-offer-primary-hover"],
+type Variant = MessageTone;
+/** Only the icon carries the tone; the surface, title and body stay neutral. */
+const ICON_TONE: Record<Variant, string> = {
+  neutral: "text-icon-secondary",
+  info: "text-icon-info-primary",
+  success: "text-icon-success-primary-hover",
+  warning: "text-icon-warning-primary-hover",
+  error: "text-icon-error-primary",
+  offer: "text-icon-offer-primary-hover",
 };
 const svg = (d: React.ReactNode) => <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{d}</svg>;
 const DEFAULT_ICON: Record<Variant, React.ReactElement> = {
@@ -25,6 +27,8 @@ const DEFAULT_ICON: Record<Variant, React.ReactElement> = {
 export interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   /** Default 'info'. */
   variant?: Variant;
+  /** subtle (default): a neutral surface, only the icon is in color. loud: the same surface with a hairline in the tone, for the few alerts that must stand out. */
+  emphasis?: Emphasis;
   title?: React.ReactNode;
   /** Defaults to the variant's icon; false hides it. */
   icon?: IconProp | false;
@@ -34,19 +38,23 @@ export interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "
   onDismiss?: () => void;
   /** Label of the close button. Default 'Dismiss'. */
   dismissLabel?: string;
+  /** Set when the alert appears after the page has loaded (after an action, a sync, a failed request): it's announced as a status, or as an alert for errors. Alerts rendered with the page have no live role. */
+  live?: boolean;
+  /** Visually hidden word read before the message: 'Info', 'Success', 'Warning' or 'Error' by default (none for neutral and offer). Translate it here, or pass false to leave it out. */
+  toneLabel?: string | false;
 }
 
-/** A message in the page: what happened and what to do. Errors and warnings are announced. */
-export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert({ variant = "info", title, icon, action, onDismiss, dismissLabel = "Dismiss", className, children, role, ...rest }, ref) {
-  const [box, ic] = TONE[variant];
+/** A message in the page: what happened and what to do. Quiet by default; loud for the few that must stand out. */
+export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert({ variant = "info", emphasis = "subtle", title, icon, action, onDismiss, dismissLabel = "Dismiss", live, toneLabel, className, children, role, ...rest }, ref) {
   const shown = icon === false ? null : icon ? renderIcon(icon, "md") : DEFAULT_ICON[variant];
+  const label = toneLabel === false ? null : toneLabel ?? TONE_LABEL[variant] ?? null;
   return (
-    <div ref={ref} role={role ?? (variant === "error" || variant === "warning" ? "alert" : "status")}
-      className={cn("flex items-start gap-sm border p-base text-primary rounded-petal rounded-tl-petal-tip", box, className)} {...rest}>
-      {shown ? <span className={cn("inline-flex leading-none", ic)}>{shown}</span> : null}
+    <div ref={ref} role={role ?? liveRole(variant, live)} data-variant={variant} data-emphasis={emphasis}
+      className={cn("flex items-start gap-sm border bg-primary p-base text-primary rounded-petal rounded-tl-petal-tip", emphasis === "loud" ? LOUD_BORDER[variant] : "border-secondary", className)} {...rest}>
+      {shown ? <span className={cn("inline-flex leading-none", ICON_TONE[variant])}>{shown}</span> : null}
       <div className="flex min-w-0 flex-1 flex-col gap-xxs pt-xxxs">
-        {title ? <p className="m-0 text-primary label-label-2-semibold">{title}</p> : null}
-        {children ? <div className="text-secondary body-body-3-regular">{children}</div> : null}
+        {title ? <p className="m-0 text-primary label-label-2-semibold">{label ? <span className="sr-only">{label}: </span> : null}{title}</p> : null}
+        {children ? <div className="text-secondary body-body-3-regular [&_a]:text-accent-primary [&_a:hover]:text-accent-primary-hover">{label && !title ? <span className="sr-only">{label}: </span> : null}{children}</div> : null}
         {action ? <div className="mt-xs flex gap-xs">{action}</div> : null}
       </div>
       {onDismiss ? (

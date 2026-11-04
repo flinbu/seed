@@ -73,6 +73,31 @@ export function BannerVariants() {
   );
 }
 
+export function BannerLoud() {
+  return (
+    <Stack gap="sm" className="w-full">
+      <Banner emphasis="loud" title="Seed 2.0 is coming.">Token names change on March 3. <Link href="#">Read the guide</Link></Banner>
+      <Banner emphasis="loud" variant="success" title="Back online.">Sync with Figma resumed.</Banner>
+      <Banner emphasis="loud" variant="warning" title="You’re out of credits." action={<Button size="sm" variant="secondary">Add credits</Button>}>Pluto pauses until the 1st.</Banner>
+      <Banner emphasis="loud" variant="error" title="Sync failed." action={<Button size="sm" variant="secondary">Try again</Button>}>Nothing reached Figma since 9:40.</Banner>
+    </Stack>
+  );
+}
+
+export function BannerThemes() {
+  return (
+    <div className="grid w-full gap-base md:grid-cols-2">
+      {(["light", "dark"] as const).map((theme) => (
+        <div key={theme} data-theme={theme} className="flex flex-col gap-sm overflow-hidden rounded-xl border border-secondary bg-primary pb-base">
+          <span className="px-base pt-base mono-label-medium text-tertiary">{theme === "light" ? "Light" : "Dark"}</span>
+          {(["info", "success", "warning", "error"] as const).map((v) => <Banner key={v} variant={v}>Subtle {v}: only the icon is in color.</Banner>)}
+          {(["info", "success", "warning", "error"] as const).map((v) => <Banner key={v} variant={v} emphasis="loud">Loud {v}: the hairline takes the tone.</Banner>)}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function TagBasic() {
   const [on, setOn] = React.useState(["Color"]);
   const [tags, setTags] = React.useState([["brand-500", "#2563EB"], ["neutral-900", "#171717"], ["success-600", "#16A34A"]]);

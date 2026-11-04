@@ -11,7 +11,7 @@ Contrast of semantic text and icon tokens (placeholders and helper text included
 - Never color alone: icon or word for status, legend or direct labels for charts, + and − for diffs.
 - Targets at least 24×24px; controls default 40px, never smaller than 32px.
 - 300-weight text only at `text-primary` or `text-secondary`; `text-tertiary` at 14px and up.
-- Announce async results (live regions); toasts are polite.
+- Announce async results (live regions); toasts are polite. An Alert or Banner that appears after the page loads gets `live` (role status, or role alert for errors only); one rendered with the page gets no live role. Both read a hidden "Warning:" style prefix, so the tone never depends on color.
 - Don't auto-dismiss anything that needs action; no autoplay.
 - Reflow at 320px wide and 200% text without horizontal scroll (tables and code may scroll inside).
 
