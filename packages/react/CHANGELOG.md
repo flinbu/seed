@@ -1,5 +1,12 @@
 # @flinbu/seed
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [56622a6]
+  - @flinbu/seed-tokens@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes

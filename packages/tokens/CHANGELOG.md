@@ -1,5 +1,11 @@
 # @flinbu/seed-tokens
 
+## 0.5.1
+
+### Patch Changes
+
+- 56622a6: Sheets and drawers dim the page in dark mode too: `bg-overlay-alpha-primary` is black at 50% there, not white at 20%, which lightened the page behind.
+
 ## 0.5.0
 
 ### Minor Changes
