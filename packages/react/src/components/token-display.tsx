@@ -267,10 +267,12 @@ export interface PropsTableProps extends React.HTMLAttributes<HTMLTableElement> 
   props: PropRow[];
   /** Names the table "<Component> props". */
   component?: string;
+  /** Below 768px each prop becomes a card: its name, then Type, Default and Description. Default true. */
+  stackOnMobile?: boolean;
 }
 const chip = "rounded-sm bg-tertiary px-xxs font-mono text-primary body-body-4-regular";
 
-/** A component's API: each prop's name, type, default and description. */
+/** A component's API: each prop's name, type, default and description. On phones each prop is a card, so nothing shrinks. */
 export const PropsTable = React.forwardRef<HTMLTableElement, PropsTableProps>(function PropsTable({ props: rows, component, className, "aria-label": label, ...rest }, ref) {
   return (
     <Table ref={ref} aria-label={label ?? (component ? `${component} props` : "Props")} className={className} {...rest}>
@@ -280,15 +282,15 @@ export const PropsTable = React.forwardRef<HTMLTableElement, PropsTableProps>(fu
       <TableBody>
         {rows.map((r) => (
           <TableRow key={r.name}>
-            <TableCell className="whitespace-nowrap text-primary">
+            <TableCell className="whitespace-nowrap text-primary max-md:whitespace-normal">
               <code className="mono-value-regular">{r.name}</code>
               {r.required ? <span title="Required" className="text-error-primary"> *<span className="sr-only">required</span></span> : null}
             </TableCell>
-            <TableCell>
+            <TableCell label="Type">
               {r.type ? <span className="flex flex-wrap gap-xxxs">{r.type.split(/\s*\|\s*/).map((t, i) => <code key={i} className={chip}>{t}</code>)}</span> : null}
             </TableCell>
-            <TableCell>{r.default != null ? <code className={chip}>{r.default}</code> : <span className="text-tertiary" aria-label="No default">–</span>}</TableCell>
-            <TableCell className="text-secondary body-body-3-regular">{r.description}</TableCell>
+            <TableCell label="Default">{r.default != null ? <code className={chip}>{r.default}</code> : <span className="text-tertiary" aria-label="No default">–</span>}</TableCell>
+            <TableCell label="Description" className="text-secondary body-body-3-regular">{r.description}</TableCell>
           </TableRow>
         ))}
       </TableBody>

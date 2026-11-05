@@ -25,7 +25,7 @@ Every component below ships in `@flinbu/seed` (marked *package*). Live previews 
 - **Badge** (package): A short status or category label: one or two words, optionally with a dot or an icon
 - **Avatar** (package): A person's or workspace's picture, falling back to initials, then to the `user` icon
 - **Kbd** (package): A keyboard key, for shortcuts in menus, tooltips and help text
-- **Table** (package): Displays rows of structured data with sorting, selection, loading and empty states
+- **Table** (package): Displays rows of structured data with sorting, selection, loading and empty states. Below 768px each row stacks into a card (first cell as the title, every other value under its header) so text never shrinks; `stackOnMobile={false}` keeps a table that scrolls sideways. Same prop on DataTable and PropsTable
 - **Item** (package): A row for one thing, with media, a title, a description and actions: integrations, members, files, settings entries
 - **DataTable** (package): A list of records with everything around it: search, sorting across all pages, column visibility, pagination, selection and bulk actions
 - **Chart** (package): Bar, stacked bar, line and area charts drawn in Seed's chart palette, with a tooltip, keyboard reading and a table view built in

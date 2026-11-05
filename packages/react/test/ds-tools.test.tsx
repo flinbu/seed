@@ -75,6 +75,12 @@ describe("ColorSwatch, ColorScale, PropsTable", () => {
     expect(screen.getByText("required")).toBeTruthy();
     expect(screen.getByLabelText("No default")).toBeTruthy();
   });
+  it("labels each value for the stacked cards on phones; the name is the title", () => {
+    render(<PropsTable component="Button" props={[{ name: "size", type: "'sm' | 'md'", default: "'md'", description: "Height." }]} />);
+    const cells = screen.getAllByRole("cell");
+    expect(cells.map((c) => c.getAttribute("data-label"))).toEqual(["Prop", "Type", "Default", "Description"]);
+    expect(cells[0]!.textContent).toBe("size");
+  });
 });
 
 describe("ContrastPair", () => {

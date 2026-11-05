@@ -146,6 +146,19 @@ const ROWS = [
   { name: "text-secondary", value: "#525252", uses: 52, status: "Published" },
   { name: "border-focus", value: "#2563EB", uses: 0, status: "Draft" },
 ];
+export function TableNoStack() {
+  return (
+    <Table stackOnMobile={false} frameClassName="max-w-xs" aria-label="Spacing">
+      <TableHeader><TableRow><TableHead>Token</TableHead><TableHead align="right">Value</TableHead></TableRow></TableHeader>
+      <TableBody>
+        {[["space-xs", "8px"], ["space-sm", "12px"], ["space-base", "16px"]].map(([t, v]) => (
+          <TableRow key={t}><TableCell className="font-mono">{t}</TableCell><TableCell align="right" className="font-mono text-secondary">{v}</TableCell></TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
 export function TableBasic() {
   const [dir, setDir] = React.useState<"ascending" | "descending">("ascending");
   const rows = [...ROWS].sort((a, b) => (dir === "ascending" ? 1 : -1) * a.name.localeCompare(b.name));

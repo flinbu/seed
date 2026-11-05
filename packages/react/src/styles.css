@@ -48,6 +48,26 @@
 @keyframes seed-collapsible-open { from { height: 0; } to { height: var(--radix-collapsible-content-height); } }
 @keyframes seed-collapsible-close { from { height: var(--radix-collapsible-content-height); } to { height: 0; } }
 
+/* Table on phones (below the md breakpoint, 768px): each row is a card. A cell shows its column's header (data-label) above
+   the value, small and muted; the empty alt text keeps screen readers on the real header so they don't hear it twice.
+   The row's first cell (after a select checkbox) is the card's title and has no label. */
+@layer components {
+  .seed-table-stack :is(tbody, tfoot) > tr > [data-label]:not([data-label=""])::before {
+    @variant max-md {
+      content: attr(data-label);
+      content: attr(data-label) / "";
+      display: block; margin-bottom: var(--space-xxs); color: var(--text-tertiary);
+      @apply mono-label-medium;
+    }
+  }
+  .seed-table-stack :is(tbody, tfoot) > tr > :is(:first-child:not([data-select]), [data-select] + *) {
+    @variant max-md { color: var(--text-primary); font-weight: 500; }
+  }
+  .seed-table-stack :is(tbody, tfoot) > tr > :is(:first-child:not([data-select]), [data-select] + *)::before {
+    @variant max-md { content: none; }
+  }
+}
+
 /* Prose: rendered rich text and Markdown in Seed's reading styles (Typography). */
 @layer components {
   .seed-prose { color: var(--text-primary); font-family: var(--font-reading); font-size: 1rem; line-height: 1.625; font-weight: 300; max-width: 68ch; }

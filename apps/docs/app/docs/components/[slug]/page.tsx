@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Alert, Badge } from "@flinbu/seed";
+import { Alert, Badge, PropsTable } from "@flinbu/seed";
 import { COMPONENTS, bySlug } from "@/lib/registry";
 import { exampleSource } from "@/lib/examples";
 import { Example } from "@/components/example";
@@ -60,19 +60,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
       </section>
       <section className="flex flex-col gap-sm">
         <h2 className="m-0 heading-h6-semibold text-primary">Props</h2>
-        <div className="overflow-x-auto rounded-xl border border-secondary">
-          <table className="w-full border-collapse body-body-3-regular">
-            <thead><tr>{["Prop", "Type", "Default", "Description"].map((h) => <th key={h} className="border-b border-secondary bg-secondary px-sm py-xs text-left mono-label-medium text-tertiary">{h}</th>)}</tr></thead>
-            <tbody>{c.props.map((p) => (
-              <tr key={p.name}>
-                <td className="border-b border-secondary px-sm py-xs align-top"><code className="whitespace-nowrap mono-value-regular text-primary">{p.name}</code></td>
-                <td className="border-b border-secondary px-sm py-xs align-top"><code className="mono-value-regular text-secondary">{p.type}</code></td>
-                <td className="border-b border-secondary px-sm py-xs align-top"><code className="whitespace-nowrap mono-value-regular text-tertiary">{p.default ?? "none"}</code></td>
-                <td className="border-b border-secondary px-sm py-xs align-top text-secondary">{p.description}</td>
-              </tr>
-            ))}</tbody>
-          </table>
-        </div>
+        <PropsTable component={c.name} props={c.props} />
       </section>
       <section className="flex flex-col gap-sm">
         <h2 className="m-0 heading-h6-semibold text-primary">Accessibility</h2>

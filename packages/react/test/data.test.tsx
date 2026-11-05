@@ -83,6 +83,15 @@ describe("DataTable", () => {
     await user.type(screen.getByRole("textbox", { name: "Search" }), "zzz");
     expect(screen.getByText("Nothing matches “zzz”.")).toBeTruthy();
   });
+  it("stacks rows into cards on phones, each value under its column's header", () => {
+    const { rerender } = render(<DataTable aria-label="Components" columns={COLS} rows={ROWS} pageSize={2} selectable />);
+    const row = screen.getAllByRole("row")[1]!;
+    const cells = within(row).getAllByRole("cell");
+    expect(cells[0]!.hasAttribute("data-select")).toBe(true);
+    expect(cells.slice(1).map((c) => c.getAttribute("data-label"))).toEqual(["Name", "Status", "Uses"]);
+    rerender(<DataTable aria-label="Components" columns={COLS} rows={ROWS} pageSize={2} stackOnMobile={false} />);
+    expect(screen.getByRole("table", { name: "Components" }).className).not.toContain("seed-table-stack");
+  });
 });
 
 describe("Carousel, Resizable, DirectionProvider", () => {

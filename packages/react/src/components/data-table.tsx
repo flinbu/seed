@@ -57,6 +57,8 @@ export interface DataTableProps<R extends Record<string, unknown>> {
   /** Shown when there are no rows at all. */
   empty?: React.ReactNode;
   density?: "comfortable" | "compact";
+  /** Below 768px each row becomes a card, with sort buttons and select all above them. Default true. */
+  stackOnMobile?: boolean;
   onRowClick?: (row: R) => void;
   columnToggle?: boolean;
   className?: string;
@@ -66,7 +68,7 @@ export interface DataTableProps<R extends Record<string, unknown>> {
 /** A list of records with search, sorting across pages, column visibility, pagination, selection and bulk actions. */
 export function DataTable<R extends Record<string, unknown>>({
   columns, rows, rowKey = "id", pageSize = 10, noun = ["row", "rows"], searchKeys, searchPlaceholder = "Search", selectable, selected, defaultSelected = [], onSelectedChange,
-  bulkActions, sort, defaultSort = null, onSortChange, defaultHiddenColumns = [], toolbar, loading, empty, density, onRowClick, columnToggle = true, className, "aria-label": label,
+  bulkActions, sort, defaultSort = null, onSortChange, defaultHiddenColumns = [], toolbar, loading, empty, density, stackOnMobile = true, onRowClick, columnToggle = true, className, "aria-label": label,
 }: DataTableProps<R>) {
   const [q, setQ] = React.useState("");
   const [hidden, setHidden] = React.useState<string[]>(defaultHiddenColumns);
@@ -135,7 +137,7 @@ export function DataTable<R extends Record<string, unknown>>({
           ) : null}
         </span>
       </div>
-      <Table density={density} aria-label={label} aria-busy={loading || undefined}>
+      <Table density={density} stackOnMobile={stackOnMobile} aria-label={label} aria-busy={loading || undefined}>
         <TableHeader>
           <TableRow>
             {selectable ? (
@@ -157,13 +159,14 @@ export function DataTable<R extends Record<string, unknown>>({
           )) : shown.length ? shown.map(({ r, k }) => {
             const on = sel.includes(k);
             return (
-              <TableRow key={String(k)} className={cn(on && "bg-selected [tbody>&]:hover:bg-selected-hover", onRowClick && "cursor-pointer")} onClick={onRowClick ? () => onRowClick(r) : undefined}>
+              <TableRow key={String(k)} selected={on} className={cn(onRowClick && "cursor-pointer")} onClick={onRowClick ? () => onRowClick(r) : undefined}>
                 {selectable ? (
-                  <TableCell onClick={(e) => e.stopPropagation()}>
+                  <TableCell data-select="" className="max-md:absolute max-md:end-base max-md:top-base" onClick={(e) => e.stopPropagation()}>
                     <Checkbox aria-label={`Select row ${String(r[columns[0]?.key ?? ""] ?? k)}`} checked={on} onCheckedChange={(v) => setSel(v ? [...sel, k] : sel.filter((x) => x !== k))} />
                   </TableCell>
                 ) : null}
-                {visible.map((c) => <TableCell key={c.key} align={c.align} className={c.className}>{c.render ? c.render(r) : (r[c.key] as React.ReactNode)}</TableCell>)}
+                {visible.map((c, i) => <TableCell key={c.key} align={c.align} label={typeof c.header === "string" ? c.header : undefined}
+                  className={cn(selectable && i === 0 && "max-md:pe-2xl", c.className)}>{c.render ? c.render(r) : (r[c.key] as React.ReactNode)}</TableCell>)}
               </TableRow>
             );
           }) : (

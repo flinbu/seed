@@ -1,6 +1,6 @@
 import * as React from "react";
 import { describe, expect, it, vi } from "vitest";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { Copy, Trash2 } from "lucide-react";
 import {
@@ -105,6 +105,29 @@ describe("Table", () => {
     expect(screen.getByRole("columnheader", { name: "Value" }).getAttribute("aria-sort")).toBeNull();
     await user.click(within(th).getByRole("button"));
     expect(onSort).toHaveBeenCalled();
+  });
+  it("stacks into cards on phones: explicit roles, and every cell labeled with its header", async () => {
+    const T = ({ rows }: { rows: string[] }) => (
+      <Table aria-label="Tokens"><TableHeader><TableRow><TableHead>Name</TableHead><TableHead>Value</TableHead><TableHead>Status</TableHead></TableRow></TableHeader>
+        <TableBody>{rows.map((r) => <TableRow key={r}><TableCell>{r}</TableCell><TableCell>1</TableCell><TableCell label="State">Draft</TableCell></TableRow>)}</TableBody></Table>
+    );
+    const { rerender } = render(<T rows={["a"]} />);
+    const table = screen.getByRole("table", { name: "Tokens" });
+    expect(table.getAttribute("role")).toBe("table");
+    expect(table.className).toContain("seed-table-stack");
+    const cells = within(table).getAllByRole("cell");
+    expect(cells.map((c) => c.getAttribute("role"))).toEqual(["cell", "cell", "cell"]);
+    expect(cells.map((c) => c.getAttribute("data-label"))).toEqual(["Name", "Value", "State"]);
+    rerender(<T rows={["a", "b"]} />);
+    await waitFor(() => expect(within(table).getAllByRole("cell")[4]!.getAttribute("data-label")).toBe("Value"));
+    expect(await violations(table.parentElement!)).toEqual([]);
+  });
+  it("stays a table with stackOnMobile={false}", () => {
+    render(<Table aria-label="Tokens" stackOnMobile={false}><TableHeader><TableRow><TableHead>Name</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>a</TableCell></TableRow></TableBody></Table>);
+    const table = screen.getByRole("table", { name: "Tokens" });
+    expect(table.hasAttribute("role")).toBe(false);
+    expect(table.className).not.toContain("seed-table-stack");
+    expect(screen.getByRole("cell").hasAttribute("data-label")).toBe(false);
   });
 });
 
